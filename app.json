@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "calogo",
-    "slug": "Calogo",
+    "slug": "calogo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.pemeoh1.calogo"
     },
     "web": {
       "bundler": "metro",

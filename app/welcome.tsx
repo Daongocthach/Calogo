@@ -6,7 +6,6 @@ import { useForm, Controller } from "react-hook-form"
 import { RadioButton } from 'react-native-paper'
 import { Firework } from '@/components/Firework'
 import Toast from 'react-native-toast-message'
-import { router } from 'expo-router'
 import useStore from '@/store'
 
 export default function WelcomeScreen() {
