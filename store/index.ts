@@ -53,7 +53,8 @@ const useStore = create<StoreState>()(
         historyFoodList: [],
         addTodayFood: (payload: FoodDailyItemType) => {
           set((state) => ({
-            todayFoodList: [...state.todayFoodList, payload]
+            todayFoodList: [...state.todayFoodList, payload],
+            todayCalories: state.todayCalories + payload.calories
           }))
         },
         removeTodayFood: (payload: string) => {

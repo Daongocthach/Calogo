@@ -20,13 +20,25 @@ const foodTypes = Object.entries(FoodTypes).map(([key, value]) => ({
   value: key,
 }))
 
-const pieData = [
-  { value: 70, color: '#177AD5' },
-  { value: 30, color: 'lightgray' }
-]
+const levels = [
+  { label: 'Giảm Chậm: 0,25kg/tuần', value: 0, caloriesChange: -250 },
+  { label: 'Trung bình: 0,5kg/tuần', value: 1, caloriesChange: -500 },
+  { label: 'Nhanh: 0,75kg/tuần', value: 2, caloriesChange: -750 },
+  { label: 'Tăng cân: 0,25kg/tuần', value: 3, caloriesChange: 250 },
+  { label: 'Tăng cân: 0,5kg/tuần', value: 4, caloriesChange: 500 },
+  { label: 'Tăng cân: 1kg/tuần', value: 5, caloriesChange: 1000 },
+];
+
+
 
 export default function HomeScreen() {
-  const { bmr, tdde, todayFoodList, foodList, addFood, addTodayFood, addHistoryFood } = useStore()
+  const { bmr, tdde, todayFoodList, foodList, todayCalories, addFood, addTodayFood, addHistoryFood } = useStore()
+  const [level, setLevel] = useState(0)
+  const goal = tdde ? tdde + levels[level].caloriesChange : 0
+  const pieData = [
+    { value: todayCalories, color: '#177AD5' },
+    { value: goal - todayCalories, color: 'lightgray' }
+  ]
   const [modalVisible, setModalVisible] = useState(false)
   const [type, setType] = useState('fastfood')
   const [selectedFoodList, setSelectedFoodList] = useState<FoodItemType[]>([])
@@ -75,12 +87,13 @@ export default function HomeScreen() {
   }
   const handleAddMeal = () => {
     if (selectedFoodList.length < 1) {
-      Alert.alert('Chưa chọn thực phẩm', 'Bạn chưa chọn thực phẩm nào để thêm vào bữa ăn.', [
-        {
-          text: 'OK',
-          style: 'cancel'
-        }
-      ])
+      Toast.show({
+        type: 'error',
+        text1: 'Lỗi',
+        text2: 'Chưa chọn thực phẩm nào',
+        visibilityTime: 2000,
+        autoHide: true,
+      })
     }
     else {
       selectedFoodList.forEach((food) => {
@@ -107,7 +120,7 @@ export default function HomeScreen() {
               centerLabelComponent={() => {
                 return <View className='flex flex-row items-center'>
                   <Text style={{ fontSize: 20, color: '#0284c7', fontWeight: 600 }}>
-                    2000
+                    {todayCalories.toFixed(0)}
                   </Text>
                   <IconSymbol name='flame.fill' size={20} color='#0284c7' />
                 </View>
@@ -118,22 +131,32 @@ export default function HomeScreen() {
                 <IconSymbol name={'trophy'} size={25} color={'#0284c7'} />
                 <View>
                   <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>Mục tiêu</Text>
-                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>{tdde?.toFixed(0)} calories</Text>
+                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>
+                    {goal.toFixed(0)} calories
+                  </Text>
                 </View>
               </View>
               <View className='flex flex-row gap-2 items-center text-slate-700'>
                 <IconSymbol name={'leaf.circle.fill'} size={25} color={'#0284c7'} />
                 <View>
-                  <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>Còn lại</Text>
-                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>2000</Text>
+                  <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>Cần thiết</Text>
+                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>{tdde?.toFixed(0)} calories</Text>
                 </View>
               </View>
               <View className='flex flex-row gap-2 items-center text-slate-700'>
                 <IconSymbol name={'exclamationmark.triangle'} size={25} color={'#0284c7'} />
                 <View>
                   <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>Khuyến cáo</Text>
-                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>Giảm chậm: 0,25kg/tuần</Text>
+                  <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>{levels[level].label}</Text>
                 </View>
+              </View>
+              <View className='flex flex-row gap-4 items-center justify-center'>
+                <TouchableOpacity onPress={() => setLevel(level - 1 > 0 ? level - 1 : 0)}>
+                  <IconSymbol name={'chevron.left.2'} size={20} color={'#0284c7'} />
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setLevel(level + 1 < 6 ? level + 1 : level)}>
+                  <IconSymbol name={'chevron.right.2'} size={20} color={'#0284c7'} />
+                </TouchableOpacity>
               </View>
             </View>
           </View>

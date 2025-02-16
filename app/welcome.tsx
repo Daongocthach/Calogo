@@ -7,11 +7,12 @@ import { RadioButton } from 'react-native-paper'
 import { Firework } from '@/components/Firework'
 import Toast from 'react-native-toast-message'
 import useStore from '@/store'
+import { GenderType, IntensiveType } from '@/lib/types'
 
 export default function WelcomeScreen() {
   const { saveData } = useStore()
-  const [gender, setGender] = useState<'male' | 'female'>('male')
-  const [intensity, setIntensity] = useState<'inactive' | 'low' | 'medium' | 'high' | 'super'>('medium')
+  const [gender, setGender] = useState<GenderType>('male')
+  const [intensity, setIntensity] = useState<IntensiveType>('medium')
   const {
     control,
     handleSubmit,

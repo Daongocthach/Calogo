@@ -51,6 +51,8 @@ const MAPPING = {
   'key.fill': 'password',
   'person.badge.plus.fill': 'person-add',
   'delete.left.fill': 'delete',
+  'chevron.left.2': 'chevron-left',
+  'chevron.right.2': 'chevron-right',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
