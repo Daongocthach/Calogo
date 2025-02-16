@@ -1,13 +1,45 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import { StyleSheet, Platform, Switch, TouchableOpacity, Alert } from 'react-native'
+import { useState } from 'react'
+import { Collapsible } from '@/components/Collapsible'
+import ParallaxScrollView from '@/components/ParallaxScrollView'
+import { ThemedText } from '@/components/ThemedText'
+import { ThemedView } from '@/components/ThemedView'
+import { IconSymbol } from '@/components/ui/IconSymbol'
+import { HelloWave } from '@/components/HelloWave'
+import { Link, router } from 'expo-router'
+import useStore from '@/store'
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-
-export default function TabTwoScreen() {
+export default function Settings() {
+  const { removeData } = useStore()
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const handleDelete = () => {
+    Alert.alert('Xóa thông tin BMR', 'Bạn chắc chắn muốn xóa?', [
+      {
+        text: 'Không',
+        style: 'cancel'
+      },
+      {
+        text: 'Xóa',
+        onPress: () => {
+          removeData()
+        }
+      }
+    ])
+  }
+  const handleLogout = () => {
+    Alert.alert('Đăng xuất', 'Bạn chắc chắn muốn đăng xuất?', [
+      {
+        text: 'Không',
+        style: 'cancel'
+      },
+      {
+        text: 'Đăng xuất',
+        onPress: () => {
+          router.push('/login')
+        }
+      }
+    ])
+  }
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -15,84 +47,78 @@ export default function TabTwoScreen() {
         <IconSymbol
           size={310}
           color="#808080"
-          name="chevron.left.forwardslash.chevron.right"
+          name="gearshape.fill"
           style={styles.headerImage}
         />
       }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Explore</ThemedText>
+      <ThemedView style={styles.titleContainer} className='flex flex-row gap-2'>
+        <ThemedText type="title">Cài đặt</ThemedText>
+        <HelloWave />
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
-      <Collapsible title="File-based routing">
-        <ThemedText>
-          This app has two screens:{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
-        </ThemedText>
-        <ThemedText>
-          The layout file in <ThemedText type="defaultSemiBold">app/(tabs)/_layout.tsx</ThemedText>{' '}
-          sets up the tab navigator.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/router/introduction">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Android, iOS, and web support">
-        <ThemedText>
-          You can open this project on Android, iOS, and the web. To open the web version, press{' '}
-          <ThemedText type="defaultSemiBold">w</ThemedText> in the terminal running this project.
-        </ThemedText>
-      </Collapsible>
-      <Collapsible title="Images">
-        <ThemedText>
-          For static images, you can use the <ThemedText type="defaultSemiBold">@2x</ThemedText> and{' '}
-          <ThemedText type="defaultSemiBold">@3x</ThemedText> suffixes to provide files for
-          different screen densities
-        </ThemedText>
-        <Image source={require('@/assets/images/react-logo.png')} style={{ alignSelf: 'center' }} />
-        <ExternalLink href="https://reactnative.dev/docs/images">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Custom fonts">
-        <ThemedText>
-          Open <ThemedText type="defaultSemiBold">app/_layout.tsx</ThemedText> to see how to load{' '}
-          <ThemedText style={{ fontFamily: 'SpaceMono' }}>
-            custom fonts such as this one.
+      <ThemedText>Chào mừng bạn đến trung tâm cài đặt.</ThemedText>
+      <ThemedView className='flex flex-col gap-6'>
+        <Collapsible title="Thông tin tài khoản">
+          <ThemedView className='ml-3 flex flex-col gap-4 my-4'>
+            <Link href='/login' className='flex flex-row items-center gap-2'>
+              <ThemedView className='flex flex-row items-center gap-2'>
+                <IconSymbol name="arrow.right.circle.fill" size={20} color={'#64748b'} />
+                <ThemedText type="default" className='text-slate-500'>Đăng nhập</ThemedText>
+              </ThemedView>
+            </Link>
+            <Link href='/signup' className='flex flex-row items-center gap-2'>
+              <ThemedView className='flex flex-row items-center gap-2'>
+                <IconSymbol name="person.badge.plus.fill" size={20} color={'#64748b'} />
+                <ThemedText type="default" className='text-slate-500'>Đăng ký</ThemedText>
+              </ThemedView>
+            </Link>
+            <Link href='/reset-password' className='flex flex-row items-center gap-2'>
+              <ThemedView className='flex flex-row items-center gap-2'>
+                <IconSymbol name="key.fill" size={20} color={'#64748b'} />
+                <ThemedText type="default" className='text-slate-500'>Đổi mật khẩu</ThemedText>
+              </ThemedView>
+            </Link>
+            <TouchableOpacity className='flex flex-row items-center gap-2' onPress={handleLogout}>
+              <IconSymbol name="arrow.left.circle.fill" size={20} color={'#64748b'} />
+              <ThemedText type="default" className='text-slate-500'>Đăng xuất</ThemedText>
+            </TouchableOpacity>
+            <TouchableOpacity className='flex flex-row items-center gap-2' onPress={handleDelete}>
+              <IconSymbol name="delete.left.fill" size={20} color={'#64748b'} />
+              <ThemedText type="default" className='text-slate-500'>Xóa thông tin BMR</ThemedText>
+            </TouchableOpacity>
+          </ThemedView>
+        </Collapsible>
+        <Collapsible title="Chế độ sáng tối">
+          <ThemedView className='text-sky-600 flex flex-row items-center gap-1 ml-3 mt-4'>
+            <IconSymbol name="sun.max.fill" size={20} color={'#64748b'} />
+            <IconSymbol name="moon.fill" size={20} color={'#64748b'} />
+            <Switch
+              value={isDarkMode}
+              onValueChange={setIsDarkMode}
+              trackColor={{ true: '#D0D0D0', false: '#D0D0D0' }}
+              thumbColor={Platform.OS === 'ios' ? '#FFFFFF' : '#64748b'}
+            />
+          </ThemedView>
+        </Collapsible>
+        <Collapsible title="Một số thông tin cần thiết">
+          <ThemedText className='ml-3 text-slate-500 mt-4'>
+            Email: ngocthach752@gmail.com
           </ThemedText>
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/versions/latest/sdk/font">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Light and dark mode components">
-        <ThemedText>
-          This template has light and dark mode support. The{' '}
-          <ThemedText type="defaultSemiBold">useColorScheme()</ThemedText> hook lets you inspect
-          what the user's current color scheme is, and so you can adjust UI colors accordingly.
-        </ThemedText>
-        <ExternalLink href="https://docs.expo.dev/develop/user-interface/color-themes/">
-          <ThemedText type="link">Learn more</ThemedText>
-        </ExternalLink>
-      </Collapsible>
-      <Collapsible title="Animations">
-        <ThemedText>
-          This template includes an example of an animated component. The{' '}
-          <ThemedText type="defaultSemiBold">components/HelloWave.tsx</ThemedText> component uses
-          the powerful <ThemedText type="defaultSemiBold">react-native-reanimated</ThemedText>{' '}
-          library to create a waving hand animation.
-        </ThemedText>
-        {Platform.select({
-          ios: (
-            <ThemedText>
-              The <ThemedText type="defaultSemiBold">components/ParallaxScrollView.tsx</ThemedText>{' '}
-              component provides a parallax effect for the header image.
-            </ThemedText>
-          ),
-        })}
-      </Collapsible>
+          <ThemedText className='ml-3 text-slate-500 mt-4'>
+            Calories=(Carb×4)+(Protein×4)+(Fat×9)
+          </ThemedText>
+          <ThemedText className='ml-3 text-slate-500 mt-4'>
+            Nam: BMR = (10 x Cân Nặng(kg)) + (6,25 x Chiều Cao(cm)) – (5 x Tuổi) + 5.
+          </ThemedText>
+          <ThemedText className='ml-3 text-slate-500 mt-4'>
+            Nữ: BMR = (10 x Cân Nặng(kg)) + (6,25 x Chiều cao(cm)) – (5 x Tuổi) – 161.
+          </ThemedText>
+          <ThemedText className='ml-3 text-slate-500 mt-4'>
+            TDEE = BMR × Hệ số vận động (1.2-1.9)
+          </ThemedText>
+        </Collapsible>
+      </ThemedView>
     </ParallaxScrollView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -106,4 +132,4 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
   },
-});
+})

@@ -1,12 +1,13 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View, Text, StyleSheet } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { CustomHeader } from '@/components/CustomHeader';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,13 +15,12 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        tabBarActiveTintColor: Colors['light'].tint,
+        header: () => <CustomHeader />,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
           default: {},
@@ -34,14 +34,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="history"
+        name="foods"
         options={{
-          title: 'Nhật ký',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="clock.fill" color={color} />,
+          title: 'Thực phẩm',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="takeoutbag.and.cup.and.straw.fill" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="statistics"
         options={{
           title: 'Báo cáo',
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="chart.bar.fill" color={color} />,
@@ -57,3 +57,19 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+
+const styles = StyleSheet.create({
+  header: {
+    height: 60,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ddd',
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});

@@ -2,10 +2,10 @@ export const Colors = {
   light: {
     text: "#1C2A3A",
     background: "#F5FAFF",
-    tint: "#0EA5E9",
+    tint: "#3b82f6",
     icon: "#40576E",
     tabIconDefault: "#40576E",
-    tabIconSelected: "#0EA5E9",
+    tabIconSelected: "#3b82f6",
     primary: "#0EA5E9",
     onPrimary: "#FFFFFF",
     primaryContainer: "#BAE6FD",
@@ -75,5 +75,5 @@ export const Colors = {
     onSurfaceDisabled: "#E7E1E566",
     backdrop: "#141E324D",
   },
-};
+}
 

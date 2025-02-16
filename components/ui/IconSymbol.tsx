@@ -1,9 +1,9 @@
 // This file is a fallback for using MaterialIcons on Android and web.
 
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolWeight } from 'expo-symbols';
-import React from 'react';
-import { OpaqueColorValue, StyleProp, ViewStyle } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import { SymbolWeight } from 'expo-symbols'
+import React from 'react'
+import { OpaqueColorValue, StyleProp, ViewStyle } from 'react-native'
 
 // Add your SFSymbol to MaterialIcons mappings here.
 const MAPPING = {
@@ -17,14 +17,48 @@ const MAPPING = {
   'person.fill': 'person',
   'chart.bar.fill': 'bar-chart',
   'clock.fill': 'history',
+  'takeoutbag.and.cup.and.straw.fill': 'fastfood',
+  'eye.fill': 'visibility',
+  'eye.slash.fill': 'visibility-off',
+  'plus': 'add',
+  'cup.and.saucer.fill': 'local-cafe',
+  'applelogo': 'emoji-food-beverage',
+  'carrot.fill': 'spa',
+  'fish.fill': 'set-meal',
+  'carton.fill': 'icecream',
+  'birthday.cake.fill': 'cake',
+  'bowl.fill': 'ramen-dining',
+  'baguette': 'bakery-dining',
+  'bottle.fill': 'local-bar',
+  'snowflake': 'ac-unit',
+  'leaf.fill': 'eco',
+  'bell.badge.slash': 'notifications-none',
+  'chevron.right.2': 'chevron-right',
+  'dot.square.fill': 'square',
+  'flame.fill': 'local-fire-department',
+  'xmark.app.fill': 'close',
+  'chevron.up.2': 'expand-less',
+  'chevron.down.2': 'expand-more',
+  'trophy': 'emoji-events',
+  "exclamationmark.triangle": "warning",
+  "leaf.circle.fill": "energy-savings-leaf",
+  'clock.arrow.circlepath': 'query-builder',
+  'circle.dotted.circle': 'radio-button-checked',
+  'moon.fill': 'nights-stay',
+  'sun.max.fill': 'wb-sunny',
+  'arrow.right.circle.fill': 'login',
+  'arrow.left.circle.fill': 'logout',
+  'key.fill': 'password',
+  'person.badge.plus.fill': 'person-add',
+  'delete.left.fill': 'delete',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
     React.ComponentProps<typeof MaterialIcons>['name']
   >
->;
+>
 
-export type IconSymbolName = keyof typeof MAPPING;
+export type IconSymbolName = keyof typeof MAPPING
 
 /**
  * An icon component that uses native SFSymbols on iOS, and MaterialIcons on Android and web. This ensures a consistent look across platforms, and optimal resource usage.
@@ -37,11 +71,11 @@ export function IconSymbol({
   color,
   style,
 }: {
-  name: IconSymbolName;
-  size?: number;
-  color: string | OpaqueColorValue;
-  style?: StyleProp<ViewStyle>;
-  weight?: SymbolWeight;
+  name: IconSymbolName
+  size?: number
+  color: string | OpaqueColorValue
+  style?: StyleProp<ViewStyle>
+  weight?: SymbolWeight
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />
 }
