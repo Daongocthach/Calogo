@@ -194,14 +194,16 @@ export default function HomeScreen() {
                         required: true,
                       }}
                       render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                          className='border-b border-sky-600 rounded mb-2 bg-slate-50'
-                          placeholder="Tên thực phẩm"
-                          placeholderTextColor="#888"
-                          onBlur={onBlur}
-                          onChangeText={onChange}
-                          value={value}
-                        />
+                        <View className="h-12 flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
+                          <TextInput
+                            className='flex-1 p-3'
+                            placeholder="Tên thực phẩm"
+                            placeholderTextColor="#888"
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                          />
+                        </View>
                       )}
                       name="name"
                     />
@@ -212,9 +214,9 @@ export default function HomeScreen() {
                         required: true,
                       }}
                       render={({ field: { onChange, onBlur, value } }) => (
-                        <View className="flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
+                        <View className="h-12 flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
                           <TextInput
-                            className="flex-1"
+                            className="flex-1 p-3"
                             placeholder="Nhập lượng tinh bột (carbs)"
                             keyboardType="numeric"
                             placeholderTextColor="#888"
@@ -234,9 +236,9 @@ export default function HomeScreen() {
                         required: true,
                       }}
                       render={({ field: { onChange, onBlur, value } }) => (
-                        <View className="flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
+                        <View className="h-12 flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
                           <TextInput
-                            className="flex-1"
+                            className="flex-1 p-3"
                             placeholder="Nhập lượng proteins"
                             keyboardType="numeric"
                             placeholderTextColor="#888"
@@ -256,9 +258,9 @@ export default function HomeScreen() {
                         required: true,
                       }}
                       render={({ field: { onChange, onBlur, value } }) => (
-                        <View className="flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
+                        <View className="h-12 flex-row items-center border-b border-sky-600 rounded w-full mb-2 bg-slate-50">
                           <TextInput
-                            className="flex-1"
+                            className="flex-1 p-3"
                             placeholder="Nhập lượng chất béo (fats)"
                             keyboardType="numeric"
                             placeholderTextColor="#888"

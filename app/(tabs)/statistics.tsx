@@ -13,15 +13,7 @@ type GroupedFood = {
 }
 
 
-const barData = [
-  { value: 250, label: 'M' },
-  { value: 500, label: 'T', frontColor: '#177AD5' },
-  { value: 745, label: 'W', frontColor: '#177AD5' },
-  { value: 320, label: 'T' },
-  { value: 600, label: 'F', frontColor: '#177AD5' },
-  { value: 256, label: 'S' },
-  { value: 300, label: 'S' },
-]
+
 
 const groupByDate = (data: FoodDailyItemType[]): GroupedFood[] => {
   const grouped = data.reduce<{ [key: string]: FoodDailyItemType[] }>((acc, item) => {
@@ -35,10 +27,19 @@ const groupByDate = (data: FoodDailyItemType[]): GroupedFood[] => {
 }
 
 export default function Statistics() {
-  const { historyFoodList } = useStore()
-  console.log(historyFoodList)
+  const { historyFoodList, weekHistoryCalories } = useStore()
   const groupedData = groupByDate(historyFoodList)
+  const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']
 
+  const barData = weekHistoryCalories.map((calories, index) => {
+    const frontColor = ['#177AD5', '#177AD5', '#177AD5'][index] || ''
+  
+    return {
+      value: calories, 
+      label: daysOfWeek[index], 
+      frontColor: frontColor, 
+    }
+  })
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>(() => {
     const firstTitle = groupedData.length > 0 ? groupedData[0].title : null
     return firstTitle ? { [firstTitle]: true } : {}
@@ -62,13 +63,7 @@ export default function Statistics() {
           xAxisThickness={0}
         />
       </View>
-      {/* <ScrollView className='mt-4'>
-        {historyFoodList.map((item, index) => (
-          <FoodItem key={index} {...item} />
-        ))}
-      </ScrollView> */}
       <View className='w-full'>
-
         <SectionList
           contentContainerStyle={{ marginTop: 10 }}
           sections={groupedData}
@@ -87,7 +82,6 @@ export default function Statistics() {
           }
         />
       </View>
-
     </View>
   )
 }

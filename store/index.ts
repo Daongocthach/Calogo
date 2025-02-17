@@ -17,6 +17,7 @@ type StoreState = {
   todayCalories: number
   todayFoodList: FoodDailyItemType[]
   historyFoodList: FoodDailyItemType[]
+  weekHistoryCalories: number[]
   foodList: FoodItemType[]
   bmr: number | null
   tdde: number | null
@@ -51,20 +52,35 @@ const useStore = create<StoreState>()(
         foodList: FoodSamples,
         todayFoodList: [],
         historyFoodList: [],
+        weekHistoryCalories: [
+          0, 0, 0, 0, 0, 0, 0
+        ],
         addTodayFood: (payload: FoodDailyItemType) => {
           set((state) => ({
             todayFoodList: [...state.todayFoodList, payload],
-            todayCalories: state.todayCalories + payload.calories
+            todayCalories: state.todayCalories + payload.calories,
+            weekHistoryCalories: state.weekHistoryCalories.map((item, index) => {
+              if (new Date().getDay() === 1 && index !== new Date().getDay()) {
+                return 0
+              }
+              return index === new Date().getDay() ? item + payload.calories : item
+            })
           }))
         },
         removeTodayFood: (payload: string) => {
           set((state) => ({
-            todayFoodList: state.todayFoodList.filter((item) => item.id !== payload)
+            todayFoodList: state.todayFoodList.filter((item) => item.id !== payload),
+            todayCalories: state.todayCalories - (state.todayFoodList.find((item) => item.id === payload)?.calories || 0),
+            weekHistoryCalories: state.weekHistoryCalories.map((item, index) => 
+              index === new Date().getDay() ? item - (state.todayFoodList.find((item) => item.id === payload)?.calories || 0) : item)
           }))
         },
         editTodayFood: (payload: FoodDailyItemType) => {
           set((state) => ({
-            todayFoodList: state.todayFoodList.map((item) => item.id === payload.id ? payload : item)
+            todayFoodList: state.todayFoodList.map((item) => item.id === payload.id ? payload : item),
+            todayCalories: state.todayCalories - (state.todayFoodList.find((item) => item.id === payload.id)?.calories || 0) + payload.calories,
+            weekHistoryCalories: state.weekHistoryCalories.map((item, index) =>
+              index === new Date().getDay() ? item - (state.todayFoodList.find((item) => item.id === payload.id)?.calories || 0) + payload.calories : item)
           }))
         },
         addHistoryFood: (payload: FoodDailyItemType) => {
@@ -148,7 +164,8 @@ const useStore = create<StoreState>()(
           foodList: state.foodList,
           todayFoodList: state.todayFoodList,
           todayCalories: state.todayCalories,
-          historyFoodList: state.historyFoodList
+          historyFoodList: state.historyFoodList,
+          weekHistoryCalories: state.weekHistoryCalories
         }),
       },
     ),

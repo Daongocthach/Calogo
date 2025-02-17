@@ -3,7 +3,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 import { SymbolWeight } from 'expo-symbols'
 import React from 'react'
-import { OpaqueColorValue, StyleProp, ViewStyle } from 'react-native'
+import { OpaqueColorValue, StyleProp, TextStyle, ViewStyle } from 'react-native'
 
 // Add your SFSymbol to MaterialIcons mappings here.
 const MAPPING = {
@@ -23,13 +23,13 @@ const MAPPING = {
   'plus': 'add',
   'cup.and.saucer.fill': 'local-cafe',
   'applelogo': 'emoji-food-beverage',
-  'carrot.fill': 'spa',
+  'carrot.fill': 'local-florist',
   'fish.fill': 'set-meal',
   'carton.fill': 'icecream',
   'birthday.cake.fill': 'cake',
   'bowl.fill': 'ramen-dining',
-  'baguette': 'bakery-dining',
-  'bottle.fill': 'local-bar',
+  'baguette': 'lunch-dining',
+  'arrow.triangle.turn.up.right.diamond': 'soup-kitchen',
   'snowflake': 'ac-unit',
   'leaf.fill': 'eco',
   'bell.badge.slash': 'notifications-none',
@@ -52,7 +52,12 @@ const MAPPING = {
   'person.badge.plus.fill': 'person-add',
   'delete.left.fill': 'delete',
   'chevron.left.2': 'chevron-left',
-  'chevron.right.2': 'chevron-right',
+  'fork.knife': 'restaurant',
+  'wineglass.fill': 'wine-bar',
+  'cup.and.heat.waves.fill': 'coffee',
+  'drop.fill': 'water-drop',
+  'grass': 'grass',
+  'takeoutbag.and.cup.and.straw': 'ramen-dining',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
@@ -76,7 +81,7 @@ export function IconSymbol({
   name: IconSymbolName
   size?: number
   color: string | OpaqueColorValue
-  style?: StyleProp<ViewStyle>
+  style?: StyleProp<TextStyle>
   weight?: SymbolWeight
 }) {
   return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />
