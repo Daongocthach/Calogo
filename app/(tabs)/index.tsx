@@ -107,7 +107,7 @@ export default function HomeScreen() {
   return (
     <View className='flex-1 items-center relative px-4'>
       {bmr ?
-        <View className='flex-1 items-center relative px-4'>
+        <View className='flex-1 mb-20 items-center relative px-4'>
           <ClockInformation />
           <Text className='text-2xl font-bold my-4 text-sky-600'>Hôm nay</Text>
           <View className='flex flex-row gap-8'>

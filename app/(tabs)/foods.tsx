@@ -125,7 +125,7 @@ export default function Foods() {
     )
   }
   return (
-    <View className='flex-1 items-center relative px-4'>
+    <View className='flex-1 mb-20 items-center relative px-4'>
       <ClockInformation />
       <ScrollView>
         {foodList.map((item, index) => (

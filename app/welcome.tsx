@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { HelloWave } from '@/components/HelloWave'
-import { View, Text, TextInput, ScrollView } from 'react-native'
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native'
 import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
 import { useForm, Controller } from "react-hook-form"
 import { RadioButton } from 'react-native-paper'
@@ -68,7 +68,7 @@ export default function WelcomeScreen() {
 
 
   return (
-    <View className="flex-1 items-center relative px-4">
+    <View className="max-h-[500px] items-center relative px-4">
       <ProgressSteps
         activeStepIconBorderColor="#3b82f6"
         completedStepIconColor="#3b82f6"
@@ -85,7 +85,7 @@ export default function WelcomeScreen() {
           buttonNextText='Tiếp theo'
           buttonNextTextColor='#3b82f6'
         >
-          <View style={{ alignItems: "center", paddingTop: 10 }}>
+          <ScrollView className='mt-10'>
             <HelloWave />
             <Text className="text-2xl font-bold text-center text-slate-600">
               Chào mừng bạn đến với ứng dụng của chúng tôi
@@ -102,7 +102,7 @@ export default function WelcomeScreen() {
               <Text className='font-bold text-blue-500'> "Tiếp theo" </Text>
               để bắt đầu
             </Text>
-          </View>
+          </ScrollView>
         </ProgressStep>
         <ProgressStep
           label="Bước thứ 2"
