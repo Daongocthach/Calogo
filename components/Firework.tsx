@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -8,7 +8,6 @@ import Animated, {
   withSequence,
 } from 'react-native-reanimated'
 
-import { ThemedText } from '@/components/ThemedText'
 
 export function Firework() {
   const rotationAnimation = useSharedValue(0)
@@ -26,7 +25,7 @@ export function Firework() {
 
   return (
     <Animated.View style={animatedStyle}>
-      <ThemedText style={styles.text}>🎊</ThemedText>
+      <Text style={styles.text}>🎊</Text>
     </Animated.View>
   )
 }

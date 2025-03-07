@@ -12,6 +12,8 @@ type DataBMR = {
 }
 
 type StoreState = {
+  darkMode: boolean
+  currentLanguage: "cn" | "en" | "vi"
   isLoading: boolean
   isLoggedIn: boolean
   todayCalories: number
@@ -22,6 +24,8 @@ type StoreState = {
   bmr: number | null
   tdde: number | null
   bodyData: BodyDataType | {}
+  changeLanguage: (language: "cn" | "en" | "vi") => void
+  setDarkMode: (payload: boolean) => void
   signUp: (payload: { userName: string, displayName: string, password: string }) => void
   signIn: (payload: any, navigation: any) => void
   signOut: () => void
@@ -43,6 +47,8 @@ const useStore = create<StoreState>()(
   devtools(
     persist(
       (set) => ({
+        darkMode: false,
+        currentLanguage: "en",
         isLoading: false,
         isLoggedIn: false,
         todayCalories: 0,
@@ -55,6 +61,12 @@ const useStore = create<StoreState>()(
         weekHistoryCalories: [
           0, 0, 0, 0, 0, 0, 0
         ],
+        setDarkMode: (payload) => {
+          set({ darkMode: payload })
+        },
+        changeLanguage: (language: "cn" | "en" | "vi") => {
+          set({ currentLanguage: language })
+        },
         addTodayFood: (payload: FoodDailyItemType) => {
           set((state) => ({
             todayFoodList: [...state.todayFoodList, payload],
@@ -71,7 +83,7 @@ const useStore = create<StoreState>()(
           set((state) => ({
             todayFoodList: state.todayFoodList.filter((item) => item.id !== payload),
             todayCalories: state.todayCalories - (state.todayFoodList.find((item) => item.id === payload)?.calories || 0),
-            weekHistoryCalories: state.weekHistoryCalories.map((item, index) => 
+            weekHistoryCalories: state.weekHistoryCalories.map((item, index) =>
               index === new Date().getDay() ? item - (state.todayFoodList.find((item) => item.id === payload)?.calories || 0) : item)
           }))
         },
@@ -157,6 +169,8 @@ const useStore = create<StoreState>()(
         name: "calogo",
         storage: createJSONStorage(() => asyncStorage),
         partialize: (state) => ({
+          darkMode: state.darkMode,
+          currentLanguage: state.currentLanguage,
           isLoggedIn: state.isLoggedIn,
           bmr: state.bmr,
           tdde: state.tdde,
