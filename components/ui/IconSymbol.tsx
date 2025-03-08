@@ -58,6 +58,7 @@ const MAPPING = {
   'drop.fill': 'water-drop',
   'grass': 'grass',
   'takeoutbag.and.cup.and.straw': 'ramen-dining',
+  'translate': 'translate',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

@@ -5,11 +5,15 @@ import * as SplashScreen from 'expo-splash-screen'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
-import { useColorScheme } from '@/hooks/useColorScheme'
 import Toast from 'react-native-toast-message'
 import "../global.css"
 
 SplashScreen.preventAutoHideAsync()
+
+SplashScreen.setOptions({
+  duration: 1000,
+  fade: true,
+});
 
 export default function RootLayout() {
   const [loaded] = useFonts({

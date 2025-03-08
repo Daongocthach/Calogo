@@ -1,4 +1,3 @@
-// common components
 export { default as ClockInformation } from "@/components/common/ClockInformation"
 export { default as CustomDropDown } from "@/components/common/CustomDropDown"
 export { default as CustomMenu } from "@/components/common/CustomMenu"
@@ -10,5 +9,3 @@ export { default as Loading } from "@/components/common/Loading"
 export { default as InputField } from "@/components/common/InputField"
 export { default as MenuTranslate } from "@/components/common/MenuTranslate"
 export { default as DarkModeIcon } from "@/components/common/DarkModeIcon"
-
-
