@@ -1,7 +1,7 @@
 import { PropsWithChildren, useState } from 'react'
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native'
 
-import { IconSymbol } from '@/components/ui/IconSymbol'
+import { IconSymbol } from '@/components/common/IconSymbol'
 import { useColorScheme } from '@/hooks/useColorScheme'
 
 export function Collapsible({ children, title, isTrue }: PropsWithChildren & { title: string, isTrue?: boolean }) {

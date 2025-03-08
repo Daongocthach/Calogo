@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react'
-import { IconSymbol } from '@/components/ui/IconSymbol'
 import { Text, TouchableOpacity, View, ScrollView, TextInput, Alert } from 'react-native'
 import { PieChart } from "react-native-gifted-charts"
-import { FoodItem } from '@/components/FoodItem'
-import { CustomModal } from '@/components/CustomModal'
-import { Collapsible } from '@/components/Collapsible'
-import { useForm, Controller } from "react-hook-form"
-import { CustomDropDown } from '@/components/CustomDropDown'
-import { ClockInformation } from '@/components/ClockInformation'
 import Toast from 'react-native-toast-message'
+import { useForm, Controller } from "react-hook-form"
+
+import { ClockInformation, CustomDropDown, CustomModal, Collapsible, FoodItem, IconSymbol } from '@/components'
 import WelcomeScreen from '@/app/welcome'
 import useStore from '@/store'
 import { FoodTypes } from '@/constants/FoodTypes'
@@ -166,9 +162,8 @@ export default function HomeScreen() {
             ))}
           </ScrollView>
           <CustomModal
-            isError={Object.keys(errors).length !== 0}
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
             handle={handleAddMeal}
           >
             <View>

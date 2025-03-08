@@ -1,15 +1,12 @@
 import { useState } from 'react'
-import { IconSymbol } from '@/components/ui/IconSymbol'
 import { Text, TouchableOpacity, View, ScrollView, TextInput, Alert } from 'react-native'
-import { FoodItem } from '@/components/FoodItem'
-import { CustomModal } from '@/components/CustomModal'
-import { FoodTypes } from '@/constants/FoodTypes'
 import { useForm, Controller } from "react-hook-form"
-import { CustomDropDown } from '@/components/CustomDropDown'
-import { ClockInformation } from '@/components/ClockInformation'
 import Toast from 'react-native-toast-message'
-import useStore from '@/store'
+
+import { ClockInformation, FoodItem, CustomModal, CustomDropDown, IconSymbol } from '@/components'
+import { FoodTypes } from '@/constants/FoodTypes'
 import { FoodItemType } from '@/lib/types'
+import useStore from '@/store'
 
 const foodTypes = Object.entries(FoodTypes).map(([key, value]) => ({
   label: value.name,
@@ -135,9 +132,8 @@ export default function Foods() {
         ))}
       </ScrollView>
       <CustomModal
-        isError={Object.keys(errors).length !== 0}
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
         handle={handleSubmit(onSubmit)}
       >
         <View>

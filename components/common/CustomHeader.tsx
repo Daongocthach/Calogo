@@ -1,0 +1,26 @@
+import { Image, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useRouter } from 'expo-router'
+import { DrawerToggleButton } from '@react-navigation/drawer'
+import { CustomMenu, MenuTranslate } from '@/components'
+
+export const CustomHeader = () => {
+    const router = useRouter()
+    return (
+        <SafeAreaView className='flex flex-row justify-between items-center px-4'>
+            <TouchableOpacity onPress={() => { router.push('/') }}>
+                <Image
+                    source={require('@/assets/images/logo-header.png')}
+                    style={{ width: 250, height: 100 }} resizeMode="contain"
+                />
+            </TouchableOpacity>
+            <View className='flex flex-row items-center'>
+                <MenuTranslate />
+                {/* <CustomMenu /> */}
+                <DrawerToggleButton />
+            </View>
+        </SafeAreaView>
+    )
+}
+
+

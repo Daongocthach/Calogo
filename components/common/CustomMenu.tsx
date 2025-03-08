@@ -1,40 +1,26 @@
 import { useState } from 'react'
 import { Menu, Icon, useTheme } from 'react-native-paper'
-import { Linking } from 'react-native'
 import { useTranslation } from 'react-i18next'
+import { useRouter, useNavigation } from 'expo-router'
 
 import useStore from '@/store'
-import { version, checkUpdate, TOOLS_URL } from '@/utils'
 import { CustomButton } from '@/components'
 import { showAlert } from '@/notification'
 
 
-const CustomMenu = ({ navigation, route }: { navigation: any, route: any }) => {
+const CustomMenu = () => {
+    const router = useRouter()
+    const navigation = useNavigation()
     const { colors } = useTheme()
     const { t } = useTranslation()
 
     const [visible, setVisible] = useState(false)
-    const openMenu = () => setVisible(true)
-    const closeMenu = () => setVisible(false)
-    // const { displayName, signOut, tokenDecoded } = useStore()
-    const { displayName, signOut } = useStore()
-    const openAPK = async () => {
-        try {
-            const isUpdate = await checkUpdate()
-            if (isUpdate) {
-                showAlert("update_available", () => {
-                    Linking.openURL(TOOLS_URL + 'update' || '').catch(() => {
-                        showAlert("open_apk_failed")
-                    })
-                })
-            }
-            else {
-                showAlert("the_latest_version")
-            }
-        } catch (error) {
-            showAlert("network_error")
-        }
+    const openMenu = () => {
+        router.push('/login')
     }
+    const closeMenu = () => setVisible(false)
+    const { signOut } = useStore()
+
     const handleLogout = () => {
         showAlert("logout", () => {
             signOut()
@@ -42,7 +28,6 @@ const CustomMenu = ({ navigation, route }: { navigation: any, route: any }) => {
         closeMenu()
     }
     const handleNavigate = (screen: string) => {
-        navigation.navigate(screen)
         closeMenu()
     }
     return (
@@ -50,7 +35,7 @@ const CustomMenu = ({ navigation, route }: { navigation: any, route: any }) => {
             visible={visible}
             onDismiss={closeMenu}
             anchorPosition='bottom'
-            contentStyle={{ backgroundColor: colors.background, marginTop: 16 }}
+            contentStyle={{ backgroundColor: colors.background, marginTop: 30 }}
             anchor={
                 <CustomButton
                     handle={openMenu}
@@ -59,28 +44,7 @@ const CustomMenu = ({ navigation, route }: { navigation: any, route: any }) => {
                     buttonClassName='px-4'
                 />
             }>
-            <Menu.Item
-                title={displayName}
-                titleStyle={{ color: colors.primary, fontSize: 16, fontWeight: 'bold' }}
-            />
 
-            {route?.name === t('app') && <Menu.Item onPress={() => { handleNavigate(t('app settings')) }} title={t('app settings')} leadingIcon={'cog-outline'} />}
-            {route?.name === t('app') && <Menu.Item onPress={() => { handleNavigate(t('app users')) }} title={t('app users')} leadingIcon={'account-box-multiple-outline'} />}
-            {route?.name === t('app settings') && <Menu.Item onPress={() => { handleNavigate(t('app users')) }} title={t('app users')} leadingIcon={'account-box-multiple-outline'} />}
-            {route?.name === t('app users') && <Menu.Item onPress={() => { handleNavigate(t('app settings')) }} title={t('app settings')} leadingIcon={'cog-outline'} />}
-
-            <Menu.Item
-                onPress={openAPK}
-                title={t('update')}
-                leadingIcon={() => (
-                    <Icon
-                        source='cloud-download-outline'
-                        size={22}
-                        color={colors.onBackground}
-                    />
-                )}
-                titleStyle={{ color: colors.onBackground, fontSize: 16 }}
-            />
             <Menu.Item
                 onPress={handleLogout}
                 title={t('logout')}
@@ -91,10 +55,6 @@ const CustomMenu = ({ navigation, route }: { navigation: any, route: any }) => {
                         color={colors.onBackground}
                     />
                 )}
-                titleStyle={{ color: colors.onBackground, fontSize: 16 }}
-            />
-            <Menu.Item
-                title={version}
                 titleStyle={{ color: colors.onBackground, fontSize: 16 }}
             />
         </Menu>

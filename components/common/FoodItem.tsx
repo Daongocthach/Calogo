@@ -1,4 +1,4 @@
-import { IconSymbol } from '@/components/ui/IconSymbol'
+import { IconSymbol } from '@/components/common/IconSymbol'
 import { Text, View } from 'react-native'
 import { FoodTypes } from '@/constants/FoodTypes'
 

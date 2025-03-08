@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { View, Text } from 'react-native'
-import { ClockInformation } from '@/components/ClockInformation'
+import { ClockInformation } from '@/components'
 // import CarouselCards from '@/components/CarouselCards'
 
 export default function Menu() {

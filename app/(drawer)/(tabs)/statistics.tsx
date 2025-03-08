@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { View, SectionList, Text, TouchableOpacity, ScrollView } from 'react-native'
-import { FoodItem } from '@/components/FoodItem'
-import { ClockInformation } from '@/components/ClockInformation'
+import { View, SectionList, Text, TouchableOpacity } from 'react-native'
+import { FoodItem } from '@/components/common/FoodItem'
 import { BarChart } from "react-native-gifted-charts"
-import { IconSymbol } from '@/components/ui/IconSymbol'
+import { IconSymbol, ClockInformation } from '@/components'
 import { FoodDailyItemType } from '@/lib/types'
 import useStore from '@/store'
 

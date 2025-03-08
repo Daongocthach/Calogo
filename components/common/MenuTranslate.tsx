@@ -22,7 +22,7 @@ const MenuTranslate = () => {
             visible={visible}
             onDismiss={closeMenu}
             anchorPosition='bottom'
-            contentStyle={{ backgroundColor: colors.background, marginTop: 15 }}
+            contentStyle={{ backgroundColor: colors.background, marginTop: 30 }}
             anchor={
                 <CustomButton
                     handle={openMenu}
