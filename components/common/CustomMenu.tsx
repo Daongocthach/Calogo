@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { useRouter, useNavigation } from 'expo-router'
 
 import useStore from '@/store'
-import { CustomButton } from '@/components'
 import { showAlert } from '@/notification'
-
+import CustomButton from '@/components/common/CustomButton'
 
 const CustomMenu = () => {
     const router = useRouter()

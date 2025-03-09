@@ -14,11 +14,6 @@ import "../global.css"
 
 SplashScreen.preventAutoHideAsync()
 
-SplashScreen.setOptions({
-  duration: 1000,
-  fade: true,
-});
-
 export default function RootLayout() {
   const { darkMode } = useStore()
   const [loaded] = useFonts({
@@ -39,13 +34,11 @@ export default function RootLayout() {
     <PaperProvider theme={darkMode ? darkTheme : lightTheme} >
       <I18nextProvider i18n={i18next}>
         <Stack>
-          {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-
           <Stack.Screen name="+not-found" />
         </Stack>
         <Toast />
-        <StatusBar style="auto" />
+        {/* <StatusBar style="auto" /> */}
       </I18nextProvider>
     </PaperProvider>
   )

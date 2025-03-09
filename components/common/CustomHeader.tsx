@@ -2,7 +2,9 @@ import { Image, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { DrawerToggleButton } from '@react-navigation/drawer'
-import { CustomMenu, MenuTranslate } from '@/components'
+
+import MenuTranslate from '@/components/common/MenuTranslate'
+import CustomMenu from '@/components/common/CustomMenu'
 
 export const CustomHeader = () => {
     const router = useRouter()

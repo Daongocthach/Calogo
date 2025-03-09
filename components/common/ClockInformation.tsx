@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { useTheme, Icon } from 'react-native-paper'
-import { CustomText } from '@/components'
+import CustomText from '@/components/common/CustomText'
 
 const getFormattedTime = () => {
     const now = new Date()

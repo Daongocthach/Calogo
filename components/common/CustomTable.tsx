@@ -3,7 +3,8 @@ import { DataTable, useTheme } from 'react-native-paper'
 import { ScrollView } from 'react-native'
 import { useTranslation } from 'react-i18next'
 
-import { CustomText, Loading } from '@/components'
+import CustomText from '@/components/common/CustomText'
+import Loading from '@/components/common/Loading'
 
 type CustomTableProps = {
   titles: { name: string, numeric?: boolean }[]

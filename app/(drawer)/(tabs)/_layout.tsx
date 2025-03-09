@@ -22,6 +22,9 @@ export default function TabLayout() {
           },
           default: {},
         }),
+        sceneStyle: {
+          backgroundColor: colors.background,
+        },
       }}>
       <Tabs.Screen
         name="index"

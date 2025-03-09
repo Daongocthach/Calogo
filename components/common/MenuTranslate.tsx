@@ -3,7 +3,7 @@ import { Menu, useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 
 import useStore from '@/store'
-import { CustomButton } from '@/components'
+import CustomButton from '@/components/common/CustomButton'
 
 const MenuTranslate = () => {
     const { colors } = useTheme()

@@ -2,7 +2,8 @@ import { View, Pressable, ScrollView } from "react-native"
 import { Modal, Portal, useTheme } from 'react-native-paper'
 import { useTranslation } from "react-i18next"
 
-import { CustomButton, CustomText } from "@/components"
+import CustomButton from "@/components/common/CustomButton"
+import CustomText from "@/components/common/CustomText"
 
 type ModalProps = {
     isNoButton?: boolean

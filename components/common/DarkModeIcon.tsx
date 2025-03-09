@@ -1,7 +1,7 @@
 import { useTheme } from "react-native-paper"
 
 import useStore from "@/store"
-import { CustomButton } from "@/components"
+import CustomButton from "@/components/common/CustomButton"
 
 function DarkModeIcon() {
     const { colors } = useTheme()
