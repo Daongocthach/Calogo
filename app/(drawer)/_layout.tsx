@@ -109,6 +109,7 @@ export default function DrawerLayout() {
             drawerContent={(props) => <CustomDrawerContent {...props} />}
             screenOptions={{
                 drawerPosition: 'right',
+                headerShown: false,
                 drawerStyle: { width: "70%", backgroundColor: colors.background },
             }}
         >
