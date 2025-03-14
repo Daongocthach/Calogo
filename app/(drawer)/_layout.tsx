@@ -10,6 +10,7 @@ import {
 } from "@expo/vector-icons";
 import { router, usePathname } from "expo-router";
 import { useTheme } from "react-native-paper";
+import DrawerHeader from "@/components/common/DrawerHeader";
 
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     const pathname = usePathname();
@@ -108,8 +109,8 @@ export default function DrawerLayout() {
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}
             screenOptions={{
-                drawerPosition: 'right',
                 headerShown: false,
+                drawerPosition: 'right',
                 drawerStyle: { width: "70%", backgroundColor: colors.background },
             }}
         >

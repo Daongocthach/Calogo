@@ -68,7 +68,7 @@ export default function WelcomeScreen() {
 
 
   return (
-    <View className="mb-20 items-center relative px-4">
+    <View className="mb-20 relative px-4">
       <ProgressSteps
         activeStepIconBorderColor="#3b82f6"
         completedStepIconColor="#3b82f6"
@@ -85,7 +85,7 @@ export default function WelcomeScreen() {
           buttonNextText='Tiếp theo'
           buttonNextTextColor='#3b82f6'
         >
-          <ScrollView className='mt-10'>
+          <ScrollView className=''>
             <Text className="text-2xl font-bold text-center text-slate-600">
               Chào mừng bạn đến với ứng dụng của chúng tôi
             </Text>
