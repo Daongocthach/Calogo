@@ -109,15 +109,16 @@ export default function DrawerLayout() {
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}
             screenOptions={{
+                header: ({ route }) => <DrawerHeader title={route.name} />,
                 headerShown: false,
                 drawerPosition: 'right',
                 drawerStyle: { width: "70%", backgroundColor: colors.background },
             }}
         >
-            <Drawer.Screen name="settings" options={{ title: "Cài đặt" }} />
-            <Drawer.Screen name="login" options={{ title: "Đăng nhập" }} />
-            <Drawer.Screen name="signup" options={{ title: "Đăng ký" }} />
-            <Drawer.Screen name="reset-password" options={{ title: "Quên mật khẩu" }} />
+            <Drawer.Screen name="settings" options={{ headerShown: true, title: "Cài đặt" }} />
+            <Drawer.Screen name="login" options={{ headerShown: true, title: "Đăng nhập" }} />
+            <Drawer.Screen name="signup" options={{ headerShown: true, title: "Đăng ký" }} />
+            <Drawer.Screen name="reset-password" options={{ headerShown: true, title: "Quên mật khẩu" }} />
         </Drawer>
     );
 }

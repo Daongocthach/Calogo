@@ -4,7 +4,7 @@ import { PieChart } from "react-native-gifted-charts"
 import Toast from 'react-native-toast-message'
 import { useForm, Controller } from "react-hook-form"
 
-import { ClockInformation, CustomDropDown, CustomModal, Collapsible, FoodItem, IconSymbol } from '@/components'
+import { ClockInformation, CustomDropDown, CustomModal, Collapsible, FoodItem, IconSymbol, CustomText } from '@/components'
 import WelcomeScreen from '@/app/welcome'
 import useStore from '@/store'
 import { FoodTypes } from '@/constants/FoodTypes'
@@ -115,9 +115,9 @@ export default function HomeScreen() {
               showGradient
               centerLabelComponent={() => {
                 return <View className='flex flex-row items-center'>
-                  <Text style={{ fontSize: 20, color: '#0284c7', fontWeight: 600 }}>
+                  <CustomText style={{ fontSize: 20, color: '#0284c7', fontWeight: 600 }}>
                     {todayCalories.toFixed(0)}
-                  </Text>
+                  </CustomText>
                   <IconSymbol name='flame.fill' size={20} color='#0284c7' />
                 </View>
               }}
@@ -168,7 +168,7 @@ export default function HomeScreen() {
           >
             <View>
               <Text className='text-xl font-bold'>Thêm bữa ăn</Text>
-              <Text className='text-gray-500'>Chọn thực phẩm bạn muốn thêm vào bữa ăn</Text>
+              <Text className='text-gray-800'>Chọn thực phẩm bạn muốn thêm vào bữa ăn</Text>
               <View className='mt-4'>
                 <Collapsible title="Chọn thực phẩm có sẵn">
                   <ScrollView className='max-h-36'>

@@ -1,18 +1,18 @@
 import { TouchableOpacity, View } from "react-native";
-import { DrawerToggleButton } from '@react-navigation/drawer'
 import { useTranslation } from "react-i18next";
-import CustomText from "@/components/common/CustomText";
-import { IconSymbol } from "./IconSymbol";
 import { router } from "expo-router";
+import { useTheme } from "react-native-paper";
+import { CustomText, IconSymbol } from "@/components";
 
 const DrawerHeader = ({ title }: { title: string }) => {
-    const { t } = useTranslation();  
+    const { t } = useTranslation(); 
+    const { colors } = useTheme(); 
     return (
-        <View className="w-full h-20 flex flex-row items-center gap-10 px-2 py-2" style={{ backgroundColor: 'white' }}>
-            <TouchableOpacity onPress={() => { router.push('/') }}>
-                <IconSymbol name="chevron.left.2" size={40} color={'gray'} />
+        <View className="w-full flex flex-row items-center gap-10 px-2" style={{ height: 60 }}>
+            <TouchableOpacity onPress={() => { router.push("/") }}>
+                <IconSymbol name="chevron.left.2" size={34} color={colors.onBackground} />
             </TouchableOpacity>
-            <CustomText className="font-bold">{t(title)}</CustomText>
+            <CustomText className="font-semibold ml-2" style={{ fontSize: 20 }}>{t(title)}</CustomText>
         </View>
     );
 };
