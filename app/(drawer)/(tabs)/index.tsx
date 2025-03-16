@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Text, TouchableOpacity, View, ScrollView, TextInput, Alert } from 'react-native'
 import { PieChart } from "react-native-gifted-charts"
 import Toast from 'react-native-toast-message'
@@ -101,9 +101,9 @@ export default function HomeScreen() {
     }
   }
   return (
-    <View className='flex-1 items-center relative px-4'>
+    <View className='flex-1 relative'>
       {bmr ?
-        <View className='flex-1 mb-20 items-center relative px-4'>
+        <View className='flex-1 mb-20 items-center relative'>
           <ClockInformation />
           <Text className='text-2xl font-bold my-4 text-sky-600'>Hôm nay</Text>
           <View className='flex flex-row gap-8'>

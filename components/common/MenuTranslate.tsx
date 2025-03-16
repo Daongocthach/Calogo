@@ -26,7 +26,7 @@ const MenuTranslate = () => {
             anchor={
                 <CustomButton
                     handle={openMenu}
-                    iconColor={visible ? colors.primary : colors.onBackground}
+                    iconColor={visible ? colors.primaryContainer : colors.primary}
                     icon={'translate'}
                     buttonClassName='px-4'
                 />

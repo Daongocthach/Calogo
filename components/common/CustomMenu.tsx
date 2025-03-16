@@ -26,9 +26,6 @@ const CustomMenu = () => {
         })
         closeMenu()
     }
-    const handleNavigate = (screen: string) => {
-        closeMenu()
-    }
     return (
         <Menu
             visible={visible}
@@ -38,7 +35,7 @@ const CustomMenu = () => {
             anchor={
                 <CustomButton
                     handle={openMenu}
-                    iconColor={visible ? colors.primary : colors.onBackground}
+                    iconColor={colors.primary}
                     icon={'menu'}
                     buttonClassName='px-4'
                 />

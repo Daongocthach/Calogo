@@ -1,15 +1,59 @@
-import { useState } from 'react'
-import { View, Text, TextInput, ScrollView } from 'react-native'
-import { ProgressSteps, ProgressStep } from 'react-native-progress-steps'
+import { useState, useRef, SetStateAction } from 'react'
+import { View, Text, TextInput, ScrollView, TouchableOpacity, Image } from 'react-native'
 import { useForm, Controller } from "react-hook-form"
 import { RadioButton } from 'react-native-paper'
 import Toast from 'react-native-toast-message'
+import Slider from '@react-native-community/slider';
 
 import useStore from '@/store'
-import { Firework, HelloWave } from '@/components'
+import { CustomText, Firework, ProgressStep, ProgressSteps } from '@/components'
 import { GenderType, IntensiveType } from '@/lib/types'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+
+const intensityOptions = ['inactive', 'low', 'medium', 'high', 'super'];
+const imageSources: { [key: string]: any } = {
+  inactive: require('@/assets/images/inactive.jpg'),
+  low: require('@/assets/images/low.jpg'),
+  medium: require('@/assets/images/medium.jpg'),
+  high: require('@/assets/images/high.jpg'),
+  super: require('@/assets/images/super.jpg'),
+};
+
+const descriptions: { [key: string]: string } = {
+  inactive: 'Ít \n (Không tập thể dục)',
+  low: 'Nhẹ nhàng \n (Thể dục 1-3 ngày/tuần)',
+  medium: 'Vừa phải \n (Thể dục 3-5 ngày/tuần)',
+  high: 'Năng động \n (Thể dục 6-7 ngày/tuần)',
+  super: 'Cường độ cao \n (Thể dục hơn 90p/ngày, \n công việc nặng)',
+};
+
 
 export default function WelcomeScreen() {
+  const [height, setHeight] = useState<number>(168)
+  const [weight, setWeight] = useState(50);
+  const [age, setAge] = useState(17);
+  const [unit, setUnit] = useState('kg');
+
+  const increaseHeight = () => {
+    if (height < 250) {
+      setHeight(height + 1);
+    }
+  };
+
+  const decreaseHeight = () => {
+    if (height > 100) {
+      setHeight(height - 1);
+    }
+  };
+
+  const adjustWeight = (delta: number) => {
+    setWeight((prev) => Math.max(1, prev + delta));
+  };
+
+  const adjustAge = (delta: number) => {
+    setAge((prev) => Math.max(1, prev + delta));
+  };
+
   const { saveData } = useStore()
   const [gender, setGender] = useState<GenderType>('male')
   const [intensity, setIntensity] = useState<IntensiveType>('medium')
@@ -66,206 +110,181 @@ export default function WelcomeScreen() {
     })
   }
 
-
+  const renderIntensityOptions = () => {
+    return intensityOptions.map((option, index) => (
+      <TouchableOpacity
+        key={index} 
+        onPress={() => setIntensity(option as IntensiveType)}
+        className={`
+          flex flex-row items-center gap-2 p-4 rounded-xl 
+          ${intensity === option ? 'bg-blue-50' : 'border border-blue-100'}
+        `}
+      >
+        <RadioButton
+          value={option}
+          status={intensity === option ? 'checked' : 'unchecked'}
+          onPress={() => setIntensity(option as IntensiveType)}
+          color='#3b82f6'
+          uncheckedColor='#3b82f6'
+        />
+        <Image
+          source={imageSources[option]}
+          style={{ width: 100, height: 100, borderRadius: 20 }}
+          resizeMode="contain"
+        />
+        <Text className="text-base text-center text-blue-500 font-semibold">
+          {descriptions[option]}
+        </Text>
+      </TouchableOpacity>
+    ));
+  };
   return (
-    <View className="mb-20 relative px-4">
+    <View className="relative flex-1">
       <ProgressSteps
         activeStepIconBorderColor="#3b82f6"
         completedStepIconColor="#3b82f6"
         activeLabelColor="#3b82f6"
         completedProgressBarColor="#3b82f6"
         activeStepNumColor="#3b82f6"
-        disabledStepIconColor="#e2e8f0"
+        disabledStepIconColor="#eff6ff"
         labelColor='#475569'
         disabledStepNumColor='#3b82f6'
         completedLabelColor='#3b82f6'
       >
-        <ProgressStep
-          label="Bước đầu tiên"
-          buttonNextText='Tiếp theo'
-          buttonNextTextColor='#3b82f6'
-        >
-          <ScrollView className=''>
-            <Text className="text-2xl font-bold text-center text-slate-600">
-              Chào mừng bạn đến với ứng dụng của chúng tôi
-            </Text>
-            <Text className="text-lg text-center mt-4">
-              Ứng dụng
-              <Text className='font-bold'> hoàn toàn miễn phí </Text>
-              giúp bạn
-              <Text className='font-bold text-blue-500'> theo dõi lượng calo tiêu thụ </Text>
-              và cung cấp một số thực phẩm phù hợp với nhu cầu của bạn
-            </Text>
-            <Text className="text-lg text-center mt-4">
-              Chúng tôi cần thu thập một số thông tin về cơ thể của bạn để sử dụng ứng dụng. Nhấn nút
-              <Text className='font-bold text-blue-500'> "Tiếp theo" </Text>
-              để bắt đầu
-            </Text>
-          </ScrollView>
-        </ProgressStep>
-        <ProgressStep
-          label="Bước thứ 2"
-          buttonNextText='Tiếp theo'
-          buttonNextTextColor='#3b82f6'
-          buttonPreviousText='Quay lại'
-          buttonPreviousTextColor='#3b82f6'
-          buttonNextDisabled={Object.keys(errors).length !== 0}
-        >
-          <ScrollView>
-            <Text className="text-2xl font-bold text-center text-slate-600 mb-4">
-              Nhập thông tin BMR
-            </Text>
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <View className="flex-row items-center border-b border-sky-600 rounded w-full">
-                  <TextInput
-                    className="flex-1"
-                    placeholder="Chiều cao"
-                    keyboardType="numeric"
-                    placeholderTextColor="#888"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                  <Text className="text-gray-500">(cm)</Text>
-                </View>
-              )}
-              name="height"
-            />
-            {errors.height && <Text className='mb-2 text-red-500'>Chiều cao không được để trống</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <View className="flex-row items-center border-b border-sky-600 rounded w-full">
-                  <TextInput
-                    className='flex-1'
-                    placeholder="Cân nặng (kg)"
-                    keyboardType='numeric'
-                    placeholderTextColor="#888"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                  <Text className="text-gray-500">(kg)</Text>
-                </View>
-              )}
-              name="weight"
-            />
-            {errors.weight && <Text className='mb-2 text-red-500'>Cân nặng không được để trống</Text>}
-            <Controller
-              control={control}
-              rules={{
-                required: true,
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <View className="flex-row items-center border-b border-sky-600 rounded w-full">
-                  <TextInput
-                    className='flex-1'
-                    placeholder="Tuổi của bạn"
-                    keyboardType='numeric'
-                    placeholderTextColor="#888"
-                    onBlur={onBlur}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                  <Text className="text-gray-500">(tuổi)</Text>
-                </View>
-              )}
-              name="age"
-            />
-            {errors.age && <Text className='mb-2 text-red-500'>Tuổi của bạn không được để trống</Text>}
-            <View className='w-full items-start'>
-              <Text className="text-lg text-center mt-4 mb-2 text-blue-500 font-semibold">
-                - Giới tính
-              </Text>
-              <View className='flex flex-row items-center gap-2'>
-                <RadioButton
-                  value="male"
-                  status={gender === 'male' ? 'checked' : 'unchecked'}
+        <ProgressStep>
+          <View className='flex-1 p-1'>
+            <View className='bg-white p-4 rounded-lg shadow-md'>
+              <Text className='text-xl font-semibold text-gray-500 w-full text-center mb-4'>Chọn giới tính của bạn</Text>
+              <View className="flex flex-row gap-2 ">
+                <TouchableOpacity
+                  className={`flex-1 flex flex-row items-center justify-center gap-2 py-8 rounded-xl 
+                    ${gender === 'male' ? 'bg-blue-50' : 'border border-blue-50'}`}
                   onPress={() => setGender('male')}
-                  color='#3b82f6'
-                />
-                <Text className="text-base text-center text-blue-500 font-semibold">Nam  🧔🏻‍♂️</Text>
-              </View>
-              <View className='flex flex-row items-center gap-2'>
-                <RadioButton
-                  value="female"
-                  status={gender === 'female' ? 'checked' : 'unchecked'}
+                >
+                  <RadioButton
+                    value="male"
+                    status={gender === 'male' ? 'checked' : 'unchecked'}
+                    onPress={() => setGender('male')}
+                    color='#3b82f6'
+                    uncheckedColor='#3b82f6'
+                  />
+                  <MaterialCommunityIcons name="face-man" size={30} color={"#3b82f6"} />
+                  <Text className="text-xl text-center font-semibold text-blue-500">Nam</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  className={`flex-1 flex flex-row items-center justify-center gap-2 py-8 rounded-xl 
+                    ${gender === 'female' ? 'bg-blue-50' : 'border border-blue-50'}`}
                   onPress={() => setGender('female')}
-                  color='#3b82f6'
-                />
-                <Text className="text-base text-center text-blue-500 font-semibold">Nữ     👩🏻‍🦰</Text>
+                >
+                  <RadioButton
+                    value="female"
+                    status={gender === 'female' ? 'checked' : 'unchecked'}
+                    onPress={() => setGender('female')}
+                    color='#3b82f6'
+                    uncheckedColor='#3b82f6'
+                  />
+                  <MaterialCommunityIcons name="face-woman" size={30} color={"#3b82f6"} />
+                  <Text className="text-xl text-center font-semibold text-blue-500">Nữ</Text>
+                </TouchableOpacity>
               </View>
-              <Text className="text-lg text-center mt-4 mb-2 text-blue-500 font-semibold">
-                - Chọn hoạt động đúng nhất với bạn
-              </Text>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <View className='flex flex-col items-center gap-2 bg-blue-100 p-4 rounded-xl'>
-                  <RadioButton
-                    value="inactive"
-                    status={intensity === 'inactive' ? 'checked' : 'unchecked'}
-                    onPress={() => setIntensity('inactive')}
-                    color='#3b82f6'
-                  />
-                  <Text className="text-3xl">🧘🏻‍♂️</Text>
-                  <Text className="text-base text-center text-blue-500 font-semibold">Ít hoạt động</Text>
-                </View>
-                <View className='flex flex-col items-center gap-2 ml-4 bg-blue-100 p-4 rounded-xl'>
-                  <RadioButton
-                    value="low"
-                    status={intensity === 'low' ? 'checked' : 'unchecked'}
-                    onPress={() => setIntensity('low')}
-                    color='#3b82f6'
-                  />
-                  <Text className="text-3xl">🧘🏻‍♂️</Text>
-                  <Text className="text-base text-center text-blue-500 font-semibold">Ít thể dục</Text>
-                </View>
-                <View className='flex flex-col items-center gap-2 ml-4 bg-blue-100 p-4 rounded-xl'>
-                  <RadioButton
-                    value="medium"
-                    status={intensity === 'medium' ? 'checked' : 'unchecked'}
-                    onPress={() => setIntensity('medium')}
-                    color='#3b82f6'
-                  />
-                  <Text className="text-3xl">🧍🏻‍♂️</Text>
-                  <Text className="text-base text-center text-blue-500 font-semibold">Vừa phải</Text>
-                </View>
-                <View className='flex flex-col items-center gap-2 ml-4 bg-blue-100 p-4 rounded-xl'>
-                  <RadioButton
-                    value="high"
-                    status={intensity === 'high' ? 'checked' : 'unchecked'}
-                    onPress={() => setIntensity('high')}
-                    color='#3b82f6'
-                  />
-                  <Text className="text-3xl">🚶🏻‍♂️</Text>
-                  <Text className="text-base text-center text-blue-500 font-semibold">Năng động</Text>
-                </View>
-                <View className='flex flex-col items-center gap-2 ml-4 bg-blue-100 p-4 rounded-xl'>
-                  <RadioButton
-                    value="super"
-                    status={intensity === 'super' ? 'checked' : 'unchecked'}
-                    onPress={() => setIntensity('super')}
-                    color='#3b82f6'
-                  />
-                  <Text className="text-3xl">🏋🏻‍♂️</Text>
-                  <Text className="text-base text-center text-blue-500 font-semibold">Cường độ cao</Text>
-                </View>
-              </ScrollView>
             </View>
-          </ScrollView>
+            <View className='flex flex-col gap-2 items-center bg-white p-4 rounded-lg shadow-md mt-6'>
+              <View className='flex flex-row items-center justify-between w-full'>
+                <Text className='text-xl font-semibold text-gray-500'>Chiều cao</Text>
+                <View className="px-2 py-1 rounded-md bg-blue-100">
+                  <Text className="text-blue-500 font-bold">kg</Text>
+                </View>
+              </View>
+              <TextInput
+                className="text-blue-500 text-5xl font-bold text-center"
+                keyboardType="numeric"
+                value={height.toString()}
+                onChangeText={(text) => setHeight(parseFloat(text) || 0)}
+              />
+              <View className='flex flex-row justify-center items-center gap-2'>
+                <TouchableOpacity style={{ flex: 0 }} onPress={decreaseHeight}>
+                  <MaterialCommunityIcons name="minus" size={20} color={"#9ca3af"} />
+                </TouchableOpacity>
+                <Slider
+                  style={{ flex: 1, height: 35 }}
+                  minimumValue={100}
+                  maximumValue={250}
+                  minimumTrackTintColor="#3b82f6"
+                  maximumTrackTintColor="#6b7280"
+                  thumbTintColor='#3b82f6'
+                  value={height}
+                  step={1}
+                  onValueChange={(value) => setHeight(value)}
+                  onSlidingComplete={e => {
+                    setHeight(e)
+                  }}
+                />
+                <TouchableOpacity style={{ flex: 0 }} onPress={increaseHeight}>
+                  <MaterialCommunityIcons name="plus" size={20} color={"#9ca3af"} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View className="flex flex-row justify-center gap-4 mt-6">
+              {/* Cân nặng */}
+              <View className="flex-1 bg-white p-4 rounded-lg shadow-md items-center">
+                <View className="flex flex-row items-center justify-between w-full">
+                  <Text className="text-gray-500 text-xl font-semibold">Cân nặng</Text>
+                  <View className="px-2 py-1 rounded-md bg-blue-100">
+                    <Text className="text-blue-500 font-bold">kg</Text>
+                  </View>
+                </View>
+                <TextInput
+                  className="text-blue-500 text-5xl font-bold text-center mt-4"
+                  keyboardType="numeric"
+                  value={weight.toString()}
+                  onChangeText={(text) => setWeight(parseFloat(text) || 0)}
+                />
+                <View className="flex flex-row justify-between w-full mt-2">
+                  <TouchableOpacity onPress={() => adjustWeight(-1)}>
+                    <MaterialCommunityIcons name="minus" size={28} color={"#9ca3af"} />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => adjustWeight(1)}>
+                    <MaterialCommunityIcons name="plus" size={28} color={"#9ca3af"} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Tuổi */}
+              <View className="flex-1 bg-white p-4 rounded-lg shadow-md items-center">
+                <View className="flex flex-row items-center justify-between w-full">
+                  <Text className="text-gray-500 text-xl text-center font-semibold">Tuổi</Text>
+                  <View className="px-2 py-1 rounded-md bg-blue-100">
+                    <Text className="text-blue-500 font-bold">age</Text>
+                  </View>
+                </View>
+                <TextInput
+                  className="text-blue-500 text-5xl font-bold text-center mt-4"
+                  keyboardType="numeric"
+                  value={age.toString()}
+                  onChangeText={(text) => setAge(parseInt(text) || 0)}
+                />
+                <View className="flex flex-row justify-between w-full mt-2">
+                  <TouchableOpacity onPress={() => adjustAge(-1)}>
+                    <MaterialCommunityIcons name="minus" size={28} color={"#9ca3af"} />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => adjustAge(1)}>
+                    <MaterialCommunityIcons name="plus" size={28} color={"#9ca3af"} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+        </ProgressStep>
+
+        {/* Mức độ vận động */}
+        <ProgressStep>
+          <Text className="text-gray-500 text-xl font-semibold w-full text-center mb-4">Mức độ vận động của bạn thế nào</Text>
+          <View className='flex flex-col gap-2'>
+            {renderIntensityOptions()}
+          </View>
+
         </ProgressStep>
         <ProgressStep
-          label="Kết thúc"
-          buttonPreviousText='Quay lại'
-          buttonPreviousTextColor='#3b82f6'
-          buttonFinishTextColor='#3b82f6'
           buttonFinishText='Hoàn tất'
           onSubmit={handleSubmit(onSubmit)}
         >

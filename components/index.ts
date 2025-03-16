@@ -1,3 +1,5 @@
+import ProgressStep from "@/components/ProgressSteps/ProgressStep";
+
 export { default as ClockInformation } from "@/components/common/ClockInformation";
 export { default as CustomDropDown } from "@/components/common/CustomDropDown";
 export { default as CustomMenu } from "@/components/common/CustomMenu";
@@ -10,6 +12,9 @@ export { default as InputField } from "@/components/common/InputField";
 export { default as MenuTranslate } from "@/components/common/MenuTranslate";
 export { default as DarkModeIcon } from "@/components/common/DarkModeIcon";
 
+export { default as ProgressStep } from "@/components/ProgressSteps/ProgressStep";
+export { default as ProgressSteps } from "@/components/ProgressSteps/ProgressSteps";
+
 export { Collapsible } from "@/components/common/Collapsible";
 export { FoodItem } from "@/components/common/FoodItem";
 export { Firework } from "@/components/common/Firework";
@@ -17,4 +22,3 @@ export { HapticTab } from "@/components/common/HapticTab";
 export { CustomHeader } from "@/components/common/CustomHeader";
 export { IconSymbol } from "@/components/common/IconSymbol";
 export { HelloWave } from "@/components/common/HelloWave";
-

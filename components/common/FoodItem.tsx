@@ -1,6 +1,5 @@
 import { Text, View } from 'react-native'
 
-import { FoodTypes } from '@/constants/FoodTypes'
 import { IconSymbol } from '@/components/common/IconSymbol'
 
 type FoodItemProps =
