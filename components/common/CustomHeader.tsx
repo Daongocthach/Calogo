@@ -5,22 +5,20 @@ import { DrawerToggleButton } from '@react-navigation/drawer'
 import { useTheme } from 'react-native-paper'
 
 import MenuTranslate from '@/components/common/MenuTranslate'
-import CustomMenu from '@/components/common/CustomMenu'
 
 export const CustomHeader = () => {
     const router = useRouter()
     const { colors } = useTheme()
     return (
-        <SafeAreaView className='flex flex-row justify-between items-center px-4'>
+        <SafeAreaView className='flex flex-row justify-between items-center px-4' style={{ paddingBottom: 10 }}>
             <TouchableOpacity onPress={() => { router.push('/') }}>
                 <Image
                     source={require('@/assets/images/logo-header.png')}
-                    style={{ width: 250, height: 100 }} resizeMode="contain"
+                    style={{ width: 250, height: 75 }} resizeMode="contain"
                 />
             </TouchableOpacity>
             <View className='flex flex-row items-center'>
                 <MenuTranslate />
-                {/* <CustomMenu /> */}
                 <DrawerToggleButton tintColor={colors.primary}/>
             </View>
         </SafeAreaView>

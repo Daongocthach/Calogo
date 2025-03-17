@@ -3,7 +3,6 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { useTheme } from "react-native-paper"
 
-import TabBarBackground from '@/components/common/TabBarBackground';
 import { CustomHeader, HapticTab, IconSymbol } from '@/components';
 
 export default function TabLayout() {
@@ -15,10 +14,8 @@ export default function TabLayout() {
         tabBarActiveTintColor: colors.primary,
         header: () => <CustomHeader />,
         tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            position: 'absolute',
           },
           default: {},
         }),
