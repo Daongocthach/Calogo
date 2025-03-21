@@ -21,7 +21,7 @@ export const lightTheme = {
     "onErrorContainer": "#410002",
 
     "background": "#ffffff",
-    "onBackground": "#1f2937",
+    "onBackground": "#444",
     "surface": "#eef5ff",
     "onSurface": "#1c2a3a",
 
@@ -53,9 +53,8 @@ export const lightTheme = {
 
 export const darkTheme = {
   "colors": {
-    // Primary color used for main buttons, active elements, etc.
     "primary": "#3b82f6",
-    "onPrimary": "#ffffff", // Text color on primary (buttons, links)
+    "onPrimary": "#ffffff",
     "primaryContainer": "#3b82f6", // Background color for primary button/container
     "onPrimaryContainer": "#ffffff", // Text color on primary container
 

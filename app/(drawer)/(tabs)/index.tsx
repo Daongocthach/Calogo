@@ -7,7 +7,7 @@ import { useForm, Controller } from "react-hook-form"
 import { ClockInformation, CustomDropDown, CustomModal, Collapsible, FoodItem, IconSymbol, CustomText } from '@/components'
 import WelcomeScreen from '@/app/welcome'
 import useStore from '@/store'
-import { FoodTypes } from '@/constants/FoodTypes'
+import { FoodTypes } from '@/lib/constants/FoodTypes'
 import { FoodItemType } from '@/lib/types'
 
 
@@ -103,7 +103,7 @@ export default function HomeScreen() {
   return (
     <View className='flex-1 relative'>
       {bmr ?
-        <View className='flex-1 mb-20 items-center relative'>
+        <View className='flex-1 mb-2 items-center relative'>
           <ClockInformation />
           <Text className='text-2xl font-bold my-4 text-sky-600'>Hôm nay</Text>
           <View className='flex flex-row gap-8'>

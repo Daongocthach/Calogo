@@ -17,8 +17,6 @@ export { default as ProgressSteps } from "@/components/ProgressSteps/ProgressSte
 
 export { Collapsible } from "@/components/common/Collapsible";
 export { FoodItem } from "@/components/common/FoodItem";
-export { Firework } from "@/components/common/Firework";
 export { HapticTab } from "@/components/common/HapticTab";
 export { CustomHeader } from "@/components/common/CustomHeader";
 export { IconSymbol } from "@/components/common/IconSymbol";
-export { HelloWave } from "@/components/common/HelloWave";

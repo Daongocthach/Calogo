@@ -4,7 +4,6 @@ import { Drawer } from "expo-router/drawer";
 import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from "@react-navigation/drawer";
 import {
     Feather,
-    AntDesign,
     MaterialIcons,
     Ionicons,
 } from "@expo/vector-icons";
@@ -20,20 +19,21 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerContentScrollView {...props}>
             <View style={styles.userInfoWrapper}>
                 <Image
-                    source={{ uri: "https://randomuser.me/api/portraits/women/26.jpg" }}
-                    width={80}
-                    height={80}
-                    style={styles.userImg}
+                    source={require("@/assets/images/avatar.jpg")}
+                    width={10}
+                    height={10}
+                    resizeMode="contain"
+                    style={{ width: 80, height: 80, borderRadius: 40 }}
                 />
                 <View style={styles.userDetailsWrapper}>
-                    <Text style={styles.userName}>John Doe</Text>
-                    <Text style={styles.userEmail}>john@email.com</Text>
+                    <Text style={styles.userName}>Username</Text>
+                    <Text style={styles.userEmail}>name@email.com</Text>
                 </View>
             </View>
             <DrawerItem
                 icon={({ color, size }) => (
                     <Feather
-                        name="home"
+                        name="user-plus"
                         size={size}
                         color={pathname == "/signup" ? colors.primary : colors.onBackground}
                     />
@@ -47,8 +47,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             />
             <DrawerItem
                 icon={({ color, size }) => (
-                    <MaterialIcons
-                        name="login"
+                    <Feather
+                        name="key"
                         size={size}
                         color={pathname == "/login" ? colors.onPrimary : colors.onBackground}
                     />
@@ -65,8 +65,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             />
             <DrawerItem
                 icon={({ color, size }) => (
-                    <Ionicons
-                        name="settings-outline"
+                    <Feather
+                        name="settings"
                         size={size}
                         color={pathname == "/settings" ? colors.primary : colors.onBackground}
                     />
@@ -83,8 +83,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
             />
             <DrawerItem
                 icon={({ color, size }) => (
-                    <Ionicons
-                        name="settings-outline"
+                    <Feather
+                        name="lock"
                         size={size}
                         color={pathname == "/settings" ? colors.primary : colors.onBackground}
                     />
@@ -97,6 +97,24 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                 style={{ backgroundColor: pathname == "/reset-password" ? colors.primary : colors.background }}
                 onPress={() => {
                     router.push("/reset-password");
+                }}
+            />
+            <DrawerItem
+                icon={({ color, size }) => (
+                    <Feather
+                        name="log-out"
+                        size={size}
+                        color={pathname == "/settings" ? colors.primary : colors.onBackground}
+                    />
+                )}
+                label={"Đăng xuất"}
+                labelStyle={[
+                    styles.navItemLabel,
+                    { color: pathname == "/reset-password" ? colors.primary : colors.onBackground },
+                ]}
+                style={{ backgroundColor: pathname == "/reset-password" ? colors.primary : colors.background }}
+                onPress={() => {
+                    router.push("/login");
                 }}
             />
         </DrawerContentScrollView>
@@ -135,12 +153,9 @@ const styles = StyleSheet.create({
         borderBottomColor: "#ccc",
         borderBottomWidth: 1,
         marginBottom: 10,
-    },
-    userImg: {
-        borderRadius: 40,
+        alignItems: "center",
     },
     userDetailsWrapper: {
-        marginTop: 25,
         marginLeft: 10,
     },
     userName: {

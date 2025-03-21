@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import { useForm } from "react-hook-form"
 import { RadioButton } from 'react-native-paper'
 import Toast from 'react-native-toast-message'
 import Slider from '@react-native-community/slider';
 
 import useStore from '@/store'
-import { Firework, HelloWave, ProgressStep, ProgressSteps } from '@/components'
+import { ProgressStep, ProgressSteps } from '@/components'
 import { GenderType, IntensiveType } from '@/lib/types'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { showToast } from '@/notification';
 
 const intensityOptions = ['inactive', 'low', 'medium', 'high', 'super'];
 const imageSources: { [key: string]: any } = {
@@ -18,13 +18,49 @@ const imageSources: { [key: string]: any } = {
   high: require('@/assets/images/high.jpg'),
   super: require('@/assets/images/super.jpg'),
 };
-const descriptions: { [key: string]: string } = {
-  inactive: 'Ít \n (Không tập thể dục)',
-  low: 'Nhẹ nhàng \n (Thể dục 1-3 ngày/tuần)',
-  medium: 'Vừa phải \n (Thể dục 3-5 ngày/tuần)',
-  high: 'Năng động \n (Thể dục 6-7 ngày/tuần)',
-  super: 'Cường độ cao \n (Thể dục hơn 90p/ngày, \n công việc nặng)',
+const descriptions: { [key: string]: React.ReactNode } = {
+  inactive: (
+    <Text style={{ fontSize: 16 }}>
+      Thể dục ít{'\n'}
+      <Text style={{ fontSize: 12, color: '#6b7280' }}>
+        (Hoặc không tập thể dục)
+      </Text>
+    </Text>
+  ),
+  low: (
+    <Text style={{ fontSize: 16 }}>
+      Nhẹ nhàng{'\n'}
+      <Text style={{ fontSize: 12, color: '#6b7280' }}>
+        (Thể dục 1–3 ngày/tuần)
+      </Text>
+    </Text>
+  ),
+  medium: (
+    <Text style={{ fontSize: 16 }}>
+      Vừa phải{'\n'}
+      <Text style={{ fontSize: 12, color: '#6b7280' }}>
+        (Thể dục 3–5 ngày/tuần)
+      </Text>
+    </Text>
+  ),
+  high: (
+    <Text style={{ fontSize: 16 }}>
+      Năng động{'\n'}
+      <Text style={{ fontSize: 12, color: '#6b7280' }}>
+        (Thể dục 6–7 ngày/tuần)
+      </Text>
+    </Text>
+  ),
+  super: (
+    <Text style={{ fontSize: 16 }}>
+      Cường độ cao{'\n'}
+      <Text style={{ fontSize: 12, color: '#6b7280' }}>
+        (Thể dục hơn 90p/ngày,{'\n'}công việc nặng)
+      </Text>
+    </Text>
+  ),
 };
+
 
 const goalOptions = ['fast', 'medium', 'maintain', 'gain'];
 const imageGoalSources: { [key: string]: any } = {
@@ -33,11 +69,35 @@ const imageGoalSources: { [key: string]: any } = {
   maintain: require('@/assets/images/maintain.jpg'),
   gain: require('@/assets/images/gain.jpg'),
 };
-const goalDescriptions: { [key: string]: string } = {
-  fast: 'Giảm cân nhanh \n (0,75kg/tuần)',
-  medium: 'Giảm trung bình \n (0,5kg/tuần)',
-  maintain: 'Giữ nguyên cân nặng \n (Tối ưu sức khỏe của bạn)',
-  gain: 'Tăng cân \n (0,5kg/tuần)',
+const goalDescriptions: { [key: string]: React.ReactNode } = {
+  fast: (
+    <>
+      <Text style={{ fontSize: 16 }}>Giảm cân nhanh{'\n'}
+        <Text style={{ fontSize: 12, color: '#6b7280' }}>(0,75kg/tuần)</Text>
+      </Text>
+    </>
+  ),
+  medium: (
+    <>
+      <Text style={{ fontSize: 16 }}>Giảm trung bình{'\n'}
+        <Text style={{ fontSize: 12, color: '#6b7280' }}>(0,5kg/tuần)</Text>
+      </Text>
+    </>
+  ),
+  maintain: (
+    <>
+      <Text style={{ fontSize: 16 }}>Giữ nguyên cân nặng{'\n'}
+        <Text style={{ fontSize: 12, color: '#6b7280' }}>(Tối ưu sức khỏe của bạn)</Text>
+      </Text>
+    </>
+  ),
+  gain: (
+    <>
+      <Text style={{ fontSize: 16 }}>Tăng cân{'\n'}
+        <Text style={{ fontSize: 12, color: '#6b7280' }}>(0,5kg/tuần)</Text>
+      </Text>
+    </>
+  ),
 };
 
 
@@ -48,19 +108,13 @@ export default function WelcomeScreen() {
   const [height, setHeight] = useState<number>(168)
   const [weight, setWeight] = useState(50);
   const [age, setAge] = useState(17);
-  const [unit, setUnit] = useState('kg');
+  const [gender, setGender] = useState<GenderType>('male')
+  const [intensity, setIntensity] = useState<IntensiveType>('medium')
 
-  const increaseHeight = () => {
-    if (height < 250) {
-      setHeight(height + 1);
-    }
+  const adjustHeight = (delta: number) => {
+    setHeight((prev) => Math.max(1, prev + delta));
   };
-
-  const decreaseHeight = () => {
-    if (height > 100) {
-      setHeight(height - 1);
-    }
-  };
+  
 
   const adjustWeight = (delta: number) => {
     setWeight((prev) => Math.max(1, prev + delta));
@@ -71,25 +125,9 @@ export default function WelcomeScreen() {
   };
 
   const { saveData } = useStore()
-  const [gender, setGender] = useState<GenderType>('male')
-  const [intensity, setIntensity] = useState<IntensiveType>('medium')
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      height: "",
-      weight: "",
-      age: "",
-    },
-  })
 
-  const onSubmit = (data: any) => {
-    const weight = parseFloat(data.weight)
-    const height = parseFloat(data.height)
-    const age = parseInt(data.age, 10)
 
+  const handleSubmit = () => {
     if (!weight || !height || !age) return
 
     let bmr = gender === "male"
@@ -117,13 +155,7 @@ export default function WelcomeScreen() {
         intensive: intensity
       }
     })
-    Toast.show({
-      type: 'success',
-      text1: 'Thành công',
-      text2: 'Dữ liệu đã được lưu',
-      visibilityTime: 2000,
-      autoHide: true,
-    })
+    showToast('save_data_successfully')
   }
 
   const renderIntensityOptions = () => {
@@ -133,7 +165,7 @@ export default function WelcomeScreen() {
         onPress={() => setIntensity(option as IntensiveType)}
         className={`
           flex flex-row items-center gap-2 p-4 rounded-xl 
-          ${intensity === option ? 'bg-blue-50' : 'border border-blue-100'}
+          ${intensity === option ? 'bg-lime-100' : 'border border-blue-100'}
         `}
       >
         <RadioButton.Android
@@ -162,7 +194,7 @@ export default function WelcomeScreen() {
         onPress={() => setIntensity(option as IntensiveType)}
         className={`
           flex flex-row items-center gap-2 p-4 rounded-xl 
-          ${intensity === option ? 'bg-blue-50' : 'border border-blue-100'}
+          ${intensity === option ? 'bg-lime-100' : 'border border-blue-100'}
         `}
       >
         <RadioButton.Android
@@ -213,8 +245,11 @@ export default function WelcomeScreen() {
                     color='#3b82f6'
                     uncheckedColor='#3b82f6'
                   />
-                  <MaterialCommunityIcons name="face-man" size={30} color={"#3b82f6"} />
-                  <Text className="text-xl text-center font-semibold text-blue-500">Nam</Text>
+                  <View >
+                    <Image source={require('@/assets/images/male.jpg')} style={{ width: 50, height: 50, borderRadius: 25 }} />
+                    <Text className="text-xl text-center font-semibold text-blue-500">Nam</Text>
+                  </View>
+
                 </TouchableOpacity>
                 <TouchableOpacity
                   className={`flex-1 flex flex-row items-center justify-center gap-2 py-8 rounded-xl 
@@ -228,26 +263,28 @@ export default function WelcomeScreen() {
                     color='#3b82f6'
                     uncheckedColor='#3b82f6'
                   />
-                  <MaterialCommunityIcons name="face-woman" size={30} color={"#3b82f6"} />
-                  <Text className="text-xl text-center font-semibold text-blue-500">Nữ</Text>
+                  <View >
+                    <Image source={require('@/assets/images/female.jpg')} style={{ width: 50, height: 50, borderRadius: 25 }} />
+                    <Text className="text-xl text-center font-semibold text-blue-500">Nữ</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
             </View>
             <View style={styles.containerShadow} className='mt-6'>
-              <View className='flex flex-row items-center justify-between w-full'>
+              <View className='flex flex-row items-center justify-between w-full mb-4'>
                 <Text className='text-xl font-semibold text-gray-500'>Chiều cao</Text>
                 <View className="px-2 py-1 rounded-md bg-lime-100">
                   <Text className="text-lime-500 font-bold">cm</Text>
                 </View>
               </View>
               <TextInput
-                className="text-blue-500 text-5xl font-bold text-center"
+                className="text-blue-500 text-5xl font-bold text-center"  
                 keyboardType="numeric"
                 value={height.toString()}
                 onChangeText={(text) => setHeight(parseFloat(text) || 0)}
               />
-              <View className='flex flex-row justify-center items-center gap-2'>
-                <TouchableOpacity style={{ flex: 0 }} onPress={decreaseHeight}>
+              <View className='flex flex-row justify-between items-center gap-2'>
+                <TouchableOpacity style={{ flex: 0 }} onPress={() => adjustHeight(-1)}>
                   <MaterialCommunityIcons name="minus" size={20} color={"#9ca3af"} />
                 </TouchableOpacity>
                 <Slider
@@ -259,12 +296,11 @@ export default function WelcomeScreen() {
                   thumbTintColor='#3b82f6'
                   value={height}
                   step={1}
-                  onValueChange={(value) => setHeight(value)}
                   onSlidingComplete={e => {
                     setHeight(e)
                   }}
                 />
-                <TouchableOpacity style={{ flex: 0 }} onPress={increaseHeight}>
+                <TouchableOpacity style={{ flex: 0 }} onPress={() => adjustHeight(1)}>
                   <MaterialCommunityIcons name="plus" size={20} color={"#9ca3af"} />
                 </TouchableOpacity>
               </View>
@@ -338,15 +374,21 @@ export default function WelcomeScreen() {
         </ProgressStep>
 
         {/* Hoàn tất */}
-        <ProgressStep onSubmit={handleSubmit(onSubmit)}
+        <ProgressStep onSubmit={handleSubmit}
         >
-          <View style={{ alignItems: "center", paddingTop: 10 }}>
-            <Firework />
-            <Text className="text-lg text-center mt-4">
-              Chúc mừng bạn đã hoàn tất việc nhập thông tin cơ bản. Nhấn nút
-              <Text className='font-bold text-blue-500'> "Hoàn tất" </Text>
-              để lưu thông tin.
+          <View style={{ alignItems: "center", paddingTop: 20, paddingHorizontal: 20 }}>
+          <Image
+              source={require('@/assets/images/thuc-don-thuan-viet.jpg')}
+              style={{ width: 200, height: 200, borderRadius: 20, marginTop: 10 }}
+              resizeMode="contain"
+            />
+            <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 20, color: '#374151' }}>
+              Kế hoạch calo tối ưu cho bạn đã <Text style={{ fontWeight: 'bold', color: '#3b82f6' }}>"Sẵn sàng!"</Text>
             </Text>
+            <Text style={{ fontSize: 16, textAlign: 'center', marginTop: 6, color: '#374151' }}>
+              Nhấn nút <Text style={{ fontWeight: 'bold', color: '#3b82f6' }}>"Hoàn tất"</Text> để lưu thông tin.
+            </Text>
+
           </View>
         </ProgressStep>
       </ProgressSteps>

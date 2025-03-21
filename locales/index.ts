@@ -28,7 +28,7 @@ i18next.use(initReactI18next).init({
   resources,
   defaultNS,
   ns: ["data"],
-  fallbackLng: "en",
+  fallbackLng: "vi",
   supportedLngs: ["cn", "en", "vi"],
   
   interpolation: { escapeValue: false },

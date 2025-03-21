@@ -28,11 +28,10 @@ export default function LoginScreen() {
   return (
     <View className='flex-1 w-full px-8 pt-10'>
       <View className='flex flex-row items-center justify-center gap-2 mb-8'>
-        <Image source={require('@/assets/images/logo.png')} style={{ width: 70, height: 70 }} resizeMode="contain" />
-        <View className='mb-1'>
-          <Text className="text-3xl font-bold tracking-[4.5px]">calogo</Text>
-          <Text className="text-sm font-bold uppercase tracking-[2px]">TRY TO BETTER</Text>
-        </View>
+        <Image
+          source={require('@/assets/images/logo-header.png')}
+          style={{ width: 250, height: 75 }} resizeMode="contain"
+        />
       </View>
       <View>
         <Text className='text-2xl font-bold mb-2'>Đăng nhập</Text>

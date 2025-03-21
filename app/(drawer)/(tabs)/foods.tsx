@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form"
 import Toast from 'react-native-toast-message'
 
 import { ClockInformation, FoodItem, CustomModal, CustomDropDown, IconSymbol } from '@/components'
-import { FoodTypes } from '@/constants/FoodTypes'
+import { FoodTypes } from '@/lib/constants/FoodTypes'
 import { FoodItemType } from '@/lib/types'
 import useStore from '@/store'
 

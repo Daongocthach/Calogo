@@ -3,7 +3,7 @@ import { devtools, persist, createJSONStorage } from "zustand/middleware"
 import Toast from 'react-native-toast-message'
 import { asyncStorage } from "@/store/storage"
 import { BodyDataType, FoodItemType, FoodDailyItemType } from "@/lib/types"
-import { FoodSamples } from "@/constants/FoodSamples"
+import { FoodSamples } from "@/lib/constants/FoodSamples"
 
 type DataBMR = {
   bmr: number
@@ -48,7 +48,7 @@ const useStore = create<StoreState>()(
     persist(
       (set) => ({
         darkMode: false,
-        currentLanguage: "en",
+        currentLanguage: "vi",
         isLoading: false,
         isLoggedIn: false,
         todayCalories: 0,
