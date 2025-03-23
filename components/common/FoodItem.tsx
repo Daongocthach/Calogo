@@ -1,6 +1,7 @@
 import { Text, View } from 'react-native'
+import { useTheme } from 'react-native-paper'
 
-import { IconSymbol } from '@/components/common/IconSymbol'
+import { CustomText, Icon } from '@/components'
 
 type FoodItemProps =
     {
@@ -26,23 +27,24 @@ export function FoodItem({
     calories,
     time
 }: FoodItemProps) {
+    const { colors } = useTheme()
     return (
         <View style={{ borderColor: '#e2e8f0' }} className='flex-row items-center justify-between p-4 border-b w-full'>
             <View className='flex flex-row gap-2 items-center text-slate-700'>
                 <View>
-                    <Text style={{ fontSize: 15, fontWeight: 600 }} className='text-sky-600'>{name}</Text>
+                    <CustomText style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{name}</CustomText>
                     <View className='flex flex-row items-center gap-1'>
-                        <Text style={{ fontSize: 12, fontWeight: 500, color: '#555' }}>{carbsWeight}g - </Text>
-                        <Text style={{ fontSize: 12, fontWeight: 500, color: '#555' }}>{proteinsWeight}g - </Text>
-                        <Text style={{ fontSize: 12, fontWeight: 500, color: '#555' }}>{fatsWeight}g</Text>
+                        <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{carbsWeight}g - </CustomText>
+                        <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{proteinsWeight}g - </CustomText>
+                        <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{fatsWeight}g</CustomText>
                     </View>
                 </View>
             </View>
-            <Text style={{ fontSize: 15, fontWeight: 600, color: '#0284c7' }}>{time ? new Date(time).toLocaleTimeString() : ''}</Text>
+            <CustomText style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{time ? new Date(time).toLocaleTimeString() : ''}</CustomText>
             <View className='flex flex-row gap-1'>
-                <Text style={{ fontSize: 15, fontWeight: 600, color: '#0284c7' }}>{calories}</Text>
-                <IconSymbol name={'flame.fill'} size={20} color={'#0284c7'} />
-                {(isSample || isStatistic) && <IconSymbol name='chevron.right' size={20} color={'#0284c7'} />}
+                <Text style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{calories}</Text>
+                <Icon name={'Flame'} size={20} color={colors.primary} />
+                {(isSample || isStatistic) && <Icon name='ChevronRight' size={20} color={colors.primary} />}
             </View>
         </View>
     )

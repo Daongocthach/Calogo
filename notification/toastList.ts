@@ -1,3 +1,5 @@
+import { add } from "lodash"
+
 export const toastList = {
   login_success: {
     type: "success",
@@ -49,7 +51,26 @@ export const toastList = {
     text1: "added fail",
     text2: "",
   },
-  
+  add_food_success: {
+    type: "success",
+    text1: "add food success",
+    text2: "",
+  },
+  add_food_fail: {
+    type: "error",
+    text1: "add food fail",
+    text2: "",
+  },
+  delete_food_success: {
+    type: "success",
+    text1: "delete food success",
+    text2: "",
+  },
+  no_food_selected: {
+    type: "error",
+    text1: "no food selected",
+    text2: "",
+  },
 } as const
 
 export type ToastType = keyof typeof toastList

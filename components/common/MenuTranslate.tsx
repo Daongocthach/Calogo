@@ -26,23 +26,23 @@ const MenuTranslate = () => {
             anchor={
                 <CustomButton
                     handle={openMenu}
-                    iconColor={visible ? colors.primaryContainer : colors.primary}
+                    iconColor={visible ? colors.onSurfaceDisabled : colors.onBackground}
                     icon={'translate'}
-                    buttonClassName='px-4'
+                    buttonClassName='px-2'
                 />
             }>
             <Menu.Item
-                onPress={() => { handleChangeLanguage('cn') }}
-                title={'中文'}
-                titleStyle={{ color: currentLanguage === 'cn' ? colors.primary : colors.onBackground }}
+                onPress={() => { handleChangeLanguage('vi') }} title={'Tiếng Việt'}
+                titleStyle={{ color: currentLanguage === 'vi' ? colors.primary : colors.onBackground }}
             />
             <Menu.Item
                 onPress={() => { handleChangeLanguage('en') }} title={'English'}
                 titleStyle={{ color: currentLanguage === 'en' ? colors.primary : colors.onBackground }}
             />
             <Menu.Item
-                onPress={() => { handleChangeLanguage('vi') }} title={'Tiếng Việt'}
-                titleStyle={{ color: currentLanguage === 'vi' ? colors.primary : colors.onBackground }}
+                onPress={() => { handleChangeLanguage('cn') }}
+                title={'中文'}
+                titleStyle={{ color: currentLanguage === 'cn' ? colors.primary : colors.onBackground }}
             />
         </Menu>
     )

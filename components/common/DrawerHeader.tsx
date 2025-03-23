@@ -2,7 +2,7 @@ import { TouchableOpacity, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { router } from "expo-router";
 import { useTheme } from "react-native-paper";
-import { CustomText, IconSymbol } from "@/components";
+import { CustomText } from "@/components";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const DrawerHeader = ({ title }: { title: string }) => {

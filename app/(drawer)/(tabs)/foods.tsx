@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View, ScrollView, TextInput, Alert } from 'reac
 import { useForm, Controller } from "react-hook-form"
 import Toast from 'react-native-toast-message'
 
-import { ClockInformation, FoodItem, CustomModal, CustomDropDown, IconSymbol } from '@/components'
+import { FoodItem, CustomModal, CustomDropDown, Icon } from '@/components'
 import { FoodTypes } from '@/lib/constants/FoodTypes'
 import { FoodItemType } from '@/lib/types'
 import useStore from '@/store'
@@ -123,7 +123,6 @@ export default function Foods() {
   }
   return (
     <View className='flex-1 mb-20 items-center relative px-4'>
-      <ClockInformation />
       <ScrollView>
         {foodList.map((item, index) => (
           <TouchableOpacity onPress={() => handleSelectFood(item)} key={index}>
@@ -144,7 +143,7 @@ export default function Foods() {
               onPress={handleDeleteFood}
               className='bg-[#2196F3] p-2 rounded mt-2 flex flex-row items-center justify-center gap-2'
             >
-              <IconSymbol name="delete.left.fill" size={24} color="white" />
+              <Icon name="Trash" size={24} color="white" />
               <Text className='text-white font-bold'>Xóa thực phẩm</Text>
             </TouchableOpacity>
           }
@@ -257,7 +256,7 @@ export default function Foods() {
         }}
         onPress={handleAddFood}
       >
-        <IconSymbol name="plus" size={24} color="white" />
+        <Icon name="Plus" size={24} color="white" />
       </TouchableOpacity>
     </View>
   )

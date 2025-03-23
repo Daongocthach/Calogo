@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Dimensions, Animated } from 'react-native';
 import { Check } from 'lucide-react-native';
-import type { StepIconProps } from '../types';
+import type { StepIconProps } from '@/lib/types';
 
 const CIRCLE_SIZE = 40;
 const MOBILE_BREAKPOINT = 768;

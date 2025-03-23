@@ -1,9 +1,9 @@
 export const lightTheme = {
   "colors": {
-    "primary": "#5d8cea",
+    "primary": "#3b82f6",
     "onPrimary": "#ffffff",
     "primaryContainer": "#bfdbfe",
-    "onPrimaryContainer": "#0A4178",
+    "onPrimaryContainer": "#1d4ed8",
 
     "secondary": "#2196F3",
     "onSecondary": "#ffffff",

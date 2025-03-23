@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import { useForm, Controller } from "react-hook-form"
-import { IconSymbol } from '@/components'
+import { Icon } from '@/components'
 import { Link } from 'expo-router'
 
 export default function LoginScreen() {
@@ -79,7 +79,7 @@ export default function LoginScreen() {
             className='absolute right-3 top-1/2 transform -translate-y-1/2'
             onPress={() => setShowPassword(!showPassword)}
           >
-            <IconSymbol size={15} name={showPassword ? 'eye.fill' : 'eye.slash.fill'} color="gray" />
+            <Icon size={15} name={showPassword ? 'Eye' : 'EyeOff'} color="gray" />
           </TouchableOpacity>
         </View>
         {errors.password && <Text className='mb-4 text-red-500'>Mật khẩu phải có ít nhất 4 ký tự.</Text>}
@@ -108,7 +108,7 @@ export default function LoginScreen() {
             className='absolute right-3 top-1/2 transform -translate-y-1/2'
             onPress={() => setShowPassword(!showPassword)}
           >
-            <IconSymbol size={15} name={showPassword ? 'eye.fill' : 'eye.slash.fill'} color="gray" />
+            <Icon size={15} name={showPassword ? 'Eye' : 'EyeOff'} color="gray" />
           </TouchableOpacity>
         </View>
         {errors.repassword && <Text className='mb-4 text-red-500'>Mật khẩu không khớp.</Text>}

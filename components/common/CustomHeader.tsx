@@ -4,8 +4,6 @@ import { useRouter } from 'expo-router'
 import { DrawerToggleButton } from '@react-navigation/drawer'
 import { useTheme } from 'react-native-paper'
 
-import MenuTranslate from '@/components/common/MenuTranslate'
-
 export const CustomHeader = () => {
     const router = useRouter()
     const { colors } = useTheme()
@@ -18,8 +16,7 @@ export const CustomHeader = () => {
                 />
             </TouchableOpacity>
             <View className='flex flex-row items-center'>
-                <MenuTranslate />
-                <DrawerToggleButton tintColor={colors.primary}/>
+                <DrawerToggleButton tintColor={colors.onBackground}/>
             </View>
         </SafeAreaView>
     )

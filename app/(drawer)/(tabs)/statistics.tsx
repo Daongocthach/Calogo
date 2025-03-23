@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { View, SectionList, Text, TouchableOpacity } from 'react-native'
 import { FoodItem } from '@/components/common/FoodItem'
 import { BarChart } from "react-native-gifted-charts"
-import { IconSymbol, ClockInformation } from '@/components'
+import { Icon, ClockInformation } from '@/components'
 import { FoodDailyItemType } from '@/lib/types'
 import useStore from '@/store'
 
@@ -69,9 +69,9 @@ export default function Statistics() {
           keyExtractor={(item, index) => item.name + index}
           renderSectionHeader={({ section: { title } }) => (
             <TouchableOpacity onPress={() => toggleSection(title)} className="mt-4 flex flex-row items-center gap-2">
-              <IconSymbol name="circle.dotted.circle" size={15} color="#0284c7" />
+              <Icon name="History" size={15} color="#0284c7" />
               <Text className="text-lg font-bold text-sky-600">{`Ngày ${title}`}</Text>
-              <IconSymbol name={expandedSections[title] ? 'chevron.up.2' : 'chevron.down.2'} size={20} color="#0284c7" />
+              <Icon name={expandedSections[title] ? 'ChevronUp' : 'ChevronDown'} size={20} color="#0284c7" />
             </TouchableOpacity>
           )}
           renderItem={({ item, section }) =>
