@@ -1,26 +1,18 @@
-import { useState } from 'react'
-import { Text, TouchableOpacity, View, ScrollView, TextInput, Alert } from 'react-native'
+import { useState, useMemo } from 'react'
+import { Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import { PieChart } from "react-native-gifted-charts"
-import { useForm, Controller } from "react-hook-form"
 import { useTranslation } from 'react-i18next'
 import { useTheme } from 'react-native-paper'
+import dayjs from 'dayjs'
+
+import { Apple, BarChart, UtensilsCrossed } from 'lucide-react-native'
 
 import {
-  CustomModal,
   CustomText,
   Icon
 } from '@/components'
-import WelcomeScreen from '@/app/welcome'
 import useStore from '@/store'
-import { FoodTypes } from '@/lib/constants/FoodTypes'
-import { FoodItemType } from '@/lib/types'
-import { showToast } from '@/notification'
 
-
-const foodTypes = Object.entries(FoodTypes).map(([key, value]) => ({
-  label: value.name,
-  value: key,
-}))
 
 const levels = [
   { label: 'Giảm Chậm: 0,25kg/tuần', value: 0, caloriesChange: -250 },
@@ -31,18 +23,7 @@ const levels = [
   { label: 'Tăng cân: 1kg/tuần', value: 5, caloriesChange: 1000 },
 ];
 
-const nutritionData = [
-  { day: '9', type: 'T2' },
-  { day: '10', type: 'T3' },
-  { day: '11', type: 'T4' },
-  { day: '12', type: 'T5', selected: true },
-  { day: '13', type: 'T6' },
-  { day: '14', type: 'T7' },
-  { day: '15', type: 'CN' },
-  { day: '16', type: 'T2' },
-  { day: '17', type: 'T3' },
-  { day: '18', type: 'T4' },
-]
+const weekdays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
 
 export default function HomeScreen() {
   const { t } = useTranslation()
@@ -55,78 +36,144 @@ export default function HomeScreen() {
     { value: goal - todayCalories, color: 'lightgray' }
   ]
   const [modalVisible, setModalVisible] = useState(false)
+  const [today, setToday] = useState(new Date())
 
-
+  const dateData = useMemo(() => {
+    const result = []
+    for (let i = -5; i <= 5; i++) {
+      const date = dayjs(today).add(i, 'day')
+      result.push({
+        key: date.format('YYYY-MM-DD'),
+        day: date.format('D'),
+        type: weekdays[date.day()],
+        selected: date.isSame(dayjs(today), 'day'),
+        fullDate: date.toDate(),
+      })
+    }
+    return result
+  }, [today])
 
   return (
     <View className='flex-1 relative px-4'>
       <ScrollView>
-        {bmr ?
-          <View className='flex-1 mb-2 relative w-full'>
-            <CustomText className='text-2xl font-semibold my-4'>{t('your calories consumption today')}</CustomText>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} className='flex-1 w-full mb-4'>
-              <View className="flex-row justify-center items-center space-x-3">
-                {nutritionData.map((item, index) => (
-                  <TouchableOpacity
-                    key={index}
-                    style={{ backgroundColor: item.selected ? colors.primary : colors.background }}
-                    className="rounded-full px-4 py-2 items-center"
-                  >
-                    <CustomText style={{ color: item.selected ? colors.onPrimary : colors.outline }} className={
-                      item.selected 
-                      ? "text-sm font-semibold text-center" 
-                      : "text-base font-semibold text-center"
+        <View className='flex-1 mb-2 relative w-full'>
+          <CustomText className='font-semibold my-6' style={{ fontSize: 18 }}>
+            {t('your calories consumption today')}
+          </CustomText>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-1 w-full mb-4">
+            <View className="flex-row justify-center items-center gap-3">
+              {dateData.map((item) => (
+                <TouchableOpacity
+                  key={item.key}
+                  onPress={() => setToday(item.fullDate)}
+                  style={{ backgroundColor: item.selected ? colors.primary : colors.background }}
+                  className="rounded-full px-3 py-3 items-center"
+                >
+                  <CustomText
+                    style={{ color: item.selected ? colors.onPrimary : colors.outline }}
+                    className={
+                      item.selected
+                        ? 'text-sm font-semibold text-center'
+                        : 'text-base font-semibold text-center'
                     }>
-                      {item.day}
-                    </CustomText>
-                    <Text className={
-                      item.selected 
-                      ? "text-white text-xs text-center" 
-                      : "text-gray-400 text-xs text-center"
+                    {item.day}
+                  </CustomText>
+                  <Text
+                    className={
+                      item.selected
+                        ? 'text-white text-xs text-center'
+                        : 'text-gray-400 text-xs text-center'
                     }>
-                      {item.type}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            </ScrollView>
-            <View className='flex flex-row items-center justify-center gap-8 w-full'>
-              <PieChart
-                donut
-                radius={80}
-                innerRadius={65}
-                data={pieData}
-                showGradient
-                centerLabelComponent={() => {
-                  return <View className='flex flex-row items-center'>
-                    <CustomText style={{ fontSize: 20, color: '#0284c7', fontWeight: 600 }}>
-                      {todayCalories.toFixed(0)}
-                    </CustomText>
-                  </View>
-                }}
-              />
-              <View className='flex-1 w-full border border-slate-300 rounded-3xl p-4 justify-center flex flex-col gap-2'>
-                <View className='flex flex-row gap-2 items-center text-slate-700'>
-                  <Icon name="Plus" size={25} color="#0284c7" />
-                  <View>
-                    <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>{t('goal')}</Text>
-                    <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>
-                      {goal.toFixed(0)} calories
-                    </Text>
-                  </View>
+                    {item.type}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </ScrollView>
+          <View className='flex flex-row items-center justify-center gap-8 w-full'>
+            <PieChart
+              donut
+              radius={80}
+              innerRadius={65}
+              data={pieData}
+              showGradient
+              centerLabelComponent={() => {
+                return <View className='flex flex-row items-center'>
+                  <CustomText style={{ fontSize: 20, color: '#0284c7', fontWeight: 600 }}>
+                    {todayCalories.toFixed(0)}
+                  </CustomText>
                 </View>
-                <View className='flex flex-row gap-2 items-center text-slate-700'>
-                  <Icon name="Plus" size={25} color="#0284c7" />
-                  <View>
-                    <Text style={{ fontSize: 13, fontWeight: 600 }} className='text-sky-600'>Cần thiết</Text>
-                    <Text style={{ fontSize: 10, fontWeight: 500, color: '#555' }}>{tdde?.toFixed(0)} calories</Text>
-                  </View>
+              }}
+            />
+            <View className='flex-1 w-full border border-slate-300 rounded-3xl p-4 justify-center flex flex-col gap-5 h-44'>
+              <View className='flex flex-row gap-4 items-center text-slate-700'>
+                <Icon name="CircleCheckBig" size={25} color={colors.primary} />
+                <View>
+                  <Text style={{ fontSize: 16, color: colors.primary }} className='font-semibold'>{t('loaded')}</Text>
+                  <Text style={{ fontSize: 13, color: colors.onSurfaceDisabled }} className='font-medium'>
+                    {goal.toFixed(0) + " " + t('kcals')}
+                  </Text>
+                </View>
+              </View>
+              <View className='flex flex-row gap-4 items-center text-slate-700'>
+                <Icon name="ShieldAlert" size={25} color={colors.error} />
+                <View>
+                  <Text style={{ fontSize: 16, color: colors.error }} className='font-semibold'>{t('exceeded')}</Text>
+                  <Text style={{ fontSize: 13, color: colors.onSurfaceDisabled }} className='font-medium'>
+                    {goal.toFixed(0) + " " + t('kcals')}
+                  </Text>
                 </View>
               </View>
             </View>
           </View>
-          : <WelcomeScreen />
-        }
+          <View className="flex-row gap-4 mt-4">
+            {/* Cột trái: Protein & Fat */}
+            <View className="flex-1 justify-between gap-4">
+              {/* Protein */}
+              <TouchableOpacity className="border border-slate-300 rounded-3xl p-4 h-28 flex flex-row items-center gap-4">
+                <UtensilsCrossed size={24} color={colors.primary} />
+                <View>
+                  <Text className="text-lg font-semibold mb-1">{t('protein')}</Text>
+                  <Text className="text-base text-gray-500">25g -
+                    <Text style={{ color: colors.primary }} className='font-semibold'> 180 kcal</Text>
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              {/* Fat */}
+              <TouchableOpacity className="border border-slate-300 rounded-3xl p-4 h-28 flex flex-row items-center gap-4">
+                <Apple size={24} color={colors.primary} />
+                <View>
+                  <Text className="text-lg font-semibold mb-1">{t('fat')}</Text>
+                  <Text className="text-base text-gray-500">20g -
+                    <Text style={{ color: colors.primary }} className='font-semibold'> 180 kcal</Text>
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            {/* Cột phải: Carb lớn hơn */}
+            <TouchableOpacity className="flex-1 border border-slate-300 rounded-3xl p-4 justify-between h-60">
+              <View>
+                <Text className="text-lg font-semibold mb-1">{t('carbs')}</Text>
+                <Text className="text-base text-gray-500 mb-1">40g -
+                  <Text style={{ color: colors.primary }} className='font-semibold'> 180 kcal</Text>
+                </Text>
+
+                {/* Thêm biểu đồ nhỏ nếu muốn */}
+                <View className="mt-2 space-y-1">
+                  <Text className="text-xs text-gray-600">Fiber: 5g</Text>
+                  <Text className="text-xs text-gray-600">Sugar: 12g</Text>
+                </View>
+              </View>
+
+              <View className="items-end">
+                <BarChart size={24} color={colors.primary} />
+              </View>
+            </TouchableOpacity>
+          </View>
+
+        </View>
       </ScrollView>
       <TouchableOpacity
         className="absolute bottom-5 right-5 bg-blue-500 p-4 rounded-full shadow-lg"

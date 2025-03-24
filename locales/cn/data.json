@@ -252,5 +252,11 @@
   "select user": "選擇用戶",
   "enter to find": "輸入以查找",
   "action": "操作",
-  "user name": "用戶名"
+  "user name": "用戶名",
+  "your calories consumption today": "今天的卡路里消耗",
+  "loaded": "已載入",
+  "exceeded": "已超出",
+  "protein": "蛋白質",
+  "carb": "Carb",
+  "fat": "脂肪"
 }

@@ -1,5 +1,5 @@
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
+import { useRouter ,Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
@@ -14,7 +14,8 @@ import "../global.css"
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const { darkMode } = useStore()
+  const router = useRouter()
+  const { darkMode, bmr } = useStore()
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
@@ -24,6 +25,12 @@ export default function RootLayout() {
       SplashScreen.hideAsync()
     }
   }, [loaded])
+
+  useEffect(() => {
+    if (!bmr) {
+      router.replace('/welcome')
+    }
+  }, [bmr])
 
   if (!loaded) {
     return null
@@ -35,6 +42,7 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen name="welcome" options={{ headerShown: false }} />
         </Stack>
         <Toast />
         {/* <StatusBar style="auto" /> */}

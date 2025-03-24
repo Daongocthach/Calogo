@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { RadioButton } from 'react-native-paper'
-import Toast from 'react-native-toast-message'
 import Slider from '@react-native-community/slider';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useRouter } from 'expo-router';
 
 import useStore from '@/store'
 import { ProgressStep, ProgressSteps } from '@/components'
@@ -105,6 +106,7 @@ const goalDescriptions: { [key: string]: React.ReactNode } = {
 
 
 export default function WelcomeScreen() {
+  const router = useRouter()
   const [height, setHeight] = useState<number>(168)
   const [weight, setWeight] = useState(50);
   const [age, setAge] = useState(17);
@@ -114,7 +116,7 @@ export default function WelcomeScreen() {
   const adjustHeight = (delta: number) => {
     setHeight((prev) => Math.max(1, prev + delta));
   };
-  
+
 
   const adjustWeight = (delta: number) => {
     setWeight((prev) => Math.max(1, prev + delta));
@@ -155,6 +157,7 @@ export default function WelcomeScreen() {
         intensive: intensity
       }
     })
+    router.replace('/')
     showToast('save_data_successfully')
   }
 
@@ -216,7 +219,13 @@ export default function WelcomeScreen() {
     ));
   };
   return (
-    <View className="relative flex-1">
+    <View className="relative flex-1 bg-white">
+      <SafeAreaView className='flex flex-row justify-between items-center px-4' style={{ paddingBottom: 10 }}>
+        <Image
+          source={require('@/assets/images/logo-header.png')}
+          style={{ width: 250, height: 75 }} resizeMode="contain"
+        />
+      </SafeAreaView>
       <ProgressSteps
         activeStepIconBorderColor="#3b82f6"
         completedStepIconColor="#3b82f6"
@@ -278,7 +287,7 @@ export default function WelcomeScreen() {
                 </View>
               </View>
               <TextInput
-                className="text-blue-500 text-5xl font-bold text-center"  
+                className="text-blue-500 text-5xl font-bold text-center"
                 keyboardType="numeric"
                 value={height.toString()}
                 onChangeText={(text) => setHeight(parseFloat(text) || 0)}
@@ -377,7 +386,7 @@ export default function WelcomeScreen() {
         <ProgressStep onSubmit={handleSubmit}
         >
           <View style={{ alignItems: "center", paddingTop: 20, paddingHorizontal: 20 }}>
-          <Image
+            <Image
               source={require('@/assets/images/thuc-don-thuan-viet.jpg')}
               style={{ width: 200, height: 200, borderRadius: 20, marginTop: 10 }}
               resizeMode="contain"

@@ -252,5 +252,11 @@
   "select user": "Chọn người phụ trách",
   "enter to find": "Nhập để tìm kiếm",
   "action": "Hành động",
-  "user name": "Tên người dùng"
+  "user name": "Tên người dùng",
+  "your calories consumption today": "Lượng calo tiêu thụ của bạn hôm nay",
+  "loaded": "Đã nạp",
+  "exceeded": "Dư thừa",
+  "protein": "Chất đạm",
+  "carbs": "Tinh bột",
+  "fat": "Chất béo"
 }

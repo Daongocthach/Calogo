@@ -226,5 +226,11 @@
   "select user": "Select user",
   "enter to find": "Enter to find",
   "action": "Action",
-  "user name": "User Name"
+  "user name": "User Name",
+  "your calories consumption today": "Your calories consumption today",
+  "loaded": "Loaded",
+  "exceeded": "Exceeded",
+  "protein": "Protein",
+  "carbs": "Carbs",
+  "fat": "Fat"
 }

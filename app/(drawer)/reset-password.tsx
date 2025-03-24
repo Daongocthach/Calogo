@@ -2,12 +2,11 @@ import { Link, Stack } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { CustomText } from '@/components';
 
-export default function NotFoundScreen() {
+export default function ResetPasswordScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
       <View style={styles.container}>
-        <CustomText>This screen doesn't exist.</CustomText>
+        <CustomText>ResetPassword</CustomText>
         <Link href="/" style={styles.link}>
           <CustomText >Go to home screen!</CustomText>
         </Link>
