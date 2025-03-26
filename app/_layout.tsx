@@ -43,6 +43,7 @@ export default function RootLayout() {
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen name="welcome" options={{ headerShown: false }} />
+          <Stack.Screen name="add-meal" options={{ headerShown: false }} />
         </Stack>
         <Toast />
         {/* <StatusBar style="auto" /> */}

@@ -1,5 +1,3 @@
-import ProgressStep from "@/components/ProgressSteps/ProgressStep";
-
 export { default as CustomDropDown } from "@/components/common/CustomDropDown";
 export { default as CustomButton } from "@/components/common/CustomButton";
 export { default as CustomModal } from "@/components/common/CustomModal";
@@ -10,6 +8,8 @@ export { default as InputField } from "@/components/common/InputField";
 export { default as MenuTranslate } from "@/components/common/MenuTranslate";
 export { default as DarkModeIcon } from "@/components/common/DarkModeIcon";
 export { default as Icon } from "@/components/common/Icon";
+export { default as DateSelector } from "@/components/common/DateSelector";
+
 
 export { default as ProgressStep } from "@/components/ProgressSteps/ProgressStep";
 export { default as ProgressSteps } from "@/components/ProgressSteps/ProgressSteps";

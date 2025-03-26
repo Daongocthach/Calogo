@@ -9,6 +9,7 @@ import { Apple, BarChart, UtensilsCrossed } from 'lucide-react-native'
 
 import {
   CustomText,
+  DateSelector,
   Icon
 } from '@/components'
 import useStore from '@/store'
@@ -57,40 +58,8 @@ export default function HomeScreen() {
     <View className='flex-1 relative px-4'>
       <ScrollView>
         <View className='flex-1 mb-2 relative w-full'>
-          <CustomText className='font-semibold my-6' style={{ fontSize: 18 }}>
-            {t('your calories consumption today')}
-          </CustomText>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-1 w-full mb-4">
-            <View className="flex-row justify-center items-center gap-3">
-              {dateData.map((item) => (
-                <TouchableOpacity
-                  key={item.key}
-                  onPress={() => setToday(item.fullDate)}
-                  style={{ backgroundColor: item.selected ? colors.primary : colors.background }}
-                  className="rounded-full px-3 py-3 items-center"
-                >
-                  <CustomText
-                    style={{ color: item.selected ? colors.onPrimary : colors.outline }}
-                    className={
-                      item.selected
-                        ? 'text-sm font-semibold text-center'
-                        : 'text-base font-semibold text-center'
-                    }>
-                    {item.day}
-                  </CustomText>
-                  <Text
-                    className={
-                      item.selected
-                        ? 'text-white text-xs text-center'
-                        : 'text-gray-400 text-xs text-center'
-                    }>
-                    {item.type}
-                  </Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
-          <View className='flex flex-row items-center justify-center gap-8 w-full'>
+          <DateSelector />
+          <View className='flex flex-row items-center justify-center gap-8 w-full mt-4'>
             <PieChart
               donut
               radius={80}

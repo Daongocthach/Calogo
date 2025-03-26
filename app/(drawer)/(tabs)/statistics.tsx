@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { View, SectionList, Text, TouchableOpacity } from 'react-native'
 import { FoodItem } from '@/components/common/FoodItem'
 import { BarChart } from "react-native-gifted-charts"
-import { Icon, ClockInformation } from '@/components'
+import { Icon } from '@/components'
 import { FoodDailyItemType } from '@/lib/types'
 import useStore from '@/store'
 
@@ -10,9 +10,6 @@ type GroupedFood = {
   title: string
   data: FoodDailyItemType[]
 }
-
-
-
 
 const groupByDate = (data: FoodDailyItemType[]): GroupedFood[] => {
   const grouped = data.reduce<{ [key: string]: FoodDailyItemType[] }>((acc, item) => {
@@ -50,7 +47,6 @@ export default function Statistics() {
 
   return (
     <View className="flex-1 items-center relative px-4">
-      <ClockInformation />
       <View className='mt-4'>
         <BarChart
           barWidth={22}
