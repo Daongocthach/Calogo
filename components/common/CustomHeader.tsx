@@ -8,7 +8,10 @@ export const CustomHeader = () => {
     const router = useRouter()
     const { colors } = useTheme()
     return (
-        <SafeAreaView className='flex flex-row justify-between items-center px-4' style={{ paddingBottom: 10 }}>
+        <SafeAreaView
+            className='flex flex-row justify-between items-center px-4'
+            style={{ paddingBottom: 10, backgroundColor: colors.onPrimary }}
+        >
             <TouchableOpacity onPress={() => { router.push('/') }}>
                 <Image
                     source={require('@/assets/images/logo-header.png')}
@@ -16,7 +19,7 @@ export const CustomHeader = () => {
                 />
             </TouchableOpacity>
             <View className='flex flex-row items-center'>
-                <DrawerToggleButton tintColor={colors.onBackground}/>
+                <DrawerToggleButton tintColor={colors.onBackground} />
             </View>
         </SafeAreaView>
     )

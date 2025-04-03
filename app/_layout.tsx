@@ -1,11 +1,12 @@
 import { useFonts } from 'expo-font'
-import { useRouter ,Stack } from 'expo-router'
+import { useRouter, Stack } from 'expo-router'
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 import 'react-native-reanimated'
 import Toast from 'react-native-toast-message'
 import { PaperProvider } from 'react-native-paper'
 import { I18nextProvider } from "react-i18next"
+
 import i18next from '@/locales'
 import { lightTheme, darkTheme } from '@/theme/theme'
 import useStore from '@/store'

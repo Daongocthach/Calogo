@@ -91,7 +91,7 @@ export default function DateSelector() {
               <View
                 ref={(element) => (dayRefs.current[formattedDay] = element)}
                 style={{
-                  backgroundColor: isCurrentDay ? '#0ea5e9' : colors.surface,
+                  backgroundColor: isCurrentDay ? colors.outlineVariant : colors.primaryContainer,
                   borderRadius: 12,
                   padding: 15,
                   marginRight: 8,
@@ -101,9 +101,9 @@ export default function DateSelector() {
                   style={{
                     fontWeight: 600,
                     fontSize: 14,
-                    color: isCurrentDay ? '#fff' : colors.onSurfaceVariant
+                    color: isCurrentDay ? colors.onSurfaceVariant : colors.onSurfaceVariant
                   }}>
-                  {format(day, 'dd')}
+                  {isCurrentDay ? t('today') : format(day, 'dd')}
                 </CustomText>
               </View>
             </TouchableOpacity>

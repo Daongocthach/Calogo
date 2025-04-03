@@ -130,7 +130,7 @@ export default function DrawerLayout() {
                 header: ({ route }) => <DrawerHeader title={route.name} />,
                 headerShown: false,
                 drawerPosition: 'right',
-                drawerStyle: { width: "70%", backgroundColor: colors.background },
+                drawerStyle: { width: "70%"},
             }}
         >
             <Drawer.Screen name="settings" options={{ headerShown: true, title: "Cài đặt" }} />
