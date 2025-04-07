@@ -7,6 +7,7 @@ import { FoodItem, CustomModal, CustomDropDown, Icon } from '@/components'
 import { FoodTypes } from '@/lib/constants/FoodTypes'
 import { FoodItemType } from '@/lib/types'
 import useStore from '@/store'
+import SearchInput from '@/components/common/SearchInput'
 
 const foodTypes = Object.entries(FoodTypes).map(([key, value]) => ({
   label: value.name,
@@ -122,8 +123,9 @@ export default function Foods() {
     )
   }
   return (
-    <View className='flex-1 mb-20 items-center relative px-4'>
-      <ScrollView>
+    <View className='flex-1 relative px-4'>
+      <SearchInput />
+      <ScrollView className='px-1 mb-4'>
         {foodList.map((item, index) => (
           <TouchableOpacity onPress={() => handleSelectFood(item)} key={index}>
             <FoodItem {...item} />

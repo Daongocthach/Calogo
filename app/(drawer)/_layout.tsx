@@ -10,6 +10,7 @@ import {
 import { router, usePathname } from "expo-router";
 import { useTheme } from "react-native-paper";
 import DrawerHeader from "@/components/common/DrawerHeader";
+import { Icon } from "@/components";
 
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     const pathname = usePathname();
@@ -71,7 +72,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                         color={pathname == "/settings" ? colors.primary : colors.onBackground}
                     />
                 )}
-                label={"Settings"}
+                label={"Cài đặt"}
                 labelStyle={[
                     styles.navItemLabel,
                     { color: pathname == "/settings" ? colors.primary : colors.onBackground },
@@ -79,6 +80,24 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                 style={{ backgroundColor: pathname == "/settings" ? colors.primary : colors.background }}
                 onPress={() => {
                     router.push("/settings");
+                }}
+            />
+            <DrawerItem
+                icon={({ color, size }) => (
+                    <Icon
+                        name="Utensils"
+                        size={size}
+                        color={pathname == "/menu" ? colors.primary : colors.onBackground}
+                    />
+                )}
+                label={"Thực đơn"}
+                labelStyle={[
+                    styles.navItemLabel,
+                    { color: pathname == "/menu" ? colors.primary : colors.onBackground },
+                ]}
+                style={{ backgroundColor: pathname == "/menu" ? colors.primary : colors.background }}
+                onPress={() => {
+                    router.push("/menu");
                 }}
             />
             <DrawerItem
@@ -130,10 +149,11 @@ export default function DrawerLayout() {
                 header: ({ route }) => <DrawerHeader title={route.name} />,
                 headerShown: false,
                 drawerPosition: 'right',
-                drawerStyle: { width: "70%"},
+                drawerStyle: { width: "70%" },
             }}
         >
             <Drawer.Screen name="settings" options={{ headerShown: true, title: "Cài đặt" }} />
+            <Drawer.Screen name="menu" options={{ headerShown: true, title: "Thực đơn" }} />
             <Drawer.Screen name="login" options={{ headerShown: true, title: "Đăng nhập" }} />
             <Drawer.Screen name="signup" options={{ headerShown: true, title: "Đăng ký" }} />
             <Drawer.Screen name="reset-password" options={{ headerShown: true, title: "Quên mật khẩu" }} />
@@ -144,7 +164,7 @@ export default function DrawerLayout() {
 const styles = StyleSheet.create({
     navItemLabel: {
         marginLeft: 10,
-        fontSize: 18,
+        fontSize: 16,
     },
     userInfoWrapper: {
         flexDirection: "row",

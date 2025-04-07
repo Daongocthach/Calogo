@@ -1,10 +1,14 @@
 import { useState } from 'react'
-import { View, SectionList, Text, TouchableOpacity } from 'react-native'
+import { View, SectionList, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
 import { FoodItem } from '@/components/common/FoodItem'
 import { BarChart } from "react-native-gifted-charts"
-import { Icon } from '@/components'
+import { DateSelector, Icon } from '@/components'
 import { FoodDailyItemType } from '@/lib/types'
 import useStore from '@/store'
+import NutrientSummary from '@/components/common/NutrientSummary'
+import WeeklyBarChart from '@/components/common/WeeklyBarchart'
+import { useTranslation } from 'react-i18next'
+import MonthlyLineChart from '@/components/common/onthlyLineChart'
 
 type GroupedFood = {
   title: string
@@ -23,17 +27,17 @@ const groupByDate = (data: FoodDailyItemType[]): GroupedFood[] => {
 }
 
 export default function Statistics() {
+  const { t } = useTranslation()
   const { historyFoodList, weekHistoryCalories } = useStore()
   const groupedData = groupByDate(historyFoodList)
-  const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN']
 
   const barData = weekHistoryCalories.map((calories, index) => {
     const frontColor = ['#177AD5', '#177AD5', '#177AD5'][index] || ''
-  
+
     return {
-      value: calories, 
-      label: daysOfWeek[index], 
-      frontColor: frontColor, 
+      value: calories,
+      frontColor: frontColor,
+
     }
   })
   const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>(() => {
@@ -46,37 +50,58 @@ export default function Statistics() {
   }
 
   return (
-    <View className="flex-1 items-center relative px-4">
-      <View className='mt-4'>
-        <BarChart
-          barWidth={22}
-          noOfSections={3}
-          barBorderRadius={4}
-          frontColor="lightgray"
-          data={barData}
-          yAxisThickness={0}
-          xAxisThickness={0}
-        />
-      </View>
-      <View className='w-full'>
-        <SectionList
-          contentContainerStyle={{ marginTop: 10 }}
-          sections={groupedData}
-          keyExtractor={(item, index) => item.name + index}
-          renderSectionHeader={({ section: { title } }) => (
-            <TouchableOpacity onPress={() => toggleSection(title)} className="mt-4 flex flex-row items-center gap-2">
-              <Icon name="History" size={15} color="#0284c7" />
-              <Text className="text-lg font-bold text-sky-600">{`Ngày ${title}`}</Text>
-              <Icon name={expandedSections[title] ? 'ChevronUp' : 'ChevronDown'} size={20} color="#0284c7" />
-            </TouchableOpacity>
-          )}
-          renderItem={({ item, section }) =>
-            expandedSections[section.title] ? (
-              <FoodItem key={item.id} {...item} />
-            ) : null
-          }
-        />
-      </View>
-    </View>
+    <ScrollView className="flex-1 relative px-4 mb-4">
+      <DateSelector />
+      <NutrientSummary />
+      <WeeklyBarChart
+        data={[
+          {
+            label: t('mon'), value: 20,
+            highlight: false
+          },
+          {
+            label: t('tue'), value: 35,
+            highlight: false
+          },
+          { label: t('wed'), value: 55, highlight: true },
+          {
+            label: t('thu'), value: 30,
+            highlight: false
+          },
+          {
+            label: t('fri'), value: 25,
+            highlight: false
+          },
+          {
+            label: t('sat'), value: 40,
+            highlight: false
+          },
+          {
+            label: t('sun'), value: 15,
+            highlight: false
+          },
+        ]}
+      />
+
+      <MonthlyLineChart
+        data={[
+          { label: t('jan'), value: 300 },
+          { label: t('feb'), value: 500 },
+          { label: t('mar'), value: 200 },
+          { label: t('apr'), value: 600 },
+          { label: t('may'), value: 600 },
+          { label: t('jun'), value: 400 },
+          { label: t('jul'), value: 600 },
+          { label: t('aug'), value: 1000 },
+          { label: t('sep'), value: 1100 },
+          { label: t('oct'), value: 300 },
+          { label: t('nov'), value: 500 },
+          { label: t('dec'), value: 700 },
+        ]}
+      />
+
+    </ScrollView>
   )
 }
+
+

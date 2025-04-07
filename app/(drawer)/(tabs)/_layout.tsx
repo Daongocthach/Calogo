@@ -14,6 +14,7 @@ export default function TabLayout() {
         header: () => <CustomHeader />,
         tabBarButton: HapticTab,
         sceneStyle: {
+          backgroundColor: colors.background,
         },
       }}>
       <Tabs.Screen

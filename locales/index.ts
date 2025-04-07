@@ -21,7 +21,7 @@ export const resources = {
   },
 };
 
-const lng = useStore.getState().currentLanguage
+const lng = 'vi'
 
 i18next.use(initReactI18next).init({
   lng,

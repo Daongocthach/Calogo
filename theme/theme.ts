@@ -1,55 +1,56 @@
 export const lightTheme = {
-  "colors": {
-    "primary": "#3b82f6",
-    "onPrimary": "#ffffff",
-    "primaryContainer": "#bfdbfe",
-    "onPrimaryContainer": "#1d4ed8",
+  colors: {
+    primary: "#3b82f6",
+    onPrimary: "#ffffff",
+    primaryContainer: "#dbeafe", 
+    onPrimaryContainer: "#1e3a8a",
 
-    "secondary": "#2196F3",
-    "onSecondary": "#ffffff",
-    "secondaryContainer": "#c7e4f7",
-    "onSecondaryContainer": "#002943",
+    secondary: "#0ea5e9",
+    onSecondary: "#ffffff",
+    secondaryContainer: "#bae6fd",
+    onSecondaryContainer: "#0c4a6e",
 
-    "tertiary": "#22c55e",
-    "onTertiary": "#ffffff",
-    "tertiaryContainer": "#dcfce7",
-    "onTertiaryContainer": "#22543d",
+    tertiary: "#22c55e",
+    onTertiary: "#ffffff",
+    tertiaryContainer: "#dcfce7",
+    onTertiaryContainer: "#14532d",
 
-    "error": "#ef4444",
-    "onError": "#ffffff",
-    "errorContainer": "#ffdad6",
-    "onErrorContainer": "#410002",
+    error: "#ef4444",
+    onError: "#ffffff",
+    errorContainer: "#fee2e2",
+    onErrorContainer: "#7f1d1d",
 
-    "background": "#ffffff",
-    "onBackground": "#444",
-    "surface": "#eef5ff",
-    "onSurface": "#1c2a3a",
+    background: "#ffffff",
+    onBackground: "#1e293b",
+    surface: "#f8fafc",
+    onSurface: "#0f172a",
 
-    "surfaceVariant": "#dceef7",
-    "onSurfaceVariant": "#40576e",
-    "outline": "#999999",
-    "outlineVariant": "#ebf5ff",
+    surfaceVariant: "#e2e8f0",
+    onSurfaceVariant: "#334155",
+    outline: "#cbd5e1",
+    outlineVariant: "#e0e7ff",
 
-    "shadow": "#000000",
-    "scrim": "#000000",
-    "inverseSurface": "#323c4b",
-    "inverseOnSurface": "#ebf5ff",
-    "inversePrimary": "#bae6fd",
+    shadow: "#000000",
+    scrim: "#000000",
+    inverseSurface: "#1e293b",
+    inverseOnSurface: "#f1f5f9",
+    inversePrimary: "#93c5fd",
 
-    "elevation": {
-      "level0": "transparent",
-      "level1": "#e1f5ff",
-      "level2": "#d7f0ff",
-      "level3": "#cdefff",
-      "level4": "#c3e6ff",
-      "level5": "#b9e1ff"
+    elevation: {
+      level0: "transparent",
+      level1: "#f0f9ff",
+      level2: "#e0f2fe",
+      level3: "#bae6fd",
+      level4: "#7dd3fc",
+      level5: "#38bdf8"
     },
 
-    "surfaceDisabled": "#DDDDDD",
-    "onSurfaceDisabled": "#777777",
-    "backdrop": "#283c552f"
+    surfaceDisabled: "#e5e7eb",
+    onSurfaceDisabled: "#94a3b8",
+    backdrop: "#0f172a2f"
   }
-};
+}
+
 
 export const darkTheme = {
   "colors": {

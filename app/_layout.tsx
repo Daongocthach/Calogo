@@ -27,12 +27,6 @@ export default function RootLayout() {
     }
   }, [loaded])
 
-  useEffect(() => {
-    if (!bmr) {
-      router.replace('/welcome')
-    }
-  }, [bmr])
-
   if (!loaded) {
     return null
   }
@@ -40,7 +34,7 @@ export default function RootLayout() {
   return (
     <PaperProvider theme={darkMode ? darkTheme : lightTheme} >
       <I18nextProvider i18n={i18next}>
-        <Stack>
+        <Stack screenOptions={{ }}>
           <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
           <Stack.Screen name="welcome" options={{ headerShown: false }} />
