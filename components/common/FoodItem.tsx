@@ -1,21 +1,21 @@
-import { Text, View, StyleSheet } from 'react-native'
-import { useTheme } from 'react-native-paper'
+import React, { useState } from 'react'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { useTheme, List } from 'react-native-paper'
 
 import { CustomText, Icon } from '@/components'
 import { useTranslation } from 'react-i18next'
 
-type FoodItemProps =
-    {
-        isSample?: boolean
-        isStatistic?: boolean
-        name: string
-        carbsWeight: number
-        proteinsWeight: number
-        fatsWeight: number
-        calories: number
-        time?: string
-        type?: string
-    }
+type FoodItemProps = {
+    isSample?: boolean
+    isStatistic?: boolean
+    name: string
+    carbsWeight: number
+    proteinsWeight: number
+    fatsWeight: number
+    calories: number
+    time?: string
+    type?: string
+}
 
 export function FoodItem({
     isSample = false,
@@ -30,32 +30,52 @@ export function FoodItem({
 }: FoodItemProps) {
     const { colors } = useTheme()
     const { t } = useTranslation()
+    const [expanded, setExpanded] = useState(false)
+
     return (
-        <View style={styles.containerShadow} className='flex-row items-center mb-4 py-4' >
-            <CustomText className='text-3xl mr-4'>🥩</CustomText>
-            <View>
-                <CustomText className='text-base font-semibold'>{t('protein')}</CustomText>
-                <CustomText className='text-gray-600'>25g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></CustomText>
+        <List.Accordion
+            title={
+                <View className='flex-row items-center justify-between py-4 w-full'>
+                    <View className='flex flex-row items-center'>
+                        <CustomText className='text-3xl mr-4'>🥩</CustomText>
+                        <View>
+                            <CustomText className='text-base font-semibold'>{name}</CustomText>
+                            <CustomText className='text-gray-600'>{calories} kcals</CustomText>
+                        </View>
+                    </View>
+
+                </View>
+            }
+            expanded={expanded}
+            onPress={() => setExpanded(!expanded)}
+            style={[styles.containerShadow, { backgroundColor: '#fff', borderRadius: 20 }]}
+            titleStyle={{ padding: 0 }}
+        >
+            <View
+                className='flex flex-row items-center justify-between px-4'
+                style={{ backgroundColor: colors.surface, borderRadius: 20, padding: 10, marginBottom: 10 }}
+            >
+                <View className=''>
+                    <CustomText className='text-gray-600 font-medium'>{
+                        t('protein')}: {proteinsWeight}g
+                    </CustomText>
+                    <CustomText className='text-gray-600 font-semibold'>
+                        {t('carbs')}: {carbsWeight}g
+                    </CustomText>
+                    <CustomText className='text-gray-600 font-semibold'>
+                        {t('fat')}: {fatsWeight}g
+                    </CustomText>
+                </View>
+                <View className='flex-row gap-4'>
+                    <TouchableOpacity>
+                        <Icon name="Pencil" size={16} color={colors.primary} />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Icon name="Trash" size={16} color={colors.onSurfaceVariant} />
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
-        // <View style={{ borderColor: '#e2e8f0' }} className='flex-row items-center justify-between p-4 border-b w-full'>
-        //     <View className='flex flex-row gap-2 items-center text-slate-700'>
-        //         <View>
-        //             <CustomText style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{name}</CustomText>
-        //             <View className='flex flex-row items-center gap-1'>
-        //                 <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{carbsWeight}g - </CustomText>
-        //                 <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{proteinsWeight}g - </CustomText>
-        //                 <CustomText style={{ fontSize: 12, fontWeight: 500 }}>{fatsWeight}g</CustomText>
-        //             </View>
-        //         </View>
-        //     </View>
-        //     <CustomText style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{time ? new Date(time).toLocaleTimeString() : ''}</CustomText>
-        //     <View className='flex flex-row gap-1'>
-        //         <Text style={{ fontSize: 15, fontWeight: 600, color: colors.primary }}>{calories}</Text>
-        //         <Icon name={'Flame'} size={20} color={colors.primary} />
-        //         {(isSample || isStatistic) && <Icon name='ChevronRight' size={20} color={colors.primary} />}
-        //     </View>
-        // </View>
+        </List.Accordion>
     )
 }
 
@@ -66,9 +86,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3,
         elevation: 2,
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        flex: 1,
-        padding: 10,
+        marginBottom: 16,
     },
-});
+})

@@ -127,9 +127,9 @@ export default function Foods() {
       <SearchInput />
       <ScrollView className='px-1 mb-4'>
         {foodList.map((item, index) => (
-          <TouchableOpacity onPress={() => handleSelectFood(item)} key={index}>
-            <FoodItem {...item} />
-          </TouchableOpacity>
+          // <TouchableOpacity onPress={() => handleSelectFood(item)} key={index}>
+            <FoodItem {...item} key={index}/>
+          // </TouchableOpacity>
         ))}
       </ScrollView>
       <CustomModal

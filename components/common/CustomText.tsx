@@ -13,7 +13,7 @@ const CustomText = ({ children, style, translationKey, ...props } : CustomTextPr
     const { t } = useTranslation()
 
     return (
-        <Text style={[{ color: colors.onBackground }, style]} {...props}>
+        <Text style={[style]} {...props}>
             {translationKey ? t(translationKey) : children}
         </Text>
     )
