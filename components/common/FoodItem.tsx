@@ -4,6 +4,7 @@ import { useTheme, List } from 'react-native-paper'
 
 import { CustomText, Icon } from '@/components'
 import { useTranslation } from 'react-i18next'
+import { FoodTypes } from '@/lib'
 
 type FoodItemProps = {
     isSample?: boolean
@@ -33,49 +34,55 @@ export function FoodItem({
     const [expanded, setExpanded] = useState(false)
 
     return (
-        <List.Accordion
-            title={
-                <View className='flex-row items-center justify-between py-4 w-full'>
-                    <View className='flex flex-row items-center'>
-                        <CustomText className='text-3xl mr-4'>🥩</CustomText>
-                        <View>
-                            <CustomText className='text-base font-semibold'>{name}</CustomText>
-                            <CustomText className='text-gray-600'>{calories} kcals</CustomText>
+        <View style={[styles.containerShadow, { backgroundColor: '#fff', borderRadius: 12, padding: 4 }]}>
+            <List.Accordion
+                title={
+                    <View className='flex-row items-center justify-between w-full'>
+                        <View className='flex flex-row items-center'>
+                            <CustomText className='text-3xl mr-4'>
+                                {FoodTypes[type as keyof typeof FoodTypes]?.icon || '🥩'}
+                            </CustomText>
+                            <View>
+                                <CustomText className='text-base font-semibold'>
+                                    {name}
+                                </CustomText>
+                                <CustomText className='text-gray-600'>{calories} kcals</CustomText>
+                            </View>
                         </View>
                     </View>
-
-                </View>
-            }
-            expanded={expanded}
-            onPress={() => setExpanded(!expanded)}
-            style={[styles.containerShadow, { backgroundColor: '#fff', borderRadius: 20 }]}
-            titleStyle={{ padding: 0 }}
-        >
-            <View
-                className='flex flex-row items-center justify-between px-4'
-                style={{ backgroundColor: colors.surface, borderRadius: 20, padding: 10, marginBottom: 10 }}
+                }
+                expanded={expanded}
+                style={{ borderRadius: 12 }}
+                onPress={() => setExpanded(!expanded)}
             >
-                <View className=''>
-                    <CustomText className='text-gray-600 font-medium'>{
-                        t('protein')}: {proteinsWeight}g
-                    </CustomText>
-                    <CustomText className='text-gray-600 font-semibold'>
-                        {t('carbs')}: {carbsWeight}g
-                    </CustomText>
-                    <CustomText className='text-gray-600 font-semibold'>
-                        {t('fat')}: {fatsWeight}g
-                    </CustomText>
+                <View className='flex flex-row items-center justify-between p-4'
+                    style={{ borderRadius: 20, borderTopWidth: 1, borderTopColor: colors.surfaceDisabled }}
+                >
+                    <View>
+                        <CustomText className='text-base font-semibold' style={{ color: colors.tertiary }} >
+                            {FoodTypes[type as keyof typeof FoodTypes]?.name}
+                        </CustomText>
+                        <CustomText className='font-medium mt-2' style={{ color: colors.onSurfaceDisabled }}>
+                            {t('protein')}: {proteinsWeight}g
+                        </CustomText>
+                        <CustomText className='font-medium' style={{ color: colors.onSurfaceDisabled }}>
+                            {t('carbs')}: {carbsWeight}g
+                        </CustomText>
+                        <CustomText className='font-medium' style={{ color: colors.onSurfaceDisabled }}>
+                            {t('fat')}: {fatsWeight}g
+                        </CustomText>
+                    </View>
+                    <View className='flex flex-col gap-4 mr-4'>
+                        <TouchableOpacity>
+                            <Icon name="Pencil" size={18} color={colors.onSurfaceDisabled} />
+                        </TouchableOpacity>
+                        <TouchableOpacity className='mt-2'>
+                            <Icon name="Trash" size={18} color={colors.onSurfaceDisabled} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-                <View className='flex-row gap-4'>
-                    <TouchableOpacity>
-                        <Icon name="Pencil" size={16} color={colors.primary} />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Icon name="Trash" size={16} color={colors.onSurfaceVariant} />
-                    </TouchableOpacity>
-                </View>
-            </View>
-        </List.Accordion>
+            </List.Accordion>
+        </View>
     )
 }
 
@@ -86,6 +93,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 3,
         elevation: 2,
-        marginBottom: 16,
+        marginTop: 10,
+        marginBottom: 2,
     },
 })

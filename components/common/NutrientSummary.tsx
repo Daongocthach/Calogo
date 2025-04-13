@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         elevation: 2,
+        marginTop: 8
     },
     item: {
         alignItems: 'center',

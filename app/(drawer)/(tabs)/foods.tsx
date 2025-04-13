@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form"
 import Toast from 'react-native-toast-message'
 
 import { FoodItem, CustomModal, CustomDropDown, Icon } from '@/components'
-import { FoodTypes } from '@/lib/constants/FoodTypes'
+import { FoodTypes } from '@/lib'
 import { FoodItemType } from '@/lib/types'
 import useStore from '@/store'
 import SearchInput from '@/components/common/SearchInput'
@@ -14,7 +14,7 @@ const foodTypes = Object.entries(FoodTypes).map(([key, value]) => ({
   value: key,
 }))
 
-export default function Foods() {
+export default function Foods() {2
   const { addFood, editFood, deleteFood, foodList } = useStore()
   const [modalVisible, setModalVisible] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
