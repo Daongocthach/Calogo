@@ -56,7 +56,7 @@ const onChangeDate = (_: any, selectedDate?: Date) => {
 }
 
 return (
-  <View className='flex flex-row items-center pb-4'>
+  <View className='flex flex-row items-center' style={{ paddingBottom: 10 }}>
     <ScrollView
       ref={scrollRef}
       horizontal

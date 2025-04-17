@@ -8,7 +8,7 @@ import useStore from '@/store'
 import NutrientSummary from '@/components/common/NutrientSummary'
 import WeeklyBarChart from '@/components/common/WeeklyBarchart'
 import { useTranslation } from 'react-i18next'
-import MonthlyLineChart from '@/components/common/onthlyLineChart'
+import MonthlyLineChart from '@/components/common/MonthlyLineChart'
 
 type GroupedFood = {
   title: string

@@ -1,8 +1,8 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 import { View, Text, StyleSheet } from 'react-native'
 import { LineChart } from 'react-native-gifted-charts'
-import { useTheme } from 'react-native-paper';
+import { useTheme } from 'react-native-paper'
 
 type DataItem = {
     value: number;
