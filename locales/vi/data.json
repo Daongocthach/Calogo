@@ -44,5 +44,16 @@
   "oct": "Th 10",
   "nov": "Th 11",
   "dec": "Th 12",
-  "menu": "Thực đơn"
+  "menu": "Thực đơn",
+  "general": "Cài đặt chung",
+  "language": "Ngôn ngữ",
+  "dark mode": "Chế độ tối",
+  "data": "Dữ liệu",
+  "remove all data": "Xóa tất cả dữ liệu",
+  "login": "Đăng nhập",
+  "help": "Trợ giúp",
+  "add meal": "Thêm bữa ăn",
+  "manual": "Thêm thủ công",
+  "camera": "Chụp ảnh",
+  "search food": "Tìm kiếm thực phẩm"
 }

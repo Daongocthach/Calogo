@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Text, TouchableOpacity, View, ScrollView, StyleSheet } from 'react-native'
+import { Text, View, ScrollView, StyleSheet } from 'react-native'
 import { PieChart } from "react-native-gifted-charts"
 import { useTranslation } from 'react-i18next'
 import { useTheme } from 'react-native-paper'
@@ -8,12 +7,11 @@ import { LinearGradient } from 'expo-linear-gradient'
 import {
   CustomText,
   DateSelector,
-  Icon
 } from '@/components'
 import useStore from '@/store'
 import CalorieCards from '@/components/common/CalorieCards'
+import AddMealIcon from '@/components/common/AddMealIcon'
 
-const weekdays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
 
 export default function HomeScreen() {
   const { t } = useTranslation()
@@ -81,14 +79,7 @@ export default function HomeScreen() {
           </View>
         </View>
       </ScrollView>
-
-      <TouchableOpacity
-        className='absolute bottom-5 right-5 bg-blue-500 p-4 rounded-full shadow-lg'
-        style={{ elevation: 5 }}
-        onPress={() => { }}
-      >
-        <Icon name='Plus' size={25} color={colors.onPrimary} />
-      </TouchableOpacity>
+      <AddMealIcon />
     </View>
   )
 }

@@ -17,7 +17,7 @@ export default function CalorieCards({ goal = 2042 }) {
                 end={{ x: 1, y: 1 }}
                 style={[styles.card, styles.rotateLeft]}
             >
-                <Icon name="CircleCheckBig" size={28} color={colors.onTertiary} />
+                <Icon name="Beef" size={28} color={colors.onTertiary} />
                 <CustomText style={styles.cardTitle}>{t('loaded')}</CustomText>
                 <CustomText style={styles.cardValue}>{goal} kcal</CustomText>
             </LinearGradient>
@@ -28,7 +28,7 @@ export default function CalorieCards({ goal = 2042 }) {
                 end={{ x: 1, y: 1 }}
                 style={[styles.card, styles.rotateRight]}
             >
-                <Icon name="CircleMinus" size={28} color={colors.onError} />
+                <Icon name="Ham" size={28} color={colors.onError} />
                 <CustomText style={[styles.cardTitle, { color: colors.onError }]}>{t('exceeded')}</CustomText>
                 <CustomText style={styles.cardValue}>{goal} kcal</CustomText>
             </LinearGradient>

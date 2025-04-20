@@ -9,7 +9,10 @@ export { default as MenuTranslate } from "@/components/common/MenuTranslate";
 export { default as DarkModeIcon } from "@/components/common/DarkModeIcon";
 export { default as Icon } from "@/components/common/Icon";
 export { default as DateSelector } from "@/components/common/DateSelector";
-
+export { default as SearchInput } from "@/components/common/SearchInput";
+export { default as ScannerTab } from "@/components/common/ScannerTab";
+export { default as ManualTab } from "@/components/common/ManualTab";
+export { renderTabBar } from "@/components/common/CustomTabBar";
 
 export { default as ProgressStep } from "@/components/ProgressSteps/ProgressStep";
 export { default as ProgressSteps } from "@/components/ProgressSteps/ProgressSteps";

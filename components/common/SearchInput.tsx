@@ -1,24 +1,21 @@
 import React from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   TextInput,
-  FlatList,
-  Image,
-  TouchableOpacity
 } from 'react-native'
+import { useTranslation } from 'react-i18next'
 import { useTheme } from 'react-native-paper'
+import Icon from '@/components/common/Icon'
 
-import { Icon } from '@/components'
 function SearchInput() {
   const { colors } = useTheme()
-
+  const { t } = useTranslation()
     return (
-        <View style={[styles.searchContainer, { borderColor: colors.outlineVariant }]}>
+        <View style={[styles.searchContainer, { borderColor: colors.outline }]}>
             <TextInput
                 style={[styles.input, { color: colors.onBackground }]}
-                placeholder="Search food items"
+                placeholder={t('search food')}
                 placeholderTextColor={colors.onSurfaceDisabled}
             />
             <Icon name="Search" size={20} color={colors.outline} />
@@ -37,8 +34,8 @@ const styles = StyleSheet.create({
       borderWidth: 1,
       borderRadius: 12,
       paddingHorizontal: 12,
-      paddingVertical: 6,
-      marginBottom: 12,
+      paddingVertical: 4,
+      marginVertical: 8,
     },
     input: {
       flex: 1,

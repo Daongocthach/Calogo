@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { View, ScrollView, TouchableOpacity } from 'react-native'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { format, eachDayOfInterval, startOfMonth, endOfMonth } from 'date-fns'
-import { CustomText, Icon } from '@/components'
 import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import { LinearGradient } from 'expo-linear-gradient'
+
+import CustomText from '@/components/common/CustomText'
+import Icon from '@/components/common/Icon'
 
 export default function DateSelector() {
   const { colors } = useTheme()
