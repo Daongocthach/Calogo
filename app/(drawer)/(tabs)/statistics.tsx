@@ -3,51 +3,15 @@ import { View, SectionList, Text, TouchableOpacity, StyleSheet, ScrollView } fro
 import { FoodItem } from '@/components/common/FoodItem'
 import { BarChart } from "react-native-gifted-charts"
 import { DateSelector, Icon } from '@/components'
-import { FoodDailyItemType } from '@/lib/types'
+import { LogProps } from '@/lib'
 import useStore from '@/store'
 import NutrientSummary from '@/components/common/NutrientSummary'
 import WeeklyBarChart from '@/components/common/WeeklyBarchart'
 import { useTranslation } from 'react-i18next'
 import MonthlyLineChart from '@/components/common/MonthlyLineChart'
 
-type GroupedFood = {
-  title: string
-  data: FoodDailyItemType[]
-}
-
-const groupByDate = (data: FoodDailyItemType[]): GroupedFood[] => {
-  const grouped = data.reduce<{ [key: string]: FoodDailyItemType[] }>((acc, item) => {
-    const date = new Date(item.time).toLocaleDateString('vi-VN')
-    if (!acc[date]) acc[date] = []
-    acc[date].push(item)
-    return acc
-  }, {})
-
-  return Object.entries(grouped).map(([title, data]) => ({ title, data }))
-}
-
-export default function Statistics() {
+export default function Statistics() { 
   const { t } = useTranslation()
-  const { historyFoodList, weekHistoryCalories } = useStore()
-  const groupedData = groupByDate(historyFoodList)
-
-  const barData = weekHistoryCalories.map((calories, index) => {
-    const frontColor = ['#177AD5', '#177AD5', '#177AD5'][index] || ''
-
-    return {
-      value: calories,
-      frontColor: frontColor,
-
-    }
-  })
-  const [expandedSections, setExpandedSections] = useState<{ [key: string]: boolean }>(() => {
-    const firstTitle = groupedData.length > 0 ? groupedData[0].title : null
-    return firstTitle ? { [firstTitle]: true } : {}
-  })
-
-  const toggleSection = (title: string) => {
-    setExpandedSections((prev) => ({ ...prev, [title]: !prev[title] }))
-  }
 
   return (
     <ScrollView className="flex-1 relative px-4 mb-4">

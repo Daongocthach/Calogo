@@ -85,7 +85,7 @@ return (
             >
               <View ref={(element) => (dayRefs.current[formattedDay] = element)}>
                 <CustomText
-                  className='text-sm font-medium'
+                  className='text-sm font-semibold'
                   style={{
                     color: isCurrentDay
                       ? colors.onPrimary
@@ -114,10 +114,10 @@ return (
           borderRadius: 12
         }}
       >
-        <View className='flex flex-row items-centerrounded-xl'>
+        <View className='flex flex-row items-center rounded-xl'>
           <Icon name='Calendar' size={15} color={colors.onPrimary} />
           <CustomText
-            className='font-medium text-sm ml-2'
+            className='font-semibold text-sm ml-2'
             style={{ color: colors.onPrimary }}
           >
             {format(currentDate, 'yyyy-MM-dd')}

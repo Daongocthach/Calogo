@@ -21,6 +21,41 @@ export const toastList = {
     text1: "logout success",
     text2: "see you later",
   },
+  logout_failed: {
+    type: "error",
+    text1: "logout failed",
+    text2: "please try again",
+  },
+  user_not_found: {
+    type: "error",
+    text1: "user not found",
+    text2: "",
+  },
+  wrong_password: {
+    type: "error",
+    text1: "wrong password",
+    text2: "",
+  },
+  invalid_email: {
+    type: "error",
+    text1: "invalid email",
+    text2: "",
+  },
+  email_already_in_use: {
+    type: "error",
+    text1: "email already in use",
+    text2: "",
+  },
+  weak_password: {
+    type: "error",
+    text1: "weak password",
+    text2: "",
+  },
+  sign_up_failed: {
+    type: "error",
+    text1: "sign up failed",
+    text2: "please try again",
+  },
   update_success: {
     type: "success",
     text1: "update success",

@@ -5,31 +5,9 @@ import { useTheme, List } from 'react-native-paper'
 import CustomText from '@/components/common/CustomText'
 import Icon from '@/components/common/Icon'
 import { useTranslation } from 'react-i18next'
-import { FoodTypes } from '@/lib'
+import { CategoryProps, FoodProps } from '@/lib'
 
-type FoodItemProps = {
-    isSample?: boolean
-    isStatistic?: boolean
-    name: string
-    carbsWeight: number
-    proteinsWeight: number
-    fatsWeight: number
-    calories: number
-    time?: string
-    type?: string
-}
-
-export function FoodItem({
-    isSample = false,
-    isStatistic = false,
-    type,
-    name,
-    carbsWeight,
-    proteinsWeight,
-    fatsWeight,
-    calories,
-    time
-}: FoodItemProps) {
+export function FoodItem(item: FoodProps) {
     const { colors } = useTheme()
     const { t } = useTranslation()
     const [expanded, setExpanded] = useState(false)
@@ -41,11 +19,11 @@ export function FoodItem({
                     <View className='flex-row items-center justify-between w-full'>
                         <View className='flex flex-row items-center'>
                             <CustomText className='text-3xl mr-4'>
-                                {FoodTypes[type as keyof typeof FoodTypes]?.icon || '🥩'}
+                                {item?.food_type?.icon || '🥩'}
                             </CustomText>
                             <View>
                                 <CustomText className='text-base font-semibold'>
-                                    {name}
+                                    {item?.name || 'N/A'}
                                 </CustomText>
                                 <CustomText className='text-gray-600'>{'100g'} - {calories} kcals</CustomText>
                             </View>
