@@ -16,8 +16,8 @@ import AddMealIcon from '@/components/common/AddMealIcon'
 export default function HomeScreen() {
   const { t } = useTranslation()
   const { colors } = useTheme()
-  const { tdde, todayCalories } = useStore()
-  const goal = tdde || 2042
+  const { tdee, todayCalories } = useStore()
+  const goal = tdee || 2042
 
   const pieData = [
     { value: 500, color: '#a3e635' },

@@ -8,6 +8,10 @@
       "ios": {
         "distribution": "internal",
         "credentialsSource": "remote"
+      },
+      "android": {
+        "distribution": "internal",
+        "credentialsSource": "remote"
       }
     }
   },

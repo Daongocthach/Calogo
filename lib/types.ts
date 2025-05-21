@@ -25,7 +25,7 @@ export type UserProps = {
   birthday: string
 }
 
-export type CategoryProps = {
+export type FoodTypeProps = {
   id: string
   name: string
   icon: string
@@ -38,7 +38,7 @@ export type FoodProps = {
   protein_weight: number
   fat_weight: number
   calorie: number
-  food_type: CategoryProps
+  food_type: FoodTypeProps
 }
 
 export type LogProps = {
@@ -48,7 +48,7 @@ export type LogProps = {
   protein_weight: number
   fat_weight: number
   calorie: number
-  food_type: CategoryProps
+  food_type: FoodTypeProps
   eaten_at: string
 }
 

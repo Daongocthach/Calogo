@@ -7,7 +7,7 @@ import useStore from '@/store'
 import SearchInput from '@/components/common/SearchInput'
 import { FoodItem } from '@/components/common/FoodItem'
 import CustomText from '@/components/common/CustomText'
-import { FoodTypes, windowHeight } from '@/lib'
+import { FoodProps, windowHeight } from '@/lib'
 import AddMealIcon from '@/components/common/AddMealIcon'
 import Icon from '@/components/common/Icon'
 
@@ -15,8 +15,8 @@ function ManualTab() {
     const { foodList } = useStore()
     const { colors } = useTheme()
     const { t } = useTranslation()
-    const { tdde, todayCalories } = useStore()
-    const goal = tdde || 2042
+    const { tdee, todayCalories, foodTypes } = useStore()
+    const goal = tdee || 2042
 
     const pieData = [
         { value: 500, color: colors.primary },
@@ -43,19 +43,19 @@ function ManualTab() {
             </View>
             <SearchInput />
             <ScrollView className='px-1 pb-4' style={{ maxHeight: windowHeight - 350 }}>
-                {foodList.map((item, index) => (
+                {Array.isArray(foodList) && foodList.map((item, index) => (
                     <View key={index} style={[styles.containerShadow, { backgroundColor: '#fff', borderRadius: 12, padding: 14 }]}>
                         <Checkbox status='checked' color={colors.primary} />
                         <View className='flex-row items-center justify-between w-full ml-2'>
                             <View className='flex flex-row items-center'>
                                 <CustomText className='text-3xl mr-4'>
-                                    {FoodTypes[item?.type as keyof typeof FoodTypes]?.icon || '🥩'}
+                                    {item?.food_type?.icon || '🥩'}
                                 </CustomText>
                                 <View>
                                     <CustomText className='text-base font-semibold'>
                                         {item?.name}
                                     </CustomText>
-                                    <CustomText className='text-gray-600'>{'100g'} - {item?.calories} kcals</CustomText>
+                                    <CustomText className='text-gray-600'>{'100g'} - {item?.calorie} kcals</CustomText>
                                 </View>
                             </View>
                         </View>

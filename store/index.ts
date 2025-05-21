@@ -1,8 +1,7 @@
 import { create } from "zustand"
 import { devtools, persist, createJSONStorage } from "zustand/middleware"
 import { asyncStorage } from "@/store/storage"
-import { BodyProps, FoodProps, LogProps } from "@/lib/types"
-import { FoodSamples } from "@/lib"
+import { FoodSamples, BodyProps, FoodProps, LogProps, FoodTypeProps, FoodTypeSamples } from "@/lib"
 
 type BodyDataStored = {
   bmr: number
@@ -19,6 +18,8 @@ type StoreState = {
   bmr: number | null
   tdee: number | null
   body: BodyProps | null
+  foodTypes: FoodTypeProps[]
+  foodList: FoodProps[]
   changeLanguage: (language: "cn" | "en" | "vi") => void
   setDarkMode: (payload: boolean) => void
   signUp: (payload: any) => void
@@ -47,52 +48,48 @@ const useStore = create<StoreState>()(
         todayLogs: [],
         historyFoodLogs: [],
         weekCalories: [0, 0, 0, 0, 0, 0, 0],
-        foodLibrary: FoodSamples,
         bmr: null,
         tdee: null,
         body: null,
+        foodTypes: FoodTypeSamples,
+        foodList: FoodSamples,
         changeLanguage: (language) => set({ currentLanguage: language }),
         setDarkMode: (payload) => set({ darkMode: payload }),
-        signUp: async (payload) => {
-        },
-        signIn: async (payload) => {
-        },
-        signOut: () => {
-        },
+        signUp: async (payload) => {},
+        signIn: async (payload) => {},
+        signOut: () => {},
         addFood: (payload) => {
-          
+          set((state) => ({
+            foodList: [...state.foodList, payload],
+          }))
         },
         editFood: (payload) => {
-          
+          set((state) => ({
+            foodList: state.foodList.map((food) =>
+              food.id === payload.id ? { ...food, ...payload } : food
+            ),
+          }))
         },
         deleteFood: (payload) => {
-          
+          set((state) => ({
+            foodList: state.foodList.filter((food) => food.id !== payload),
+          }))
         },
 
         saveBody: (payload) => {
           set({
             bmr: payload.bmr,
             tdee: payload.tdee,
-            body: payload.body
+            body: payload.body,
           })
         },
-        addDaily: (payload) => {
-        },
-        editDaily: (payload) => {
-          
-        },
-        deleteDaily: (payload) => {
-          
-        },
+        addDaily: (payload) => {},
+        editDaily: (payload) => {},
+        deleteDaily: (payload) => {},
         clearDaily: () => {
-          set({
-          })
+          set({})
         },
-        clearAllData: () => {
-          
-        },
-
-
+        clearAllData: () => {},
       }),
       {
         name: "calogo-storage",
@@ -105,9 +102,10 @@ const useStore = create<StoreState>()(
           tdee: state.tdee,
           body: state.body,
           todayCalories: state.todayCalories,
-
+          foodTypes: state.foodTypes,
+          foodList: state.foodList,
         }),
-      },
+      }
     )
   )
 )

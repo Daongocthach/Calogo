@@ -21,7 +21,7 @@ export const FoodTypeSamples = [
     { id: 'supplement', name: 'Thực phẩm chức năng (Supplement)', icon: '💊' },
 ];
 
-const getFoodType = (id: string) => FoodTypeSamples.find((item) => item.id === id)!
+export const getFoodType = (id: string) => FoodTypeSamples.find((item) => item.id === id)!
 
 export const FoodSamples: FoodProps[] = [
     {

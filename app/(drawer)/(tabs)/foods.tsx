@@ -33,12 +33,18 @@ export default function Foods() {
       fatsWeight: "",
     },
   })
-  
+
+  const handleAddFood = () => {
+    setModalVisible(true)
+    reset()
+    setIsEdit(false)
+  }
+
   return (
     <View className='flex-1 relative px-4'>
       <SearchInput />
       <ScrollView className='px-1 mb-4'>
-        {foodList.map((item, index) => (
+        {Array.isArray(foodList) && foodList.map((item, index) => (
           // <TouchableOpacity onPress={() => handleSelectFood(item)} key={index}>
             <FoodItem {...item} key={index}/>
           // </TouchableOpacity>

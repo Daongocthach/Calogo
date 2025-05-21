@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "313942599693",
+    "firebase_url": "https://calogo-default-rtdb.firebaseio.com",
+    "project_id": "calogo",
+    "storage_bucket": "calogo.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313942599693:android:f17dc82a2bb291d47d4d44",
+        "android_client_info": {
+          "package_name": "com.pemeoh1.calogo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313942599693-67e77mt99gpvfiaguhd9t4k5846d7mo7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0hpc-OKvsKG9EBxjPTteTc4dEr1qgS4g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313942599693-67e77mt99gpvfiaguhd9t4k5846d7mo7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

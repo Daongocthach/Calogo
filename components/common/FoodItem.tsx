@@ -5,7 +5,7 @@ import { useTheme, List } from 'react-native-paper'
 import CustomText from '@/components/common/CustomText'
 import Icon from '@/components/common/Icon'
 import { useTranslation } from 'react-i18next'
-import { CategoryProps, FoodProps } from '@/lib'
+import { FoodTypeProps, FoodProps } from '@/lib'
 
 export function FoodItem(item: FoodProps) {
     const { colors } = useTheme()
@@ -25,7 +25,7 @@ export function FoodItem(item: FoodProps) {
                                 <CustomText className='text-base font-semibold'>
                                     {item?.name || 'N/A'}
                                 </CustomText>
-                                <CustomText className='text-gray-600'>{'100g'} - {calories} kcals</CustomText>
+                                <CustomText className='text-gray-600'>{'100g'} - {item?.calorie} kcals</CustomText>
                             </View>
                         </View>
                     </View>
@@ -34,21 +34,21 @@ export function FoodItem(item: FoodProps) {
                 style={{ borderRadius: 12 }}
                 onPress={() => setExpanded(!expanded)}
             >
-                <View className='flex flex-row items-center justify-between p-4'
-                    style={{ borderRadius: 20, borderTopWidth: 1, borderTopColor: colors.surfaceDisabled }}
+                <View className='flex flex-row items-center justify-between p-4 rounded-lg'
+                    style={{ borderTopWidth: 1, borderTopColor: colors.surfaceDisabled }}
                 >
                     <View>
                         <CustomText className='text-base font-semibold' style={{ color: colors.tertiary }} >
-                            {FoodTypes[type as keyof typeof FoodTypes]?.name}
+                            {item?.food_type?.name}
                         </CustomText>
                         <CustomText className='font-medium mt-2' style={{ color: colors.onSurfaceDisabled }}>
-                            {t('protein')}: {proteinsWeight}g
+                            {t('protein')}: {item?.protein_weight}g
                         </CustomText>
                         <CustomText className='font-medium' style={{ color: colors.onSurfaceDisabled }}>
-                            {t('carbs')}: {carbsWeight}g
+                            {t('carbs')}: {item?.carb_weight}g
                         </CustomText>
                         <CustomText className='font-medium' style={{ color: colors.onSurfaceDisabled }}>
-                            {t('fat')}: {fatsWeight}g
+                            {t('fat')}: {item?.fat_weight}g
                         </CustomText>
                     </View>
                     <View className='flex flex-col gap-4 mr-4'>
