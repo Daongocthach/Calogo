@@ -3163,6 +3163,18 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
+"@tanstack/query-core@5.77.0":
+  version "5.77.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.77.0.tgz#5115cd96a5fd835f91d33e2dd4a64182d52de543"
+  integrity sha512-PFeWjgMQjOsnxBwnW/TJoO0pCja2dzuMQoZ3Diho7dPz7FnTUwTrjNmdf08evrhSE5nvPIKeqV6R0fvQfmhGeg==
+
+"@tanstack/react-query@^5.77.0":
+  version "5.77.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.77.0.tgz#6d0f30b24bd98e9530a76789481a11b3693aa5db"
+  integrity sha512-jX52ot8WxWzWnAknpRSEWj6PTR/7nkULOfoiaVPk6nKu0otwt30UMBC9PTg/m1x0uhz1g71/imwjViTm/oYHxA==
+  dependencies:
+    "@tanstack/query-core" "5.77.0"
+
 "@testing-library/react-native@^13.1.0":
   version "13.2.0"
   resolved "https://registry.yarnpkg.com/@testing-library/react-native/-/react-native-13.2.0.tgz#b4f53c69a889728abe8bc3115ba803824bcafe10"
@@ -5431,6 +5443,18 @@ expo-haptics@~14.0.1:
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/expo-haptics/-/expo-haptics-14.0.1.tgz#ff4ead605e33f1917e615c9328af7ac1c34892dc"
   integrity sha512-V81FZ7xRUfqM6uSI6FA1KnZ+QpEKnISqafob/xEfcx1ymwhm4V3snuLWWFjmAz+XaZQTqlYa8z3QbqEXz7G63w==
+
+expo-image-loader@~5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-5.1.0.tgz#f7d65f9b9a9714eaaf5d50a406cb34cb25262153"
+  integrity sha512-sEBx3zDQIODWbB5JwzE7ZL5FJD+DK3LVLWBVJy6VzsqIA6nDEnSFnsnWyCfCTSvbGigMATs1lgkC2nz3Jpve1Q==
+
+expo-image-picker@^16.1.4:
+  version "16.1.4"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-16.1.4.tgz#d4ac2d1f64f6ec9347c3f64f8435b40e6e4dcc40"
+  integrity sha512-bTmmxtw1AohUT+HxEBn2vYwdeOrj1CLpMXKjvi9FKSoSbpcarT4xxI0z7YyGwDGHbrJqyyic3I9TTdP2J2b4YA==
+  dependencies:
+    expo-image-loader "~5.1.0"
 
 expo-keep-awake@~14.0.3:
   version "14.0.3"
@@ -9271,6 +9295,11 @@ react-is@^19.0.0:
   version "19.1.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-19.1.0.tgz#805bce321546b7e14c084989c77022351bbdd11b"
   integrity sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg==
+
+react-native-camera-kit@^15.0.1:
+  version "15.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-camera-kit/-/react-native-camera-kit-15.0.1.tgz#3d1e861fd6f87450b27744b02e9659b8e643a6a4"
+  integrity sha512-JAa/2m73vKRp9oJ6ynYDr2KIIbglUbXYmDmsUrxLdk820eMGfxlb2HukqmVrkwt9KgX5vlBWoDHys3dhmrqa/w==
 
 react-native-css-interop@0.1.22:
   version "0.1.22"

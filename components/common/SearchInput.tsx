@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     input: {
       flex: 1,
       fontSize: 14,
+      minHeight: 40,
     },
     sectionTitle: {
       fontSize: 16,

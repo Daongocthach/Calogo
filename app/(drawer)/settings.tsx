@@ -11,20 +11,14 @@ import { useTheme } from 'react-native-paper'
 import { useTranslation } from 'react-i18next'
 import useStore from '@/store'
 import { CustomText, Icon } from '@/components'
+import { showAlert } from '@/notification'
 
 export default function SettingsScreen() {
-    const { removeData } = useStore()
+    const { clearAllData } = useStore()
     const { colors } = useTheme()
     const { t } = useTranslation()
-    const handleRemoveData = () => {
-        Alert.alert('Remove data', 'Are you sure you want to remove all data?', [
-            {
-                text: 'Cancel',
-                onPress: () => console.log('Cancel Pressed'),
-                style: 'cancel',
-            },
-            { text: 'OK', onPress: removeData },
-        ])
+    const handleClearAllData = () => {
+        showAlert('clear_data', clearAllData)
     }
 
     return (
@@ -52,9 +46,9 @@ export default function SettingsScreen() {
                     <CustomText style={styles.itemText}>{t('help')}</CustomText>
                 </TouchableOpacity>
                 
-                <TouchableOpacity style={styles.item} onPress={handleRemoveData}>
+                <TouchableOpacity style={styles.item} onPress={handleClearAllData}>
                     <Icon name="Trash2" size={20} color={colors.error} />
-                    <CustomText style={[styles.itemText, { color: colors.error }]}>{t('remove all data')}</CustomText>
+                    <CustomText style={[styles.itemText, { color: colors.error }]}>{t('clear all data')}</CustomText>
                 </TouchableOpacity>
 
             </View>

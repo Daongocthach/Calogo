@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 import {
   View,
   Text,
@@ -6,26 +6,26 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-} from "react-native";
-import { RadioButton } from "react-native-paper";
-import Slider from "@react-native-community/slider";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useRouter } from "expo-router";
+} from "react-native"
+import { RadioButton } from "react-native-paper"
+import Slider from "@react-native-community/slider"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { useRouter } from "expo-router"
 
-import useStore from "@/store";
-import { ProgressStep, ProgressSteps } from "@/components";
-import { Gender, ActivityLevel } from "@/lib/types";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { showToast } from "@/notification";
+import useStore from "@/store"
+import { ProgressStep, ProgressSteps } from "@/components"
+import { Gender, ActivityLevel } from "@/lib/types"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { showToast } from "@/notification"
 
-const intensityOptions = ["inactive", "low", "medium", "high", "super"];
+const intensityOptions = ["inactive", "low", "medium", "high", "super"]
 const imageSources: { [key: string]: any } = {
   inactive: require("@/assets/images/inactive.jpg"),
   low: require("@/assets/images/low.jpg"),
   medium: require("@/assets/images/medium.jpg"),
   high: require("@/assets/images/high.jpg"),
   super: require("@/assets/images/super.jpg"),
-};
+}
 const descriptions: { [key: string]: React.ReactNode } = {
   inactive: (
     <Text style={{ fontSize: 16 }}>
@@ -67,15 +67,15 @@ const descriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </Text>
   ),
-};
+}
 
-const goalOptions = ["fast", "medium", "maintain", "gain"];
+const goalOptions = ["fast", "medium", "maintain", "gain"]
 const imageGoalSources: { [key: string]: any } = {
   fast: require("@/assets/images/loose-fast.jpg"),
   medium: require("@/assets/images/loose-medium.jpg"),
   maintain: require("@/assets/images/maintain.jpg"),
   gain: require("@/assets/images/gain.jpg"),
-};
+}
 const goalDescriptions: { [key: string]: React.ReactNode } = {
   fast: (
     <>
@@ -111,37 +111,37 @@ const goalDescriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </>
   ),
-};
+}
 
 export default function WelcomeScreen() {
-  const router = useRouter();
-  const [height, setHeight] = useState<number>(168);
-  const [weight, setWeight] = useState(50);
-  const [age, setAge] = useState(17);
-  const [gender, setGender] = useState<Gender>("male");
-  const [intensity, setIntensity] = useState<ActivityLevel>("moderate");
+  const router = useRouter()
+  const [height, setHeight] = useState<number>(168)
+  const [weight, setWeight] = useState(50)
+  const [age, setAge] = useState(17)
+  const [gender, setGender] = useState<Gender>("male")
+  const [intensity, setIntensity] = useState<ActivityLevel>("moderate")
 
   const adjustHeight = (delta: number) => {
-    setHeight((prev) => Math.max(1, prev + delta));
-  };
+    setHeight((prev) => Math.max(1, prev + delta))
+  }
 
   const adjustWeight = (delta: number) => {
-    setWeight((prev) => Math.max(1, prev + delta));
-  };
+    setWeight((prev) => Math.max(1, prev + delta))
+  }
 
   const adjustAge = (delta: number) => {
-    setAge((prev) => Math.max(1, prev + delta));
-  };
+    setAge((prev) => Math.max(1, prev + delta))
+  }
 
-  const { saveBody } = useStore();
+  const { saveBody } = useStore()
 
   const handleSubmit = () => {
-    if (!weight || !height || !age) return;
+    if (!weight || !height || !age) return
 
     let bmr =
       gender === "male"
         ? 66 + 13.75 * weight + 5 * height - 6.76 * age
-        : 655 + 9.56 * weight + 1.85 * height - 4.68 * age;
+        : 655 + 9.56 * weight + 1.85 * height - 4.68 * age
 
     const activityMultipliers = {
       inactive: 1.2,
@@ -149,10 +149,9 @@ export default function WelcomeScreen() {
       moderate: 1.55,
       active: 1.725,
       very_active: 1.9,
-    };
+    }
 
-    const tdee = bmr * activityMultipliers[intensity];
-
+    const tdee = bmr * activityMultipliers[intensity]
     saveBody({
       bmr,
       tdee: tdee,
@@ -163,10 +162,10 @@ export default function WelcomeScreen() {
         gender,
         activity_level: intensity,
       },
-    });
-    router.replace("/");
-    showToast("save_data_successfully");
-  };
+    })
+    router.replace("/")
+    showToast("save_data_successfully")
+  }
 
   const renderIntensityOptions = () => {
     return intensityOptions.map((option, index) => (
@@ -194,8 +193,8 @@ export default function WelcomeScreen() {
           {descriptions[option]}
         </Text>
       </TouchableOpacity>
-    ));
-  };
+    ))
+  }
 
   const renderGoalOptions = () => {
     return goalOptions.map((option, index) => (
@@ -228,8 +227,8 @@ export default function WelcomeScreen() {
           {goalDescriptions[option]}
         </Text>
       </TouchableOpacity>
-    ));
-  };
+    ))
+  }
   return (
     <View className="relative flex-1 bg-white">
       <SafeAreaView
@@ -348,7 +347,7 @@ export default function WelcomeScreen() {
                   value={height}
                   step={1}
                   onSlidingComplete={(e) => {
-                    setHeight(e);
+                    setHeight(e)
                   }}
                 />
                 <TouchableOpacity
@@ -503,7 +502,7 @@ export default function WelcomeScreen() {
         </ProgressStep>
       </ProgressSteps>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -517,4 +516,4 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
   },
-});
+})

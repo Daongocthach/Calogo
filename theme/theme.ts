@@ -5,20 +5,20 @@ export const lightTheme = {
     primaryContainer: "#dbeafe", 
     onPrimaryContainer: "#1e3a8a",
 
-    secondary: "#0ea5e9",
-    onSecondary: "#ffffff",
-    secondaryContainer: "#bae6fd",
-    onSecondaryContainer: "#0c4a6e",
+    "secondary": "#FF8247",
+    "onSecondary": "#ffffff",
+    "secondaryContainer": "#FFCC99",
+    "onSecondaryContainer": "#FF8247",
 
     tertiary: "#22c55e",
     onTertiary: "#ffffff",
     tertiaryContainer: "#dcfce7",
     onTertiaryContainer: "#14532d",
 
-    error: "#ef4444",
-    onError: "#ffffff",
-    errorContainer: "#fee2e2",
-    onErrorContainer: "#7f1d1d",
+    "error": "#f87171",
+    "onError": "#ffffff",
+    "errorContainer": "#F7D6D6",
+    "onErrorContainer": "#f87171",
 
     background: "#ffffff",
     onBackground: "#1e293b",
@@ -27,7 +27,7 @@ export const lightTheme = {
 
     surfaceVariant: "#e2e8f0",
     onSurfaceVariant: "#334155",
-    outline: "#cbd5e1",
+    outline: "#CCD7DF",
     outlineVariant: "#e0e7ff",
 
     shadow: "#000000",
@@ -45,9 +45,9 @@ export const lightTheme = {
       level5: "#38bdf8"
     },
 
-    surfaceDisabled: "#e5e7eb",
-    onSurfaceDisabled: "#94a3b8",
-    backdrop: "#0f172a2f"
+    "surfaceDisabled": "#DDDDDD",
+    "onSurfaceDisabled": "#8693AE",
+    "backdrop": "#283c552f"
   }
 }
 
@@ -59,11 +59,10 @@ export const darkTheme = {
     "primaryContainer": "#3b82f6", // Background color for primary button/container
     "onPrimaryContainer": "#ffffff", // Text color on primary container
 
-    // Secondary color used for secondary buttons, accents, etc.
-    "secondary": "#2196F3",
-    "onSecondary": "#ffffff", // Text color on secondary button/container
-    "secondaryContainer": "#1e3a8a", // Background color for secondary button/container
-    "onSecondaryContainer": "#ffffff", // Text color on secondary container
+    "secondary": "#FF8247",
+    "onSecondary": "#ffffff",
+    "secondaryContainer": "#FFCC99",
+    "onSecondaryContainer": "#FF8247",
 
     // Tertiary color used for highlighting, alerts, etc.
     "tertiary": "#22c55e",
@@ -71,18 +70,17 @@ export const darkTheme = {
     "tertiaryContainer": "#dcfce7",
     "onTertiaryContainer": "#22543d",
 
-    // Error color used for error messages and indicators
-    "error": "#ef4444",
-    "onError": "#ffffff", // Text color on error containers
-    "errorContainer": "#9b1111", // Background color for error containers
-    "onErrorContainer": "#ffffff", // Text color on error containers
+    "error": "#f87171",
+    "onError": "#ffffff",
+    "errorContainer": "#F7D6D6",
+    "onErrorContainer": "#f87171",
 
     // Background colors for dark mode
-    "background": "#000000", // Background color for the entire page
-    "onBackground": "#ebf5ff", // Text color for background (main text)
+    "background": "#0d1117", // Background color for the entire page
+    "onBackground": "#f0f6fc", // Text color for background (main text)
 
     // Surface color for panels, cards, and other surface elements
-    "surface": "#1c2a3a", // Surface background color
+    "surface": "#4F4F4F", // Surface background color
     "onSurface": "#ebf5ff", // Text color on surface elements (cards, panels)
 
     // Surface variant and outlines

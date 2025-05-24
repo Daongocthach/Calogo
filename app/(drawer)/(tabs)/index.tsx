@@ -11,6 +11,7 @@ import {
 import useStore from '@/store'
 import CalorieCards from '@/components/common/CalorieCards'
 import AddMealIcon from '@/components/common/AddMealIcon'
+import { useEffect } from 'react'
 
 
 export default function HomeScreen() {
@@ -23,6 +24,10 @@ export default function HomeScreen() {
     { value: 500, color: '#a3e635' },
     { value: Math.max(goal - todayCalories, 0), color: '#e5e7eb' }
   ]
+
+  if (tdee === undefined) {
+    
+  }
 
   return (
     <View className='flex-1 relative px-4 py-2'>

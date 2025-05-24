@@ -1,20 +1,47 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import React, { useEffect } from "react";
-import { Drawer } from "expo-router/drawer";
-import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from "@react-navigation/drawer";
-import {
-    Feather,
-    MaterialIcons,
-    Ionicons,
-} from "@expo/vector-icons";
-import { router, usePathname } from "expo-router";
-import { useTheme } from "react-native-paper";
-import DrawerHeader from "@/components/common/DrawerHeader";
-import { Icon } from "@/components";
+import { View, Text, StyleSheet, Image } from "react-native"
+import { Drawer } from "expo-router/drawer"
+import { DrawerContentScrollView, DrawerItem, DrawerContentComponentProps } from "@react-navigation/drawer"
+import { router, usePathname } from "expo-router"
+import { useTheme } from "react-native-paper"
+import { icons } from 'lucide-react-native'
+import { useTranslation } from "react-i18next"
+
+import { Icon, DrawerHeader } from "@/components"
+import useStore from "@/store"
+import { showAlert } from "@/notification"
+import { VERSION } from "@/lib"
 
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
-    const pathname = usePathname();
-    const { colors } = useTheme();
+    const { t } = useTranslation()
+    const pathname = usePathname()
+    const { colors } = useTheme()
+    const { isLoggedIn, darkMode, signOut } = useStore()
+
+    const handleRouting = (path: string) => {
+        if (path === "/login") {
+            showAlert('logout', signOut)
+            return
+        }
+        router.push(path as typeof router.push extends (path: infer P) => any ? P : never)
+    }
+
+    type DrawerItemProps = {
+        name: string,
+        label: string,
+        icon: keyof typeof icons,
+        path: typeof router.push extends (path: infer P) => any ? P : never,
+        isNeedScanNFC?: boolean,
+        isAdmin?: boolean,
+        isAccessManagerChecklist?: boolean
+    }
+
+    const drawerItemList: DrawerItemProps[] = [
+        { name: "settings", label: "settings", icon: "Cog", path: "/settings" },
+        isLoggedIn ?
+            { name: "logout", label: "logout", icon: "LogOut", path: "/login" } :
+            { name: "login", label: "login", icon: "LogIn", path: "/login" },
+        { name: "menu", label: "menu", icon: "ChefHat", path: "/menu" },
+    ]
 
     return (
         <DrawerContentScrollView {...props}>
@@ -31,117 +58,63 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                     <Text style={styles.userEmail}>name@email.com</Text>
                 </View>
             </View>
-            <DrawerItem
-                icon={({ color, size }) => (
-                    <Feather
-                        name="user-plus"
-                        size={size}
-                        color={pathname == "/signup" ? colors.primary : colors.onBackground}
+            {drawerItemList.map((item) => {
+                return (
+                    <DrawerItem
+                        key={item.name}
+                        icon={({ color, size }) => (
+                            <Icon
+                                name={item.icon}
+                                size={size}
+                                color={
+                                    pathname === item.path ?
+                                        (darkMode ? colors.onPrimary : colors.primary) :
+                                        colors.onBackground
+                                }
+                            />
+                        )}
+                        label={t(item.label)}
+                        labelStyle={[
+                            styles.navItemLabel,
+                            {
+                                color: pathname == item.path ?
+                                    (darkMode ? colors.onPrimary : colors.primary) :
+                                    colors.onBackground
+                            }
+                        ]}
+                        style={[
+                            styles.navItem,
+                            {
+                                backgroundColor: pathname === item.path ?
+                                    colors.primaryContainer :
+                                    colors.background,
+
+                            }
+                        ]}
+                        onPress={() => {
+                            (item?.isNeedScanNFC || item?.name === 'logout')
+                                ? handleRouting(String(item.path))
+                                : router.push(item?.path)
+                        }}
                     />
-                )}
-                label={"Đăng ký"}
-                labelStyle={[styles.navItemLabel, { color: pathname == "/signup" ? colors.primary : colors.onBackground }]}
-                style={{ backgroundColor: pathname == "/home" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/signup");
-                }}
-            />
+                )
+            })}
+
             <DrawerItem
-                icon={({ color, size }) => (
-                    <Feather
-                        name="key"
-                        size={size}
-                        color={pathname == "/login" ? colors.onPrimary : colors.onBackground}
-                    />
-                )}
-                label={"Đăng nhập"}
-                labelStyle={[
-                    styles.navItemLabel,
-                    { color: pathname == "/login" ? colors.onPrimary : colors.onBackground },
+                label={VERSION}
+                labelStyle={[styles.navItemLabel, { color: colors.outlineVariant, fontWeight: 500, fontSize: 14 }]}
+                style={[
+                    styles.navItem,
+                    { backgroundColor: colors.background }
                 ]}
-                style={{ backgroundColor: pathname == "/login" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/login");
-                }}
-            />
-            <DrawerItem
-                icon={({ color, size }) => (
-                    <Feather
-                        name="settings"
-                        size={size}
-                        color={pathname == "/settings" ? colors.primary : colors.onBackground}
-                    />
-                )}
-                label={"Cài đặt"}
-                labelStyle={[
-                    styles.navItemLabel,
-                    { color: pathname == "/settings" ? colors.primary : colors.onBackground },
-                ]}
-                style={{ backgroundColor: pathname == "/settings" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/settings");
-                }}
-            />
-            <DrawerItem
-                icon={({ color, size }) => (
-                    <Icon
-                        name="Utensils"
-                        size={size}
-                        color={pathname == "/menu" ? colors.primary : colors.onBackground}
-                    />
-                )}
-                label={"Thực đơn"}
-                labelStyle={[
-                    styles.navItemLabel,
-                    { color: pathname == "/menu" ? colors.primary : colors.onBackground },
-                ]}
-                style={{ backgroundColor: pathname == "/menu" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/menu");
-                }}
-            />
-            <DrawerItem
-                icon={({ color, size }) => (
-                    <Feather
-                        name="lock"
-                        size={size}
-                        color={pathname == "/settings" ? colors.primary : colors.onBackground}
-                    />
-                )}
-                label={"Đổi mật khẩu"}
-                labelStyle={[
-                    styles.navItemLabel,
-                    { color: pathname == "/reset-password" ? colors.primary : colors.onBackground },
-                ]}
-                style={{ backgroundColor: pathname == "/reset-password" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/reset-password");
-                }}
-            />
-            <DrawerItem
-                icon={({ color, size }) => (
-                    <Feather
-                        name="log-out"
-                        size={size}
-                        color={pathname == "/settings" ? colors.primary : colors.onBackground}
-                    />
-                )}
-                label={"Đăng xuất"}
-                labelStyle={[
-                    styles.navItemLabel,
-                    { color: pathname == "/reset-password" ? colors.primary : colors.onBackground },
-                ]}
-                style={{ backgroundColor: pathname == "/reset-password" ? colors.primary : colors.background }}
-                onPress={() => {
-                    router.push("/login");
-                }}
+                onPress={async () => { }}
             />
         </DrawerContentScrollView>
-    );
-};
+    )
+}
 
 export default function DrawerLayout() {
-    const { colors } = useTheme();
+    const { colors } = useTheme()
     return (
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -158,21 +131,24 @@ export default function DrawerLayout() {
             <Drawer.Screen name="signup" options={{ headerShown: true, title: "Đăng ký" }} />
             <Drawer.Screen name="reset-password" options={{ headerShown: true, title: "Quên mật khẩu" }} />
         </Drawer>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
+    navItem: {
+        borderRadius: 12,
+        marginHorizontal: 5,
+        marginVertical: 2,
+    },
     navItemLabel: {
-        marginLeft: 10,
+        marginLeft: 5,
         fontSize: 16,
+        fontWeight: "semibold",
     },
     userInfoWrapper: {
         flexDirection: "row",
         paddingHorizontal: 10,
-        paddingVertical: 20,
-        borderBottomColor: "#ccc",
-        borderBottomWidth: 1,
-        marginBottom: 10,
+        marginVertical: 30,
         alignItems: "center",
     },
     userDetailsWrapper: {
@@ -187,5 +163,5 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         textDecorationLine: 'underline',
     }
-});
+})
 

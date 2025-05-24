@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native'
 import { FoodProps } from '@/lib'
 
+export const VERSION = "v1.0.0"
 export const windowWidth = Dimensions.get('window').width
 export const windowHeight = Dimensions.get('window').height
 
