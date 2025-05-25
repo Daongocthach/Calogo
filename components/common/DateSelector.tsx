@@ -69,7 +69,7 @@ return (
         const isCurrentDay = formattedDay === format(currentDate, 'dd/MM/yyyy')
         const isToday = formattedDay === format(new Date(), 'dd/MM/yyyy')
 
-        const backgroundColor: readonly [string, string] = isCurrentDay ? ['#3b82f6', '#38bdf8'] : ['#e5e7eb', '#f3f4f6']
+        const backgroundColor: readonly [string, string] = isCurrentDay ? ['#3b82f6', '#38bdf8'] : [colors.surface, colors.backdrop]
 
         return (
           <TouchableOpacity key={formattedDay} onPress={() => setCurrentDate(day)}>

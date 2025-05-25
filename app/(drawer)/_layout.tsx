@@ -6,7 +6,7 @@ import { useTheme } from "react-native-paper"
 import { icons } from 'lucide-react-native'
 import { useTranslation } from "react-i18next"
 
-import { Icon, DrawerHeader } from "@/components"
+import { Icon, DrawerHeader, CustomText } from "@/components"
 import useStore from "@/store"
 import { showAlert } from "@/notification"
 import { VERSION } from "@/lib"
@@ -44,7 +44,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     ]
 
     return (
-        <DrawerContentScrollView {...props}>
+        <DrawerContentScrollView {...props} style={{ backgroundColor: colors.background }}>
             <View style={styles.userInfoWrapper}>
                 <Image
                     source={require("@/assets/images/avatar.jpg")}
@@ -54,8 +54,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                     style={{ width: 80, height: 80, borderRadius: 40 }}
                 />
                 <View style={styles.userDetailsWrapper}>
-                    <Text style={styles.userName}>Username</Text>
-                    <Text style={styles.userEmail}>name@email.com</Text>
+                    <CustomText style={styles.userName}>Username</CustomText>
+                    <CustomText style={styles.userEmail}>name@email.com</CustomText>
                 </View>
             </View>
             {drawerItemList.map((item) => {
@@ -114,7 +114,6 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
 }
 
 export default function DrawerLayout() {
-    const { colors } = useTheme()
     return (
         <Drawer
             drawerContent={(props) => <CustomDrawerContent {...props} />}

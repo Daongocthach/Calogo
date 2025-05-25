@@ -106,6 +106,11 @@ export const toastList = {
     text1: "no food selected",
     text2: "",
   },
+  clear_data_success: {
+    type: "success",
+    text1: "clear data success",
+    text2: "all data has been cleared",
+  }
 } as const
 
 export type ToastType = keyof typeof toastList

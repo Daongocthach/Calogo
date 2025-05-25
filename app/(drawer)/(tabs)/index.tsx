@@ -21,12 +21,12 @@ export default function HomeScreen() {
   const goal = tdee || 2042
 
   const pieData = [
-    { value: 500, color: '#a3e635' },
-    { value: Math.max(goal - todayCalories, 0), color: '#e5e7eb' }
+    { value: 500, color: colors.tertiary },
+    { value: Math.max(goal - todayCalories, 0), color: colors.surfaceVariant }
   ]
 
   if (tdee === undefined) {
-    
+
   }
 
   return (
@@ -46,8 +46,8 @@ export default function HomeScreen() {
               showGradient
               centerLabelComponent={() => (
                 <View className='items-center'>
-                  <CustomText className='text-base font-semibold' style={{ color: colors.onSurfaceVariant }}>{t('necessary')}</CustomText>
-                  <CustomText className='text-2xl font-bold' style={{ color: "#a3e635" }}>
+                  <Text className='text-base font-semibold' style={{ color: colors.tertiary }}>{t('necessary')}</Text>
+                  <CustomText className='text-2xl font-bold' style={{ color: colors.tertiary }}>
                     {goal}
                   </CustomText>
                 </View>
@@ -59,27 +59,27 @@ export default function HomeScreen() {
 
         {/* Nutrition Cards */}
         <View className='mt-6 flex flex-col gap-4'>
-          <View className='flex-row items-center bg-red-50 rounded-3xl px-4 py-8'>
+          <View className='flex-row items-center rounded-3xl px-4 py-8' style={{ backgroundColor: colors.errorContainer }}>
             <CustomText className='text-3xl mr-4'>🥩</CustomText>
             <View>
-              <CustomText className='text-base font-semibold'>{t('protein')}</CustomText>
-              <CustomText className='text-gray-600'>25g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></CustomText>
+              <Text className='text-base font-semibold'>{t('protein')}</Text>
+              <Text className='text-gray-600'>25g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></Text>
             </View>
           </View>
 
-          <View className='flex-row items-center bg-yellow-50 rounded-3xl px-4 py-8'>
+          <View className='flex-row items-center rounded-3xl px-4 py-8' style={{ backgroundColor: colors.secondaryContainer }}>
             <CustomText className='text-3xl mr-4'>🍞</CustomText>
             <View>
-              <CustomText className='text-base font-semibold'>{t('carbs')}</CustomText>
-              <CustomText className='text-gray-600'>40g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></CustomText>
+              <Text className='text-base font-semibold'>{t('carbs')}</Text>
+              <Text className='text-gray-600'>40g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></Text>
             </View>
           </View>
 
-          <View className='flex-row items-center bg-green-50 rounded-3xl px-4 py-8'>
+          <View className='flex-row items-center rounded-3xl px-4 py-8' style={{ backgroundColor: colors.tertiaryContainer }}>
             <CustomText className='text-3xl mr-4'>🥑</CustomText>
             <View>
-              <CustomText className='text-base font-semibold'>{t('fat')}</CustomText>
-              <CustomText className='text-gray-600'>20g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></CustomText>
+              <Text className='text-base font-semibold'>{t('fat')}</Text>
+              <Text className='text-gray-600'>20g • <Text className='text-blue-700 font-semibold'>180 kcal</Text></Text>
             </View>
           </View>
         </View>
@@ -96,7 +96,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 2,
-    backgroundColor: '#fff',
     borderRadius: 20,
     flex: 1,
     padding: 10,

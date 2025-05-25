@@ -2,6 +2,7 @@ import { create } from "zustand"
 import { devtools, persist, createJSONStorage } from "zustand/middleware"
 import { asyncStorage } from "@/store/storage"
 import { FoodSamples, BodyProps, FoodProps, LogProps, FoodTypeProps, FoodTypeSamples } from "@/lib"
+import { showToast } from "@/notification"
 
 type BodyDataStored = {
   bmr: number
@@ -89,7 +90,17 @@ const useStore = create<StoreState>()(
         clearDaily: () => {
           set({})
         },
-        clearAllData: () => {},
+        clearAllData: () => {
+          set({
+            bmr: null,
+            tdee: null,
+            body: null,
+            todayCalories: 0,
+            foodTypes: FoodTypeSamples,
+            foodList: FoodSamples,
+          })
+          showToast('clear_data_success')
+        },
       }),
       {
         name: "calogo-storage",

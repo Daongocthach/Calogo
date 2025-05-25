@@ -61,13 +61,18 @@ const InputField = ({
             />
             {isPassword &&
                 <TouchableOpacity
-                    className='absolute right-3 top-5'
+                    style={{
+                        position: 'absolute',
+                        right: 10,
+                        top: '50%',
+                        transform: [{ translateY: -7.5 }],
+                    }}
                     onPress={() => setShowPassword(!showPassword)}
                 >
                     <Icon source={showPassword ? 'eye-off-outline' : 'eye-outline'} size={15} color="gray" />
                 </TouchableOpacity>
             }
-            {errorMessage && <Text className="mt-2 text-red-500">{errorMessage}</Text>}
+            {errorMessage && <Text className="mt-2" style={{ color: colors.error }}>{errorMessage}</Text>}
         </View>
     )
 }

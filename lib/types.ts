@@ -1,5 +1,11 @@
 import type { ScrollViewProps, ViewProps } from 'react-native'
 
+export type FileProps = {
+  uri: string
+  name: string
+  type: string
+}
+
 export type ActivityLevel =
   | 'inactive'
   | 'light'

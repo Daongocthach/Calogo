@@ -9,8 +9,9 @@ export const CustomHeader = () => {
     const { colors } = useTheme()
     return (
         <SafeAreaView
-            className='flex flex-row justify-between items-center px-4'
-            style={{ paddingBottom: 10, backgroundColor: colors.onPrimary }}
+            edges={['top']}
+            className='flex flex-row justify-between items-center px-4 py-2'
+            style={{ paddingBottom: 10, backgroundColor: colors.background }}
         >
             <TouchableOpacity onPress={() => { router.push('/') }}>
                 <Image
