@@ -1,50 +1,58 @@
-# Welcome to your Expo app 👋
+# 🥗 Calogo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+![image](https://github.com/user-attachments/assets/d8c9423a-9c04-4fa0-ae81-cfce08a606c0)
 
-## Get started
+![image](https://github.com/user-attachments/assets/56619a96-e00e-423d-bd85-ba9a0783b918)
 
-1. Install dependencies
+**Calogo** là ứng dụng di động giúp bạn theo dõi lượng calo hằng ngày, quản lý chế độ ăn uống và cải thiện sức khỏe thông qua các công cụ tiện ích như quét thực phẩm bằng camera, ghi nhật ký ăn uống, và tính toán calo tự động.
 
-   ```bash
-   npm install
-   ```
+## 🚀 Tính năng chính
 
-2. Start the app
+- 📸 Quét thực phẩm bằng camera và AI để nhận diện và phân tích calo
+- 📝 Nhật ký ăn uống: ghi chú từng bữa ăn trong ngày
+- 📊 Theo dõi calo hấp thụ, tiêu hao và so sánh với mục tiêu cá nhân
+- 🔔 Nhắc nhở ăn uống và tập luyện theo khung giờ đã cài đặt
+- 💾 Lưu trữ dữ liệu offline và đồng bộ với Firebase
 
-   ```bash
-    npx expo start
-   ```
+## 🛠️ Công nghệ sử dụng
 
-In the output, you'll find options to open the app in a
+- **React Native + Expo SDK 52**
+- **Firebase Authentication & Realtime Database**
+- **Zustand** để quản lý trạng thái
+- **React Hook Form** để xử lý form
+- **NativeWind** & **React Native Paper** cho giao diện UI
+- **Notifee** cho hệ thống thông báo
+- **react-native-nfc-manager** (nếu có quét NFC thực phẩm)
+- **Tanstack React Query** cho gọi API
+- **AI food recognition (tùy chọn)**
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## 📦 Cài đặt & chạy ứng dụng
 
 ```bash
-npm run reset-project
-```
+# 1. Clone project
+git clone https://github.com/yourusername/calogo.git
+cd calogo
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+# 2. Cài đặt dependencies
+npm install
 
-## Learn more
+# 3. Cài đặt ứng dụng trên thiết bị
+npx expo start
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+✅ Tiến độ phát triển
+ Giao diện màn hình chính
 
-## Join the community
+ Ghi nhật ký ăn uống
 
-Join our community of developers creating universal apps.
+ Tính toán calo tự động
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+ Nhận diện thực phẩm qua ảnh (đang phát triển)
+
+ Tích hợp bảng xếp hạng sức khỏe (sắp ra mắt)
+
+
+👨‍💻 Tác giả
+Phát triển bởi Đào Ngọc Thạch
+Email: [your-email@example.com]
+Website: https://www.finepro.net
