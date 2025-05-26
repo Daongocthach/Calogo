@@ -54,5 +54,5 @@ npx expo start
 
 👨‍💻 Tác giả
 Phát triển bởi Đào Ngọc Thạch
-Email: [your-email@example.com]
+Email: [ngocthach752@gmail.com]
 Website: https://www.finepro.net
