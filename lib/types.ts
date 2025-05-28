@@ -13,6 +13,12 @@ export type ActivityLevel =
   | 'active'
   | 'very_active'
 
+export type Goal =
+  | "fast"
+  | "medium"
+  | "maintain"
+  | "gain"
+
 export type BodyProps = {
   height: number
   weight: number

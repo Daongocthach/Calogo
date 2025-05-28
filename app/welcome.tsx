@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import {
   View,
   Text,
@@ -11,20 +11,21 @@ import { RadioButton } from "react-native-paper"
 import Slider from "@react-native-community/slider"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { useTranslation } from "react-i18next"
 
 import useStore from "@/store"
-import { ProgressStep, ProgressSteps } from "@/components"
-import { Gender, ActivityLevel } from "@/lib/types"
-import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { CustomText, ProgressStep, ProgressSteps } from "@/components"
+import { Gender, ActivityLevel, Goal } from "@/lib"
 import { showToast } from "@/notification"
 
-const intensityOptions = ["inactive", "low", "medium", "high", "super"]
+const intensityOptions = ["inactive", "light", "moderate", "active", "very_active"]
 const imageSources: { [key: string]: any } = {
   inactive: require("@/assets/images/inactive.jpg"),
-  low: require("@/assets/images/low.jpg"),
-  medium: require("@/assets/images/medium.jpg"),
-  high: require("@/assets/images/high.jpg"),
-  super: require("@/assets/images/super.jpg"),
+  light: require("@/assets/images/low.jpg"),
+  moderate: require("@/assets/images/medium.jpg"),
+  active: require("@/assets/images/high.jpg"),
+  very_active: require("@/assets/images/super.jpg"),
 }
 const descriptions: { [key: string]: React.ReactNode } = {
   inactive: (
@@ -35,7 +36,7 @@ const descriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </Text>
   ),
-  low: (
+  light: (
     <Text style={{ fontSize: 16 }}>
       Nhẹ nhàng{"\n"}
       <Text style={{ fontSize: 12, color: "#6b7280" }}>
@@ -43,7 +44,7 @@ const descriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </Text>
   ),
-  medium: (
+  moderate: (
     <Text style={{ fontSize: 16 }}>
       Vừa phải{"\n"}
       <Text style={{ fontSize: 12, color: "#6b7280" }}>
@@ -51,7 +52,7 @@ const descriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </Text>
   ),
-  high: (
+  active: (
     <Text style={{ fontSize: 16 }}>
       Năng động{"\n"}
       <Text style={{ fontSize: 12, color: "#6b7280" }}>
@@ -59,7 +60,7 @@ const descriptions: { [key: string]: React.ReactNode } = {
       </Text>
     </Text>
   ),
-  super: (
+  very_active: (
     <Text style={{ fontSize: 16 }}>
       Cường độ cao{"\n"}
       <Text style={{ fontSize: 12, color: "#6b7280" }}>
@@ -114,12 +115,33 @@ const goalDescriptions: { [key: string]: React.ReactNode } = {
 }
 
 export default function WelcomeScreen() {
+  const { t } = useTranslation()
   const router = useRouter()
-  const [height, setHeight] = useState<number>(168)
-  const [weight, setWeight] = useState(50)
+  const [height, setHeight] = useState<number>(170)
+  const [weight, setWeight] = useState(65)
   const [age, setAge] = useState(17)
   const [gender, setGender] = useState<Gender>("male")
   const [intensity, setIntensity] = useState<ActivityLevel>("moderate")
+  const [goal, setGoal] = useState<Goal>("maintain")
+
+  const calculateBMR = useMemo(() => {
+    const bmr = gender === "male"
+      ? Math.round(66 + 13.75 * weight + 5 * height - 6.76 * age)
+      : Math.round(655 + 9.56 * weight + 1.85 * height - 4.68 * age)
+    return bmr
+  }, [gender, weight, height, age])
+
+  const calculateTdee = useMemo(() => {
+    const activityMultipliers = {
+      inactive: 1.2,
+      light: 1.375,
+      moderate: 1.55,
+      active: 1.725,
+      very_active: 1.9,
+    }
+    const tdee =  Math.round(calculateBMR * activityMultipliers[intensity])
+    return tdee
+  }, [calculateBMR, intensity])
 
   const adjustHeight = (delta: number) => {
     setHeight((prev) => Math.max(1, prev + delta))
@@ -138,23 +160,9 @@ export default function WelcomeScreen() {
   const handleSubmit = () => {
     if (!weight || !height || !age) return
 
-    let bmr =
-      gender === "male"
-        ? 66 + 13.75 * weight + 5 * height - 6.76 * age
-        : 655 + 9.56 * weight + 1.85 * height - 4.68 * age
-
-    const activityMultipliers = {
-      inactive: 1.2,
-      light: 1.375,
-      moderate: 1.55,
-      active: 1.725,
-      very_active: 1.9,
-    }
-
-    const tdee = bmr * activityMultipliers[intensity]
     saveBody({
-      bmr,
-      tdee: tdee,
+      bmr: calculateBMR,
+      tdee: calculateTdee,
       body: {
         height,
         weight,
@@ -200,16 +208,16 @@ export default function WelcomeScreen() {
     return goalOptions.map((option, index) => (
       <TouchableOpacity
         key={index}
-        onPress={() => setIntensity(option as ActivityLevel)}
+        onPress={() => setGoal(option as Goal)}
         className={`
           flex flex-row items-center gap-2 p-4 rounded-xl 
-          ${intensity === option ? "bg-lime-100" : "border border-blue-100"}
+          ${goal === option ? "bg-lime-100" : "border border-blue-100"}
         `}
       >
         <RadioButton.Android
           value={option}
-          status={intensity === option ? "checked" : "unchecked"}
-          onPress={() => setIntensity(option as ActivityLevel)}
+          status={goal === option ? "checked" : "unchecked"}
+          onPress={() => setGoal(option as Goal)}
           color="#3b82f6"
           uncheckedColor="#3b82f6"
         />
@@ -261,8 +269,7 @@ export default function WelcomeScreen() {
               <View className="flex flex-row gap-2 ">
                 <TouchableOpacity
                   className={`flex-1 flex flex-row items-center justify-center gap-2 py-8 rounded-xl 
-                    ${
-                      gender === "male" ? "bg-blue-50" : "border border-blue-50"
+                    ${gender === "male" ? "bg-blue-50" : "border border-blue-50"
                     }`}
                   onPress={() => setGender("male")}
                 >
@@ -285,10 +292,9 @@ export default function WelcomeScreen() {
                 </TouchableOpacity>
                 <TouchableOpacity
                   className={`flex-1 flex flex-row items-center justify-center gap-2 py-8 rounded-xl 
-                    ${
-                      gender === "female"
-                        ? "bg-blue-50"
-                        : "border border-blue-50"
+                    ${gender === "female"
+                      ? "bg-blue-50"
+                      : "border border-blue-50"
                     }`}
                   onPress={() => setGender("female")}
                 >
@@ -461,6 +467,24 @@ export default function WelcomeScreen() {
               paddingHorizontal: 20,
             }}
           >
+            <View style={{
+              backgroundColor: '#ffffff',
+              padding: 12,
+              borderRadius: 12,
+              elevation: 2,
+            }}>
+              <CustomText>
+                TDEE =
+                <Text className="text-lime-600 font-bold"> {calculateTdee} </Text>
+                ({t('calories/day')})
+              </CustomText>
+              <CustomText>
+                BMR =
+                <Text className="text-lime-600 font-bold"> {calculateBMR} </Text>
+                ({t('calories/day')})
+              </CustomText>
+            </View>
+
             <Image
               source={require("@/assets/images/thuc-don-thuan-viet.jpg")}
               style={{
@@ -501,7 +525,7 @@ export default function WelcomeScreen() {
           </View>
         </ProgressStep>
       </ProgressSteps>
-    </View>
+    </View >
   )
 }
 

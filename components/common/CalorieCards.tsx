@@ -5,7 +5,13 @@ import { useTranslation } from 'react-i18next'
 
 import { CustomText, Icon } from '@/components'
 
-export default function CalorieCards({ goal = 2042 }) {
+export default function CalorieCards({ 
+    loaded = 0,
+    exeeded = 0
+}: { 
+    loaded: number,
+    exeeded: number 
+}) {
     const { colors } = useTheme()
     const { t } = useTranslation()
 
@@ -19,7 +25,7 @@ export default function CalorieCards({ goal = 2042 }) {
             >
                 <Icon name="Beef" size={28} color={colors.onTertiary} />
                 <CustomText style={styles.cardTitle}>{t('loaded')}</CustomText>
-                <CustomText style={styles.cardValue}>{goal} kcal</CustomText>
+                <CustomText style={styles.cardValue}>{loaded} kcal</CustomText>
             </LinearGradient>
 
             <LinearGradient
@@ -30,7 +36,7 @@ export default function CalorieCards({ goal = 2042 }) {
             >
                 <Icon name="Ham" size={28} color={colors.onError} />
                 <CustomText style={[styles.cardTitle, { color: colors.onError }]}>{t('exceeded')}</CustomText>
-                <CustomText style={styles.cardValue}>{goal} kcal</CustomText>
+                <CustomText style={styles.cardValue}>{exeeded} kcal</CustomText>
             </LinearGradient>
         </View>
     )

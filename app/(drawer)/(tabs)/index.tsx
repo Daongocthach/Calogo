@@ -11,22 +11,20 @@ import {
 import useStore from '@/store'
 import CalorieCards from '@/components/common/CalorieCards'
 import AddMealIcon from '@/components/common/AddMealIcon'
-import { useEffect } from 'react'
+import { Redirect } from 'expo-router'
 
 
 export default function HomeScreen() {
   const { t } = useTranslation()
   const { colors } = useTheme()
   const { tdee, todayCalories } = useStore()
-  const goal = tdee || 2042
 
   const pieData = [
     { value: 500, color: colors.tertiary },
-    { value: Math.max(goal - todayCalories, 0), color: colors.surfaceVariant }
+    { value: Math.max(tdee || 0 - todayCalories, 0), color: colors.surfaceVariant }
   ]
-
-  if (tdee === undefined) {
-
+  if (tdee === null) {
+    return <Redirect href="/welcome" />
   }
 
   return (
@@ -46,15 +44,16 @@ export default function HomeScreen() {
               showGradient
               centerLabelComponent={() => (
                 <View className='items-center'>
-                  <Text className='text-base font-semibold' style={{ color: colors.tertiary }}>{t('necessary')}</Text>
-                  <CustomText className='text-2xl font-bold' style={{ color: colors.tertiary }}>
-                    {goal}
-                  </CustomText>
+                  <CustomText className='text-3xl'>🍀</CustomText>
+                  <Text className='text-base font-semibold text-lime-500'>{t('necessary')}</Text>
+                  <Text className='text-2xl font-bold text-lime-500 '>
+                    {tdee}
+                  </Text>
                 </View>
               )}
             />
           </LinearGradient>
-          <CalorieCards goal={goal} />
+          <CalorieCards loaded={todayCalories} exeeded={0}/>
         </View>
 
         {/* Nutrition Cards */}
