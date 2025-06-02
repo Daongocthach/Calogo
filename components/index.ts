@@ -14,6 +14,7 @@ export { default as ScannerTab } from "@/components/common/ScannerTab"
 export { default as ManualTab } from "@/components/common/ManualTab"
 export { default as DrawerHeader } from "@/components/common/DrawerHeader"
 export { renderTabBar } from "@/components/common/CustomTabBar"
+export { default as CustomInput } from "@/components/common/CustomInput"
 
 export { default as ProgressStep } from "@/components/ProgressSteps/ProgressStep"
 export { default as ProgressSteps } from "@/components/ProgressSteps/ProgressSteps"

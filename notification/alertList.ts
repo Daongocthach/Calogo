@@ -39,6 +39,11 @@ export const alertList = {
         text1: "error",
         text2: "all fields are required",
     },
+    delete_food: {
+        type: "confirm",
+        text1: "delete food",
+        text2: "are you sure you want to delete this food",
+    },
 } as const
 
 export type AlertType = keyof typeof alertList

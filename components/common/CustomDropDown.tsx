@@ -1,16 +1,17 @@
 import React, { useState } from "react"
 import { Dropdown } from "react-native-element-dropdown"
-import { StyleSheet, View } from "react-native"
-import { useTheme } from "react-native-paper"
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native"
+import { RadioButton, useTheme } from "react-native-paper"
 import { useTranslation } from 'react-i18next'
 
 import useStore from "@/store"
 import CustomText from "@/components/common/CustomText"
+import { windowWidth } from "@/lib"
 
 type CustomDropDownProps = {
-    selects: { label: string, value: string }[]
-    select: string
-    setSelect: (note: string) => void
+    selects: { label: string, value: string | number }[]
+    select: string | number
+    setSelect: (selectedItem: any) => void
     isDisabled?: boolean
     isSearch?: boolean
     placeholder?: string,

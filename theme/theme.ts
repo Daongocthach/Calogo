@@ -12,12 +12,12 @@ export const lightTheme = {
 
     tertiary: "#22c55e",
     onTertiary: "#ffffff",
-    tertiaryContainer: "#f0fdf4",
+    tertiaryContainer: "#ecfccb",
     onTertiaryContainer: "#14532d",
 
     error: "#f87171",
     onError: "#ffffff",
-    errorContainer: "#fef2f2",
+    errorContainer: "#fecdd3",
     onErrorContainer: "#f87171",
 
     background: "#ffffff",
@@ -71,11 +71,11 @@ export const darkTheme = {
 
     error: "#f87171",
     onError: "#ffffff",
-    errorContainer: "#F7D6D6",
+    errorContainer: "#FFC1C1",
     onErrorContainer: "#f87171",
 
     // Background colors for dark mode
-    background: "#0d1117", // Background color for the entire page
+    background: "#222222", // Background color for the entire page
     onBackground: "#f0f6fc", // Text color for background (main text)
 
     // Surface color for panels, cards, and other surface elements

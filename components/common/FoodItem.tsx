@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { useTheme, List } from 'react-native-paper'
+import { useRouter } from 'expo-router'
 
 import CustomText from '@/components/common/CustomText'
 import Icon from '@/components/common/Icon'
 import { useTranslation } from 'react-i18next'
-import { FoodTypeProps, FoodProps } from '@/lib'
+import { FoodProps } from '@/lib'
+import useStore from '@/store'
 
 export function FoodItem(item: FoodProps) {
+    const router = useRouter()
     const { colors } = useTheme()
     const { t } = useTranslation()
+    const { deleteFood } = useStore()
     const [expanded, setExpanded] = useState(false)
 
     return (
@@ -52,10 +56,10 @@ export function FoodItem(item: FoodProps) {
                         </CustomText>
                     </View>
                     <View className='flex flex-col gap-4 mr-4'>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => router.push(`/add-food?id=${item.id}`)}>
                             <Icon name="Pencil" size={18} color={colors.onSurfaceDisabled} />
                         </TouchableOpacity>
-                        <TouchableOpacity className='mt-2'>
+                        <TouchableOpacity className='mt-2' onPress={() => deleteFood(item.id)}>
                             <Icon name="Trash" size={18} color={colors.onSurfaceDisabled} />
                         </TouchableOpacity>
                     </View>

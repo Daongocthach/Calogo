@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { devtools, persist, createJSONStorage } from "zustand/middleware"
 import { asyncStorage } from "@/store/storage"
 import { FoodSamples, BodyProps, FoodProps, LogProps, FoodTypeProps, FoodTypeSamples } from "@/lib"
-import { showToast } from "@/notification"
+import { showAlert, showToast } from "@/notification"
 
 type BodyDataStored = {
   bmr: number
@@ -63,6 +63,7 @@ const useStore = create<StoreState>()(
           set((state) => ({
             foodList: [...state.foodList, payload],
           }))
+          showToast("add_food_success")
         },
         editFood: (payload) => {
           set((state) => ({
@@ -70,11 +71,16 @@ const useStore = create<StoreState>()(
               food.id === payload.id ? { ...food, ...payload } : food
             ),
           }))
+          showToast("update_food_success")
         },
         deleteFood: (payload) => {
-          set((state) => ({
-            foodList: state.foodList.filter((food) => food.id !== payload),
-          }))
+          showAlert("delete_food", () => {
+            set((state) => ({
+              foodList: state.foodList.filter((food) => food.id !== payload),
+            }))
+            showToast("delete_food_success")
+          })
+
         },
 
         saveBody: (payload) => {

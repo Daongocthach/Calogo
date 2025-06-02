@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native"
-import { RadioButton } from "react-native-paper"
+import { RadioButton, useTheme } from "react-native-paper"
 import Slider from "@react-native-community/slider"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useRouter } from "expo-router"
@@ -115,6 +115,7 @@ const goalDescriptions: { [key: string]: React.ReactNode } = {
 }
 
 export default function WelcomeScreen() {
+  const { colors } = useTheme()
   const { t } = useTranslation()
   const router = useRouter()
   const [height, setHeight] = useState<number>(170)
@@ -139,7 +140,7 @@ export default function WelcomeScreen() {
       active: 1.725,
       very_active: 1.9,
     }
-    const tdee =  Math.round(calculateBMR * activityMultipliers[intensity])
+    const tdee = Math.round(calculateBMR * activityMultipliers[intensity])
     return tdee
   }, [calculateBMR, intensity])
 
@@ -262,7 +263,7 @@ export default function WelcomeScreen() {
       >
         <ProgressStep>
           <View className="flex-1 p-1">
-            <View style={styles.containerShadow}>
+            <View style={[styles.containerShadow, { backgroundColor: colors.background }]}>
               <Text className="text-xl font-semibold text-gray-500 w-full text-center mb-4">
                 Chọn giới tính của bạn
               </Text>
@@ -317,7 +318,7 @@ export default function WelcomeScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-            <View style={styles.containerShadow} className="mt-6">
+            <View style={[styles.containerShadow, { backgroundColor: colors.background }]} className="mt-6">
               <View className="flex flex-row items-center justify-between w-full mb-4">
                 <Text className="text-xl font-semibold text-gray-500">
                   Chiều cao
@@ -370,7 +371,7 @@ export default function WelcomeScreen() {
             </View>
             <View className="flex flex-row justify-center gap-4 mt-6">
               {/* Cân nặng */}
-              <View style={styles.containerShadow} className="flex-1">
+              <View style={[styles.containerShadow, { backgroundColor: colors.background }]} className="flex-1">
                 <View className="flex flex-row items-center justify-between w-full">
                   <Text className="text-gray-500 text-xl font-semibold">
                     Cân nặng
@@ -404,7 +405,7 @@ export default function WelcomeScreen() {
               </View>
 
               {/* Tuổi */}
-              <View style={styles.containerShadow} className="flex-1">
+              <View style={[styles.containerShadow, { backgroundColor: colors.background }]} className="flex-1">
                 <View className="flex flex-row items-center justify-between w-full">
                   <Text className="text-gray-500 text-xl text-center font-semibold">
                     Tuổi
@@ -468,7 +469,7 @@ export default function WelcomeScreen() {
             }}
           >
             <View style={{
-              backgroundColor: '#ffffff',
+              backgroundColor: colors.background,
               padding: 12,
               borderRadius: 12,
               elevation: 2,
@@ -536,7 +537,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3,
     elevation: 3,
-    backgroundColor: "#fff",
     padding: 10,
     borderRadius: 10,
   },

@@ -14,7 +14,7 @@ export default function Statistics() {
   const { t } = useTranslation()
 
   return (
-    <ScrollView className="flex-1 relative px-4 mb-4">
+    <ScrollView className="flex-1 relative px-4 mb-4 text-rose-200">
       <DateSelector />
       <NutrientSummary />
       <WeeklyBarChart
