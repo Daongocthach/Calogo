@@ -14,6 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "icon": {
+        "dark": "./assets/images/ios-icon-light.png",
+        "light": "./assets/images/ios-icon-light.png",
+        "tinted": "./assets/images/ios-icon-light.png"
+      },
       "supportsTablet": true,
       "bundleIdentifier": "com.pemeoh1.calogo",
       "infoPlist": {

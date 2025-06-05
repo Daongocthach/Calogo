@@ -28,7 +28,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <View className='flex-1 relative px-4 py-2'>
+    <View className='flex-1 relative px-4 pt-2 pb-4'>
       <DateSelector />
       <ScrollView>
         <View className='items-center px-1 mt-6'>

@@ -1,3 +1,4 @@
+import IMAGES from '@/assets/images'
 import SearchInput from '@/components/common/SearchInput'
 import React from 'react'
 import {
@@ -12,14 +13,14 @@ import {
 import { useTheme } from 'react-native-paper'
 
 const menuData = [
-    { title: 'Carbohydrate intake', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Fat intake', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Calories consumed', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Calorie breakdown', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Nutritional', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Nutrient', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Caloric balance', image: require('@/assets/images/thuc-don-thuan-viet.jpg') },
-    { title: 'Nutrient analysis', image: require('@/assets/images/thuc-don-thuan-viet.jpg') }
+    { title: 'Carbohydrate intake', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Fat intake', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Calories consumed', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Calorie breakdown', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Nutritional', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Nutrient', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Caloric balance', image: IMAGES.THUC_DON_THUAN_VIET },
+    { title: 'Nutrient analysis', image: IMAGES.THUC_DON_THUAN_VIET }
 ]
 
 export default function MenuScreen() {

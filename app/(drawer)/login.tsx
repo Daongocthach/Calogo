@@ -5,6 +5,7 @@ import { useTheme } from "react-native-paper"
 import { useTranslation } from "react-i18next"
 import { InputField, CustomText, CustomButton } from "@/components"
 import useStore from "@/store"
+import IMAGES from "@/assets/images"
 
 export default function LoginScreen() {
   const { colors } = useTheme()
@@ -32,7 +33,7 @@ export default function LoginScreen() {
     <View className="flex-1 w-full px-8 pt-10" style={{ backgroundColor: colors.background }} >
          <View className='flex flex-row items-center justify-center gap-2 mb-8'>
          <Image
-          source={require('@/assets/images/logo-header.png')}
+          source={IMAGES.LOGO_HEADER_LIGHT}
           style={{ width: 250, height: 75 }} resizeMode="contain"
         />
       </View>

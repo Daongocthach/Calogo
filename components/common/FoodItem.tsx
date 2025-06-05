@@ -15,30 +15,33 @@ export function FoodItem(item: FoodProps) {
     const { t } = useTranslation()
     const { deleteFood } = useStore()
     const [expanded, setExpanded] = useState(false)
-
+    const FoodAccordionTitle = ({ item }: { item: FoodProps }) => (
+        <View className='flex-row items-center justify-between w-full'>
+            <View className='flex flex-row items-center'>
+                <CustomText className='text-3xl mr-4'>
+                    {item?.food_type?.icon || '🥩'}
+                </CustomText>
+                <View>
+                    <CustomText className='text-base font-semibold'>
+                        {item?.name || 'N/A'}
+                    </CustomText>
+                    <CustomText className='text-gray-600'>
+                        {'100g'} - {item?.calorie} kcals
+                    </CustomText>
+                </View>
+            </View>
+        </View>
+    )
     return (
         <View style={[styles.containerShadow, { backgroundColor: '#fff', borderRadius: 12, padding: 4 }]}>
             <List.Accordion
-                title={
-                    <View className='flex-row items-center justify-between w-full'>
-                        <View className='flex flex-row items-center'>
-                            <CustomText className='text-3xl mr-4'>
-                                {item?.food_type?.icon || '🥩'}
-                            </CustomText>
-                            <View>
-                                <CustomText className='text-base font-semibold'>
-                                    {item?.name || 'N/A'}
-                                </CustomText>
-                                <CustomText className='text-gray-600'>{'100g'} - {item?.calorie} kcals</CustomText>
-                            </View>
-                        </View>
-                    </View>
-                }
+                title={<FoodAccordionTitle item={item} />}
                 expanded={expanded}
                 style={{ borderRadius: 12 }}
                 onPress={() => setExpanded(!expanded)}
             >
-                <View className='flex flex-row items-center justify-between p-4 rounded-lg'
+                <View
+                    className='flex flex-row items-center justify-between p-4 rounded-lg'
                     style={{ borderTopWidth: 1, borderTopColor: colors.surfaceDisabled }}
                 >
                     <View>

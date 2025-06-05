@@ -18,14 +18,15 @@ import useStore from "@/store"
 import { CustomText, ProgressStep, ProgressSteps } from "@/components"
 import { Gender, ActivityLevel, Goal } from "@/lib"
 import { showToast } from "@/notification"
+import IMAGES from "@/assets/images"
 
 const intensityOptions = ["inactive", "light", "moderate", "active", "very_active"]
 const imageSources: { [key: string]: any } = {
-  inactive: require("@/assets/images/inactive.jpg"),
-  light: require("@/assets/images/low.jpg"),
-  moderate: require("@/assets/images/medium.jpg"),
-  active: require("@/assets/images/high.jpg"),
-  very_active: require("@/assets/images/super.jpg"),
+  inactive: IMAGES.INACTIVE,
+  light: IMAGES.LOW,
+  moderate: IMAGES.MEDIUM,
+  active: IMAGES.HIGH,
+  very_active: IMAGES.SUPER,
 }
 const descriptions: { [key: string]: React.ReactNode } = {
   inactive: (
@@ -72,10 +73,10 @@ const descriptions: { [key: string]: React.ReactNode } = {
 
 const goalOptions = ["fast", "medium", "maintain", "gain"]
 const imageGoalSources: { [key: string]: any } = {
-  fast: require("@/assets/images/loose-fast.jpg"),
-  medium: require("@/assets/images/loose-medium.jpg"),
-  maintain: require("@/assets/images/maintain.jpg"),
-  gain: require("@/assets/images/gain.jpg"),
+  fast: IMAGES.LOOSE_FAST,
+  medium: IMAGES.LOOSE_MEDIUM,
+  maintain: IMAGES.MAINTAIN,
+  gain: IMAGES.GAIN,
 }
 const goalDescriptions: { [key: string]: React.ReactNode } = {
   fast: (
@@ -245,7 +246,7 @@ export default function WelcomeScreen() {
         style={{ paddingBottom: 10 }}
       >
         <Image
-          source={require("@/assets/images/logo-header.png")}
+          source={IMAGES.LOGO_HEADER_LIGHT}
           style={{ width: 250, height: 75 }}
           resizeMode="contain"
         />
@@ -283,7 +284,7 @@ export default function WelcomeScreen() {
                   />
                   <View>
                     <Image
-                      source={require("@/assets/images/male.jpg")}
+                      source={IMAGES.MALE}
                       style={{ width: 50, height: 50, borderRadius: 25 }}
                     />
                     <Text className="text-xl text-center font-semibold text-blue-500">
@@ -308,7 +309,7 @@ export default function WelcomeScreen() {
                   />
                   <View>
                     <Image
-                      source={require("@/assets/images/female.jpg")}
+                      source={IMAGES.FEMALE}
                       style={{ width: 50, height: 50, borderRadius: 25 }}
                     />
                     <Text className="text-xl text-center font-semibold text-blue-500">
@@ -487,7 +488,7 @@ export default function WelcomeScreen() {
             </View>
 
             <Image
-              source={require("@/assets/images/thuc-don-thuan-viet.jpg")}
+              source={IMAGES.THUC_DON_THUAN_VIET}
               style={{
                 width: 200,
                 height: 200,

@@ -16,6 +16,10 @@ export default function TabLayout() {
         sceneStyle: {
           backgroundColor: colors.background,
         },
+        tabBarStyle: {
+          backgroundColor: colors.background,
+          height: 55,
+        },
       }}>
       <Tabs.Screen
         name="index"

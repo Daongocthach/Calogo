@@ -3,6 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import { useForm, Controller } from "react-hook-form"
 import { Icon } from '@/components'
 import { Link } from 'expo-router'
+import IMAGES from '@/assets/images'
 
 export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false)
@@ -29,7 +30,7 @@ export default function LoginScreen() {
     <View className='flex-1 w-full px-8 pt-10'>
       <View className='flex flex-row items-center justify-center gap-2 mb-8'>
         <Image
-          source={require('@/assets/images/logo-header.png')}
+          source={IMAGES.LOGO_HEADER_LIGHT}
           style={{ width: 250, height: 75 }} resizeMode="contain"
         />
       </View>

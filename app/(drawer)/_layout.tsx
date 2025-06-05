@@ -10,6 +10,7 @@ import { Icon, DrawerHeader, CustomText } from "@/components"
 import useStore from "@/store"
 import { showAlert } from "@/notification"
 import { VERSION } from "@/lib"
+import IMAGES from "@/assets/images"
 
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     const { t } = useTranslation()
@@ -47,7 +48,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerContentScrollView {...props} style={{ backgroundColor: colors.background }}>
             <View style={styles.userInfoWrapper}>
                 <Image
-                    source={require("@/assets/images/avatar.jpg")}
+                    source={IMAGES.AVATAR}
                     width={10}
                     height={10}
                     resizeMode="contain"
