@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>313942599693-opn35f3u7i8qh7qlpmrmp378ahcfug37.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.313942599693-opn35f3u7i8qh7qlpmrmp378ahcfug37</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDAH7ol2ldLw_E76nnLMXHrJ32EEfuL3G0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>313942599693</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pemeoh1.calogo</string>
+	<key>PROJECT_ID</key>
+	<string>calogo</string>
+	<key>STORAGE_BUCKET</key>
+	<string>calogo.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:313942599693:ios:8e09244be8a926977d4d44</string>
+	<key>DATABASE_URL</key>
+	<string>https://calogo-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>
